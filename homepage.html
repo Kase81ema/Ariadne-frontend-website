@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ariadne — Coaching creativo-esperienziale</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-cream: #FBF8F2;
+    --bg-cream-deep: #F5EFE3;
+    --bg-white: #FFFFFF;
+    --ink: #1F1813;
+    --ink-soft: #5A4A3D;
+    --ink-mute: #9C8B7B;
+    --viola-deep: #655a9c;
+    --viola-deep-soft: #7a6fb0;
+    --terra: #df7a4a;
+    --terra-deep: #b8633a;
+    --terra-light: #e8a070;
+    --cubo-arancio-light: #df7a4a;
+    --cubo-arancio-dark: #df7a4a;
+    --cubo-verde-light: #d4d965;
+    --cubo-verde-dark: #9ec165;
+    --cubo-rosso-light: #d95d84;
+    --cubo-rosso-dark: #d33935;
+    --cubo-viola: #655a9c;
+    --cubo-azzurro: #67b2e2;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Open Sans', -apple-system, sans-serif;
+    --radius-card: 16px;
+    --radius-btn: 6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--bg-cream);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .mockup-banner {
+    background: var(--viola-deep);
+    color: var(--bg-cream);
+    padding: 10px 32px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .mockup-banner strong { color: var(--terra-light); }
+
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid rgba(31, 24, 19, 0.08);
+    padding: 24px 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    background: rgba(251, 248, 242, 0.95);
+  }
+  .header-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .logo { flex-shrink: 0; }
+  .logo img { height: 58px; width: auto; display: block; }
+
+  .nav { display: flex; align-items: center; gap: 36px; }
+  .nav a {
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 400;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav a:hover { color: var(--terra); }
+  .nav a:hover::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--terra);
+  }
+  .nav-cta {
+    background: var(--viola-deep);
+    color: var(--bg-cream) !important;
+    padding: 11px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--radius-btn);
+    transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--terra) !important; }
+  .nav-cta:hover::after { display: none; }
+
+  /* LABEL CUBOTTO */
+  .label-cubotto {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .label-cubotto img { width: 32px; height: 32px; }
+
+  /* PLACEHOLDER FOTO */
+  .photo-placeholder {
+    background: linear-gradient(135deg, #F5EFE3 0%, #EAE0CC 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgba(31, 24, 19, 0.08);
+  }
+  .photo-placeholder::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 30% 30%, rgba(232, 116, 60, 0.04) 0%, transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(45, 38, 73, 0.03) 0%, transparent 60%);
+  }
+  .photo-placeholder .ph-content {
+    position: relative;
+    text-align: center;
+    padding: 32px;
+  }
+  .photo-placeholder .ph-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 20px;
+    border: 1.5px solid var(--ink-mute);
+    border-radius: 6px;
+    position: relative;
+    opacity: 0.4;
+  }
+  .photo-placeholder .ph-icon::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--ink-mute);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .photo-placeholder .ph-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink-mute);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .photo-placeholder .ph-desc {
+    font-family: var(--serif);
+    font-size: 15px;
+    
+    color: var(--ink-soft);
+    font-weight: 400;
+    line-height: 1.4;
+    max-width: 280px;
+  }
+
+  /* HERO */
+  .hero { background: var(--bg-cream); overflow: hidden; }
+  .hero-grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 0;
+    align-items: stretch;
+    min-height: 720px;
+  }
+  .hero-image-wrap { position: relative; background: var(--bg-cream-deep); overflow: hidden; }
+  .hero-image-wrap .photo-placeholder { width: 100%; height: 100%; }
+  .hero-content {
+    padding: 80px 64px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--bg-cream);
+  }
+  .hero-content h1 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 1.02;
+    letter-spacing: -2.2px;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+  .hero-content h1 em {
+    
+    font-weight: 400;
+    color: var(--terra);
+  }
+  .hero-content h1 .line-2 { display: block; font-weight: 300; }
+  .hero-content .lede {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin-bottom: 40px;
+  }
+  .hero-cta-row { display: flex; gap: 14px; margin-bottom: 56px; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 16px 28px;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid;
+    cursor: pointer;
+    border-radius: var(--radius-btn);
+  }
+  .btn-primary {
+    background: var(--terra);
+    color: #fff;
+    border-color: var(--terra);
+  }
+  .btn-primary:hover {
+    background: var(--terra-deep);
+    border-color: var(--terra-deep);
+    transform: translateX(3px);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--bg-cream);
+  }
+  .btn .arrow { font-size: 16px; transition: transform 0.3s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(31, 24, 19, 0.12);
+  }
+  .hero-meta-item .accent { width: 24px; height: 2px; background: var(--terra); margin-bottom: 12px; }
+  .hero-meta-item h4 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .hero-meta-item p {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-mute);
+    line-height: 1.5;
+  }
+
+  /* MANIFESTO */
+  .manifesto { background: var(--bg-cream); padding: 120px 56px; text-align: center; }
+  .manifesto-inner { max-width: 920px; margin: 0 auto; }
+  .manifesto h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 44px;
+    line-height: 1.25;
+    letter-spacing: -1px;
+    color: var(--ink);
+  }
+  .manifesto h2 em {  color: var(--terra); font-weight: 400; }
+
+  /* PERCORSO */
+  .percorso {
+    background: var(--bg-white);
+    padding: 120px 56px;
+    border-top: 1px solid rgba(31, 24, 19, 0.06);
+  }
+  .percorso-header {
+    max-width: 1440px;
+    margin: 0 auto 64px;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: end;
+  }
+  .percorso-header h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--ink);
+  }
+  .percorso-header h2 em {  color: var(--terra); font-weight: 400; }
+  .percorso-header .intro {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .percorso-grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .programma-card {
+    padding: 48px 44px 44px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 440px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+    border-radius: var(--radius-card);
+  }
+  .programma-card:hover { transform: translateY(-4px); }
+  .programma-card.core {
+    background: linear-gradient(135deg, var(--cubo-arancio-light) 0%, var(--cubo-arancio-dark) 100%);
+  }
+  .programma-card.team {
+    background: linear-gradient(135deg, var(--cubo-verde-light) 0%, var(--cubo-verde-dark) 100%);
+  }
+  .programma-card.advanced {
+    background: linear-gradient(135deg, var(--cubo-rosso-light) 0%, var(--cubo-rosso-dark) 100%);
+  }
+  .programma-card.quadrant {
+    background: linear-gradient(135deg, var(--cubo-azzurro) 0%, var(--cubo-viola) 100%);
+  }
+  .programma-card .num {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 8px;
+  }
+  .programma-card h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  .programma-card .descr {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 420px;
+    opacity: 0.95;
+    margin-bottom: 32px;
+  }
+  .programma-card .meta {
+    display: flex;
+    gap: 24px;
+    font-family: var(--sans);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    font-weight: 500;
+    opacity: 0.92;
+  }
+  .programma-card .meta span::before {
+    content: "—";
+    margin-right: 8px;
+    opacity: 0.6;
+  }
+  .programma-card .arrow-link {
+    position: absolute;
+    bottom: 44px;
+    right: 44px;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s;
+    border-radius: 6px;
+  }
+  .programma-card:hover .arrow-link {
+    background: #fff;
+    color: var(--ink);
+    border-color: #fff;
+  }
+  .percorso-footer {
+    max-width: 1440px;
+    margin: 56px auto 0;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+  .percorso-footer a {
+    color: var(--terra);
+    border-bottom: 1px solid var(--terra);
+    padding-bottom: 1px;
+  }
+
+  /* METODO */
+  .metodo { background: var(--bg-cream); padding: 120px 56px; }
+  .metodo-grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .metodo-text h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+  .metodo-text h2 em {  color: var(--terra); font-weight: 400; }
+  .metodo-text p {
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    max-width: 540px;
+  }
+  .metodo-text p:last-of-type { margin-bottom: 32px; }
+  .metodo-text .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--terra);
+    font-weight: 500;
+    border-bottom: 1px solid var(--terra);
+    padding-bottom: 2px;
+    transition: gap 0.3s;
+  }
+  .metodo-text .link-arrow:hover { gap: 16px; }
+  .metodo-image {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+  }
+  .metodo-image .photo-placeholder { width: 100%; height: 100%; }
+
+  /* VALORI */
+  .valori {
+    background: var(--bg-white);
+    padding: 120px 56px;
+    border-top: 1px solid rgba(31, 24, 19, 0.06);
+  }
+  .valori-header { max-width: 1100px; margin: 0 auto 80px; text-align: center; }
+  .valori-header h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .valori-header h2 em {  color: var(--terra); font-weight: 400; }
+  .valori-header p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .valori-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 80px;
+  }
+  .valore-item { display: flex; align-items: flex-start; gap: 28px; }
+  .valore-cubotto { flex-shrink: 0; width: 72px; height: 72px; }
+  .valore-content h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .valore-content h3 em {  color: var(--ink-soft); font-weight: 400; }
+  .valore-content p {
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  /* CITAZIONE */
+  .citazione { background: var(--bg-cream-deep); padding: 140px 56px; text-align: center; }
+  .citazione-inner { max-width: 920px; margin: 0 auto; }
+  .citazione blockquote {
+    font-family: var(--serif);
+    font-weight: 300;
+    
+    font-size: 38px;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 32px;
+    letter-spacing: -0.8px;
+  }
+  .citazione blockquote::before {
+    content: "“";
+    font-size: 80px;
+    line-height: 0;
+    vertical-align: -28px;
+    color: var(--terra);
+    margin-right: 8px;
+  }
+  .citazione blockquote::after {
+    content: "”";
+    font-size: 80px;
+    line-height: 0;
+    vertical-align: -28px;
+    color: var(--terra);
+    margin-left: 4px;
+  }
+  .citazione cite {
+    font-family: var(--sans);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink-mute);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* AZIENDE */
+  .aziende {
+    background: var(--viola-deep);
+    color: var(--bg-cream);
+    padding: 120px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .aziende-grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .aziende-image {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+  }
+  .aziende-image .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #7a6fb0 0%, #655a9c 100%);
+    border: 1px solid rgba(251, 248, 242, 0.08);
+  }
+  .aziende-image .photo-placeholder::before {
+    background-image:
+      radial-gradient(circle at 30% 30%, rgba(232, 116, 60, 0.12) 0%, transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(251, 248, 242, 0.04) 0%, transparent 60%);
+  }
+  .aziende-image .photo-placeholder .ph-icon { border-color: rgba(251, 248, 242, 0.4); }
+  .aziende-image .photo-placeholder .ph-icon::before { border-color: rgba(251, 248, 242, 0.4); }
+  .aziende-image .photo-placeholder .ph-label { color: rgba(251, 248, 242, 0.6); }
+  .aziende-image .photo-placeholder .ph-desc { color: rgba(251, 248, 242, 0.8); }
+
+  .aziende-text .label-cubotto { color: var(--terra-light); margin-bottom: 28px; }
+  .aziende-text h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 52px;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--bg-cream);
+    margin-bottom: 28px;
+  }
+  .aziende-text h2 em {  color: var(--terra-light); font-weight: 400; }
+  .aziende-text p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 19px;
+    line-height: 1.55;
+    color: rgba(251, 248, 242, 0.8);
+    margin-bottom: 32px;
+    max-width: 520px;
+  }
+  .aziende-text .btn-primary { background: var(--terra); border-color: var(--terra); }
+  .aziende-text .btn-secondary {
+    color: var(--bg-cream);
+    border-color: var(--bg-cream);
+    margin-left: 12px;
+  }
+  .aziende-text .btn-secondary:hover {
+    background: var(--bg-cream);
+    color: var(--viola-deep);
+  }
+
+  /* CALENDARIO */
+  .calendario { background: var(--bg-cream); padding: 120px 56px; }
+  .calendario-header {
+    max-width: 1440px;
+    margin: 0 auto 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: end;
+  }
+  .calendario-header h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--ink);
+  }
+  .calendario-header h2 em {  color: var(--terra); font-weight: 400; }
+  .calendario-header .link-cal { text-align: right; }
+  .calendario-header .link-cal a {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--terra);
+    font-weight: 500;
+    border-bottom: 1px solid var(--terra);
+    padding-bottom: 2px;
+  }
+  .eventi-grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .evento-card {
+    background: var(--bg-white);
+    padding: 40px 36px;
+    border-top: 3px solid var(--terra);
+    transition: all 0.3s;
+    cursor: pointer;
+    border-radius: var(--radius-card);
+  }
+  .evento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px rgba(45, 38, 73, 0.15);
+  }
+  .evento-card.core { border-top-color: var(--cubo-arancio-dark); }
+  .evento-card.team { border-top-color: var(--cubo-verde-dark); }
+  .evento-card.quadrant { border-top-color: var(--cubo-azzurro); }
+  .evento-num {
+    font-family: var(--serif);
+    font-weight: 300;
+    
+    font-size: 80px;
+    line-height: 0.9;
+    color: var(--bg-cream-deep);
+    margin-bottom: 4px;
+    user-select: none;
+  }
+  .evento-card.core .evento-num { color: rgba(238, 116, 60, 0.18); }
+  .evento-card.team .evento-num { color: rgba(148, 195, 86, 0.22); }
+  .evento-card.quadrant .evento-num { color: rgba(74, 180, 231, 0.20); }
+  .evento-tipo {
+    font-family: var(--sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: var(--ink-mute);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .evento-card h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .evento-info {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    border-top: 1px solid rgba(31, 24, 19, 0.08);
+    padding-top: 16px;
+    margin-top: 16px;
+  }
+  .evento-info strong { color: var(--ink); font-weight: 600; }
+  .evento-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--terra);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* FOOTER */
+  footer { background: var(--viola-deep); color: var(--bg-cream); padding: 100px 56px 40px; }
+  .footer-grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(251, 248, 242, 0.15);
+  }
+  .footer-brand .footer-logo img {
+    height: 62px;
+    width: auto;
+    margin-bottom: 24px;
+    filter: brightness(0) invert(1);
+  }
+  .footer-brand p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(251, 248, 242, 0.7);
+    max-width: 360px;
+    
+  }
+  .footer-col h5 {
+    font-family: var(--sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: var(--terra-light);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 12px; }
+  .footer-col a {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: rgba(251, 248, 242, 0.78);
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--terra-light); }
+  .footer-col p {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: rgba(251, 248, 242, 0.68);
+    line-height: 1.7;
+  }
+  .footer-bottom {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: rgba(251, 248, 242, 0.45);
+  }
+  .footer-bottom .legal a {
+    color: rgba(251, 248, 242, 0.45);
+    margin-left: 24px;
+  }
+
+  
+.entry-points{background:var(--bg-cream);padding:120px 56px}
+.ep-grid{max-width:1440px;margin:48px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.ep-card{background:var(--bg-white);padding:48px 40px;border-radius:var(--radius-card);border-top:4px solid var(--terra);transition:all .3s;cursor:pointer}
+.ep-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(45,38,73,.12)}
+.ep-card .ep-num{font-family:var(--serif);font-size:14px;color:var(--terra);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.ep-card h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15;margin-bottom:16px;color:var(--ink)}
+.ep-card p{font-size:15px;line-height:1.65;color:var(--ink-soft);margin-bottom:24px}
+.ep-card .ep-link{font-size:13px;font-weight:500;color:var(--terra);text-transform:uppercase;letter-spacing:1px}
+.entry-points-header{max-width:1100px;margin:0 auto;text-align:center}
+.entry-points-header h2{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1.1;letter-spacing:-1.2px;margin-bottom:20px}
+.entry-points-header h2 em{color:var(--terra);font-weight:400}
+.entry-points-header p{font-family:var(--serif);font-weight:300;font-size:19px;line-height:1.55;color:var(--ink-soft);max-width:680px;margin:0 auto}
+.trainer{background:var(--bg-white);padding:120px 56px;border-top:1px solid rgba(31,24,19,.06)}
+.trainer-header{max-width:1100px;margin:0 auto 64px;text-align:center}
+.trainer-header h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
+.trainer-header h2 em{color:var(--terra);font-weight:400}
+.trainer-header p{font-family:var(--serif);font-weight:300;font-size:19px;line-height:1.55;color:var(--ink-soft);max-width:680px;margin:0 auto}
+.trainer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.trainer-card{text-align:center}
+.trainer-photo{width:200px;height:200px;border-radius:16px;overflow:hidden;margin:0 auto 24px;background:var(--bg-cream-deep)}
+.trainer-photo img{width:100%;height:100%;object-fit:cover}
+.trainer-card h3{font-family:var(--serif);font-weight:500;font-size:22px;color:var(--ink);margin-bottom:6px}
+.trainer-card .role{font-family:var(--sans);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra);font-weight:600;margin-bottom:14px}
+.trainer-card p{font-size:14px;line-height:1.6;color:var(--ink-soft);max-width:280px;margin:0 auto}
+.testimonianze{background:var(--bg-cream-deep);padding:120px 56px}
+.testi-header{max-width:1100px;margin:0 auto 64px;text-align:center}
+.testi-header h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px}
+.testi-header h2 em{color:var(--terra);font-weight:400}
+.testi-grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.testi-card{background:var(--bg-cream);padding:40px 36px;border-radius:var(--radius-card)}
+.testi-card .quote{font-family:var(--serif);font-weight:300;font-size:19px;line-height:1.5;color:var(--ink);margin-bottom:24px}
+.testi-card .author{font-family:var(--sans);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-mute);font-weight:600;border-top:1px solid rgba(31,24,19,.1);padding-top:16px}
+.testi-card .author strong{color:var(--ink);display:block;font-size:13px;margin-bottom:2px;letter-spacing:1px}
+@media(max-width:1024px){.ep-grid,.trainer-grid,.testi-grid{grid-template-columns:1fr}}
+
+@media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-image-wrap { min-height: 400px; }
+    .hero-content { padding: 56px 40px; }
+    .hero-content h1 { font-size: 48px; }
+    .percorso-header { grid-template-columns: 1fr; gap: 24px; }
+    .percorso-grid { grid-template-columns: 1fr; }
+    .metodo-grid { grid-template-columns: 1fr; gap: 48px; }
+    .valori-grid { grid-template-columns: 1fr; gap: 40px; }
+    .aziende-grid { grid-template-columns: 1fr; gap: 48px; }
+    .calendario-header { grid-template-columns: 1fr; }
+    .calendario-header .link-cal { text-align: left; }
+    .eventi-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .header { padding: 16px 32px; }
+    .nav { display: none; }
+    .manifesto h2 { font-size: 30px; }
+    .citazione blockquote { font-size: 26px; }
+  }
+
+  /* TEASER HOMEPAGE - CSS inline per garantire caricamento */
+  .home-teaser{padding:100px 56px}
+  .home-teaser.alt{background:var(--bg-cream)}
+  .home-teaser-grid{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center}
+  .home-teaser-grid.reverse{grid-template-columns:1fr 1.2fr}
+  .home-teaser-img{aspect-ratio:4/3;width:100%;min-height:360px;border-radius:var(--radius-card);overflow:hidden;background:var(--bg-cream-deep);display:block}
+  .home-teaser-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .home-teaser-text{display:flex;flex-direction:column;align-items:flex-start}
+  .home-teaser h2{font-family:var(--serif);font-weight:300;font-size:52px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px;color:var(--ink)}
+  .home-teaser h2 em{color:var(--terra);font-weight:400}
+  .home-teaser p{font-family:var(--serif);font-weight:300;font-size:19px;line-height:1.55;color:var(--ink-soft);margin-bottom:28px;max-width:520px}
+  .home-teaser .teaser-link{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-size:14px;font-weight:500;color:var(--terra);border-bottom:1px solid var(--terra);padding-bottom:2px;text-decoration:none}
+  @media(max-width:1024px){.home-teaser-grid,.home-teaser-grid.reverse{grid-template-columns:1fr;gap:40px}}
+</style>
+<link rel="stylesheet" href="revisione.css">
+</head>
+<body>
+
+<div class="mockup-banner">
+  <strong>MOCKUP HOMEPAGE ARIADNE · v3 — completa</strong> · correzioni · cubotti ufficiali · viola scuro · payoff originale
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <a href="#"><img src="assets/logo-completo.png" alt="Ariadne"></a>
+    </div>
+    <nav class="nav">
+      <a href="approccio.html">L'approccio</a>
+      <a href="scuola.html" class="has-sub">Scuola</a>
+      <a href="core-quadrant.html">Core Quadrant®</a>
+      <a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a>
+      <a href="calendario.html">Calendario</a>
+      <a href="#" class="nav-cta">Aziende →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-image-wrap"><img src="assets/hero-workshop.jpg" alt="Workshop Ariadne" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="hero-content">
+      <div>
+        <span class="label-cubotto">
+          <img src="assets/cubotto-arancio.png" alt="">
+          Coaching creativo-esperienziale
+        </span>
+        <h1 class="ari-fade">Experience your <em>potential.</em><span class="line-2">Create your future.</span></h1>
+        <p class="lede">La scuola italiana di coaching professionale ICF, dove il lavoro su di sé passa dall'esplorazione dei pattern interiori, dall'incontro con le emozioni, e da metodologie creative che attivano corpo, mente e relazione. La teoria arriva dopo l'esperienza, e serve a darle senso.</p>
+      </div>
+      <div>
+        <div class="hero-cta-row">
+          <a href="#" class="btn btn-primary">Scegli il percorso <span class="arrow">→</span></a>
+          <a href="#" class="btn btn-secondary">Calendario</a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <div class="accent"></div>
+            <h4>ICF Level 1 + 2</h4>
+            <p>Accreditati per le credenziali ACC, PCC e ACTC</p>
+          </div>
+          <div class="hero-meta-item">
+            <div class="accent"></div>
+            <h4>Core Quadrant®</h4>
+            <p>Unica scuola autorizzata in Italia da Daniel Ofman</p>
+          </div>
+          <div class="hero-meta-item">
+            <div class="accent"></div>
+            <h4>Italia · Svizzera</h4>
+            <p>Sedi operative tra Milano, Monza, Segrate e Lugano</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <h2>Lavoriamo con persone, team e organizzazioni per liberare il potenziale individuale e relazionale, con un approccio che integra coaching, sviluppo organizzativo e <em>metodologie creativo-esperienziali</em></h2>
+  </div>
+</section>
+
+
+<section class="entry-points">
+  <div class="entry-points-header">
+    <span class="label-cubotto" style="margin:0 auto 24px"><img src="assets/cubotto-verde.png" alt="">Per chi è Ariadne</span>
+    <h2>Tre punti di partenza,<br>un metodo che <em>resta tuo</em></h2>
+    <p>Che tu stia cercando una professione nuova, voglia evolvere come coach già in pratica, o porti il coaching dentro un'organizzazione, ti accompagniamo dal punto in cui sei.</p>
+  </div>
+  <div class="ep-grid">
+    <div class="ep-card"><div class="ep-num">— 01 / Aspirante coach</div><h3>Voglio diventare coach professionista</h3><p>Una professione nuova fondata su ascolto, presenza e competenze relazionali. Si parte dal Core Coaching Program e si ottiene la credenziale ACC.</p><a href="#" class="ep-link">Scopri il Core →</a></div>
+    <div class="ep-card"><div class="ep-num">— 02 / Coach in evoluzione</div><h3>Sono coach e voglio specializzarmi</h3><p>Lavori già con persone e team, e vuoi approfondire il team coaching, sviluppare metodologie creative, o ottenere PCC e ACTC.</p><a href="#" class="ep-link">Scopri Team & Advanced →</a></div>
+    <div class="ep-card"><div class="ep-num">— 03 / Manager e HR</div><h3>Cerco strumenti per il mio ruolo</h3><p>Sei un leader, HR business partner, formatore. Vuoi portare il pensiero del coaching nel tuo lavoro quotidiano con persone e team.</p><a href="#" class="ep-link">Scopri Ariadne Aziende →</a></div>
+  </div>
+</section>
+<section class="percorso">
+  <div class="percorso-header">
+    <h2>I nostri programmi<br>di <em>formazione</em></h2>
+    <p class="intro">Tre programmi di formazione in coaching ICF — Core, Team, Advanced — più la certificazione internazionale Core Quadrant® di Daniel Ofman. Tre percorsi distinti verso le credenziali ACC, PCC e ACTC, e un approccio che resta tuo per sempre.</p>
+  </div>
+  <div class="percorso-grid">
+    <div class="programma-card core">
+      <div>
+        <div class="num">— Programma 01</div>
+        <h3>Core Coaching<br>Program</h3>
+        <p class="descr">Il programma di formazione in coaching creativo-esperienziale di primo livello. 60 ore di formazione + 10 ore di Mentor Coaching, per chi vuole diventare coach professionista e ottenere la credenziale ACC.</p>
+      </div>
+      <div class="meta">
+        <span>4 moduli</span>
+        <span>12 settimane</span>
+        <span>ICF Level 1</span>
+      </div>
+      <div class="arrow-link">→</div>
+    </div>
+    <div class="programma-card team">
+      <div>
+        <div class="num">— Programma 02</div>
+        <h3>Team Coaching<br>Program</h3>
+        <p class="descr">Il programma avanzato in team coaching, in linea con gli standard ICF: 65 ore di formazione specifica per chi desidera sviluppare le proprie competenze nel lavoro con i team e ottenere la credenziale PCC o ACTC.</p>
+      </div>
+      <div class="meta">
+        <span>3 moduli</span>
+        <span>12 settimane</span>
+        <span>ICF Level 2</span>
+      </div>
+      <div class="arrow-link">→</div>
+    </div>
+    <div class="programma-card advanced">
+      <div>
+        <div class="num">— Programma 03</div>
+        <h3>Advanced<br>Coaching Program</h3>
+        <p class="descr">Il nostro percorso pilota di approfondimento per coach già credenziati che vogliono andare ancora più in profondità nel proprio lavoro, con un focus sulle dinamiche sistemiche e sui processi creativi.</p>
+      </div>
+      <div class="meta">
+        <span>Pilota</span>
+        <span>2026</span>
+        <span>Pre-iscrizioni aperte</span>
+      </div>
+      <div class="arrow-link">→</div>
+    </div>
+    <div class="programma-card quadrant">
+      <div>
+        <div class="num">— Certificazione internazionale</div>
+        <h3>Core Quadrant®<br>delle Qualità Autentiche</h3>
+        <p class="descr">La certificazione ufficiale del metodo di Daniel Ofman. Siamo l'unica scuola italiana autorizzata da Core Quality International a erogare il programma e a rilasciare il certificato internazionale.</p>
+      </div>
+      <div class="meta">
+        <span>3 giorni</span>
+        <span>In presenza</span>
+        <span>Authorized Italian Partner</span>
+      </div>
+      <div class="arrow-link">→</div>
+    </div>
+  </div>
+  <div class="percorso-footer">
+    Non sai da dove cominciare? <a href="#">Esplora i tre percorsi verso le credenziali ICF →</a>
+  </div>
+</section>
+
+<section class="metodo">
+  <div class="metodo-grid">
+    <div class="metodo-text">
+      <span class="label-cubotto">
+        <img src="assets/cubotto-rosso.png" alt="">
+        Il metodo
+      </span>
+      <h2>Si impara a fare il coach <em>facendo coaching</em></h2>
+      <p>Crediamo che il potenziale si sviluppi attraverso un processo di espressione creativa di sé, di consapevolezza delle proprie dinamiche interiori e di scoperta delle risorse evolutive ancora inesplorate.</p>
+      <p>Per questo il nostro approccio coniuga il coaching tradizionale con metodologie innovative e strumenti creativo-esperienziali — Lego® Serious Play®, disegno onirico, Hero's Journey, intelligenza emotiva, comunicazione nonviolenta, modelli di sviluppo ispirati al lavoro di Kegan & Lahey — perché si impara meglio facendo e poi riflettendo, che leggendo e poi provando.</p>
+      <a href="#" class="link-arrow">Scopri l'approccio creativo-esperienziale →</a>
+    </div>
+    <div class="metodo-image">
+      <div class="photo-placeholder">
+        <div class="ph-content">
+          <div class="ph-icon"></div>
+          <div class="ph-label">Foto da shooting</div>
+          <div class="ph-desc">Sessione con carte illustrate,<br>cerchio visto dall'alto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="trainer">
+  <div class="trainer-header"><h2>I trainer<br>che <em>tengono la scuola</em></h2><p>Tre coach con percorsi diversi e una visione comune del lavoro: il potenziale si libera attraverso l'esperienza, il dialogo creativo e la presenza.</p></div>
+  <div class="trainer-grid">
+    <div class="trainer-card"><div class="trainer-photo"><img src="assets/trainer-arianna.jpg" alt="Arianna Perrone"></div><h3>Arianna Perrone</h3><div class="role">Master Certified Coach · ICF</div><p>MCC con oltre 2500 ore di coaching. Formatrice esperienziale specializzata in soft skills, intelligenza emotiva e Lego® Serious Play®.</p></div>
+    <div class="trainer-card"><div class="trainer-photo"><img src="assets/trainer-ciccarelli.jpg" alt="Emanuele Ciccarelli"></div><h3>Emanuele Ciccarelli</h3><div class="role">Integral Coach™</div><p>Integral Coach specializzato in processi creativo-esperienziali. Fondatore di LABORINTUS, trainer KAOSPILOT, facilitatore Lego® Serious Play®.</p></div>
+    <div class="trainer-card"><div class="trainer-photo"><div style="width:100%;height:100%;background:linear-gradient(135deg,#F5EFE3,#EAE0CC);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:42px;color:var(--ink-mute)">EC</div></div><h3>Emanuele Casero</h3><div class="role">Professional Certified Coach · ICF</div><p>PCC operante in Italia e Svizzera. Specializzato in team coaching, sviluppo organizzativo e accompagnamento di leader e team complessi.</p></div>
+  </div>
+</section>
+<section class="valori">
+  <div class="valori-header">
+    <h2>Quattro coppie di principi<br>che guidano <em>il nostro lavoro</em></h2>
+    <p>Non sono valori dichiarati: sono i quattro assi di tensione dentro i quali ogni nostro programma trova il suo equilibrio. Ciascuno è una coppia, perché crediamo che ogni qualità reale viva nel suo opposto complementare.</p>
+  </div>
+  <div class="valori-grid">
+    <div class="valore-item">
+      <img src="assets/cubotto-arancio.png" class="valore-cubotto" alt="">
+      <div class="valore-content">
+        <h3>Esplorazione <em>↔ Integrazione</em></h3>
+        <p>Dare nome a ciò che conta e tradurlo in direzione. L'esplorazione apre, l'integrazione consolida — l'una senza l'altra non produce trasformazione.</p>
+      </div>
+    </div>
+    <div class="valore-item">
+      <img src="assets/cubotto-verde.png" class="valore-cubotto" alt="">
+      <div class="valore-content">
+        <h3>Esperienza <em>↔ Riflessione</em></h3>
+        <p>Apprendere facendo e consolidare con senso critico. Crediamo nell'apprendimento adulto come ciclo continuo tra azione e pensiero.</p>
+      </div>
+    </div>
+    <div class="valore-item">
+      <img src="assets/cubotto-rosso.png" class="valore-cubotto" alt="">
+      <div class="valore-content">
+        <h3>Creatività <em>↔ Focus</em></h3>
+        <p>Aprire possibilità e scegliere ciò che è essenziale. La creatività senza focus si disperde, il focus senza creatività si rigidisce.</p>
+      </div>
+    </div>
+    <div class="valore-item">
+      <img src="assets/cubotto-azzurro.png" class="valore-cubotto" alt="">
+      <div class="valore-content">
+        <h3>Profondità <em>↔ Leggerezza</em></h3>
+        <p>Andare in profondità senza appesantire i processi. È una delle cose che più ci distinguono nel modo in cui lavoriamo con persone e team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="citazione">
+  <div class="citazione-inner">
+    <blockquote>Non chiederti di cosa ha bisogno il mondo. Chiediti piuttosto cosa ti rende vivo, vai e realizzalo. Perché ciò di cui il mondo ha bisogno sono persone che realizzino ciò che le rende vive.</blockquote>
+    <cite>Howard Thurman</cite>
+  </div>
+</section>
+
+
+
+
+<!-- TITOLO COMMUNITY -->
+<section style="background:var(--bg-white);padding:100px 56px 40px;text-align:center">
+<div style="max-width:900px;margin:0 auto">
+<h2 style="font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px">Entra nel mondo <em style="color:var(--terra);font-weight:400">Ariadne</em></h2>
+<p style="font-family:var(--serif);font-weight:300;font-size:19px;color:var(--ink-soft)">Non serve iscriversi a un programma per incontrare Ariadne. Ci sono modi più leggeri per cominciare.</p>
+</div>
+</section>
+
+<!-- EVENTI APERTI -->
+<section class="home-teaser">
+<div class="home-teaser-grid">
+<div class="home-teaser-img"><img src="assets/aziende-cerchio.jpg" alt="Eventi aperti Ariadne"></div>
+<div class="home-teaser-text">
+<span class="label-cubotto"><img src="assets/cubotto-verde.png" alt="">Entry point</span>
+<h2 class="ari-fade">Eventi aperti<br><em>a tutti</em></h2>
+<p>Webinar, presentazioni aperte, colloqui conoscitivi collettivi. Il modo più semplice per incontrare Ariadne senza impegno, prima ancora di pensare a un programma di formazione. Gratuiti, senza pressione, senza follow-up commerciale.</p>
+<a href="calendario.html" class="teaser-link">Vedi i prossimi eventi aperti →</a>
+</div>
+</div>
+</section>
+
+<!-- WORKSHOP TEASER -->
+<section class="home-teaser alt">
+<div class="home-teaser-grid reverse">
+<div class="home-teaser-text">
+<span class="label-cubotto"><img src="assets/cubotto-rosso.png" alt="">Spazio di contaminazione</span>
+<h2 class="ari-fade">Workshop<br>e <em>percorsi brevi</em></h2>
+<p>Incontri di mezza o una giornata, con trainer che stimiamo, su temi che attraversano il coaching: leadership, facilitazione, metodologie creative, strumenti specifici. Alcuni li curiamo noi, altri ospitano maestri che portano il loro modo di lavorare nelle nostre sale.</p>
+<a href="workshop.html" class="teaser-link">Scopri tutti i workshop →</a>
+</div>
+<div class="home-teaser-img"><img src="assets/metodo-carte.jpg" alt="Workshop Ariadne"></div>
+</div>
+</section>
+
+<!-- ATELIER TEASER -->
+<section class="home-teaser">
+<div class="home-teaser-grid">
+<div class="home-teaser-img"><img src="assets/cq-aula.jpg" alt="Atelier community Ariadne"></div>
+<div class="home-teaser-text">
+<span class="label-cubotto"><img src="assets/cubotto-arancio.png" alt="">La community</span>
+<h2 class="ari-fade">L'Atelier:<br><em>community viva</em></h2>
+<p>Una volta al mese, in presenza, con un tema e un calice. L'Apericoaching è l'entry point più semplice per incontrare il mondo Ariadne — anche se non lo conosci ancora. Gratuito, aperto a tutti, con prenotazione libera.</p>
+</div>
+</div>
+</section>
+
+<section class="testimonianze" style="background:var(--bg-cream);padding:120px 56px">
+<div style="max-width:1100px;margin:0 auto;text-align:center;margin-bottom:64px">
+<h2 style="font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px">Sono passati <em style="color:var(--terra);font-weight:400">di qui</em></h2>
+</div>
+<div style="max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+<div style="background:var(--bg-white);padding:40px 36px;border-radius:16px;border-top:3px solid #df7a4a">
+<p style="font-family:var(--serif);font-weight:300;font-size:18px;line-height:1.5;color:var(--ink);margin-bottom:24px;font-style:italic">"Il Core Coaching mi ha insegnato che le domande potenti non si imparano dai libri. Si scoprono in aula, dentro un esercizio, quando capisci all'improvviso che hai appena fatto qualcosa che non sapevi di poter fare."</p>
+<cite style="font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-mute);font-weight:600"><strong style="display:block;color:var(--ink);margin-bottom:4px">Giulia R.</strong>Core Coaching · 2024</cite>
+</div>
+<div style="background:var(--bg-white);padding:40px 36px;border-radius:16px;border-top:3px solid #9ec165">
+<p style="font-family:var(--serif);font-weight:300;font-size:18px;line-height:1.5;color:var(--ink);margin-bottom:24px;font-style:italic">"Il Team Coaching di Ariadne non è un corso sul team coaching. È un'esperienza in cui diventi il team, lo osservi, lo guidi, e capisci cosa succede davvero quando un gruppo lavora insieme."</p>
+<cite style="font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-mute);font-weight:600"><strong style="display:block;color:var(--ink);margin-bottom:4px">Marco T.</strong>Team Coaching · 2024</cite>
+</div>
+<div style="background:var(--bg-white);padding:40px 36px;border-radius:16px;border-top:3px solid #655a9c">
+<p style="font-family:var(--serif);font-weight:300;font-size:18px;line-height:1.5;color:var(--ink);margin-bottom:24px;font-style:italic">"Dopo vent'anni di formazione, raramente mi era capitato di trovare uno strumento così semplice e così potente. Il Core Quadrant mi ha cambiato il modo di guardare le persone."</p>
+<cite style="font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-mute);font-weight:600"><strong style="display:block;color:var(--ink);margin-bottom:4px">Chiara M.</strong>Core Quadrant · 2024</cite>
+</div>
+</div>
+</section>
+<section class="aziende">
+  <div class="aziende-grid">
+    <div class="aziende-image"><img src="assets/aziende-cerchio.jpg" alt="Workshop Ariadne aziende" style="width:100%;height:100%;object-fit:cover;filter:brightness(.85)"></div>
+    <div class="aziende-text">
+      <span class="label-cubotto">
+        <img src="assets/cubotto-arancio.png" alt="">
+        Ariadne per le aziende
+      </span>
+      <h2>Portiamo Ariadne<br>dentro le <em>organizzazioni</em></h2>
+      <p>Executive coaching, team coaching, group coaching, formazione esperienziale, assessment Hogan, retreat e team building. Sei aree di intervento e una sola logica di lavoro: creiamo spazi di esplorazione e azione, per trasformare consapevolezza in evoluzione.</p>
+      <div>
+        <a href="#" class="btn btn-primary">Scopri Ariadne Aziende <span class="arrow">→</span></a>
+        <a href="#" class="btn btn-secondary">Casi e clienti</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="calendario">
+  <div class="calendario-header">
+    <h2>Le prossime<br><em>edizioni in partenza</em></h2>
+    <div class="link-cal">
+      <a href="#">Vedi tutto il calendario →</a>
+    </div>
+  </div>
+  <div class="eventi-grid">
+    <div class="evento-card core">
+      <div class="evento-num">01</div>
+      <div class="evento-tipo">Programma di formazione</div>
+      <h3>Core Coaching Program — Edizione 2026</h3>
+      <div class="evento-info">
+        <p><strong>Inizio:</strong> Settembre 2026</p>
+        <p><strong>Modalità:</strong> Ibrido — Milano + online</p>
+        <p><strong>Posti:</strong> 8 partecipanti, ultimi posti disponibili</p>
+      </div>
+      <a href="#" class="evento-link">Scopri il programma →</a>
+    </div>
+    <div class="evento-card team">
+      <div class="evento-num">02</div>
+      <div class="evento-tipo">Programma di formazione</div>
+      <h3>Team Coaching Program — Edizione 2026</h3>
+      <div class="evento-info">
+        <p><strong>Modulo 3:</strong> Giugno 2026</p>
+        <p><strong>Sede:</strong> Spazio Cascina Ovi, Segrate</p>
+        <p><strong>Stato:</strong> Iscrizioni in corso</p>
+      </div>
+      <a href="#" class="evento-link">Scopri il programma →</a>
+    </div>
+    <div class="evento-card quadrant">
+      <div class="evento-num">03</div>
+      <div class="evento-tipo">Certificazione internazionale</div>
+      <h3>Core Quadrant® — Maggio/Giugno 2026</h3>
+      <div class="evento-info">
+        <p><strong>Date:</strong> Maggio – Giugno 2026</p>
+        <p><strong>Sede:</strong> NTT Data, Milano</p>
+        <p><strong>Posti:</strong> Iscrizioni aperte</p>
+      </div>
+      <a href="#" class="evento-link">Scopri la certificazione →</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="footer-grid">
+<div class="footer-brand"><img src="assets/logo-completo.png" alt="Ariadne"><p>La scuola italiana di coaching professionale ICF, dove l'approccio si impara sperimentando.</p></div>
+<div class="footer-col"><h5>Percorso</h5><ul><li><a href="scuola.html" class="has-sub">Scuola</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="professional-coaching.html">Professional (Core+Team)</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+<div class="footer-col"><h5>Community</h5><ul><li></li><li><a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li><li><a href="area-riservata.html">Area riservata</a></li></ul></div>
+<div class="footer-col"><h5>Scuola · Contatti</h5><ul><li><a href="approccio.html">L'approccio</a></li><li><a href="il-metodo.html#trainer">I trainer</a></li><li><a href="#">Ariadne per le aziende</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul><p style="margin-top:16px">Ariadne SRL<br>Via Pietro Paleocapa, 7<br>20121 Milano<br>Tel. +39 339 272 4113<br>info@ariadne.training</p></div></div>
+<div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div><a href="#">Termini</a><a href="#">Privacy</a><a href="#">Cookie</a></div></div></footer>
+
+<script src="ariadne.js"></script>
+<script src="revisione.js"></script>
+</body>
+</html>

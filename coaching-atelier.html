@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Atelier — La community Ariadne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ariadne.css">
+<style>
+.at-hero{background:linear-gradient(135deg,var(--cubo-arancio-light) 0%,var(--cubo-arancio-dark) 100%);color:#fff;padding:140px 56px 100px;position:relative;overflow:hidden}
+.at-hero::before{display:none}
+.at-hero-inner{max-width:1100px;margin:0 auto;position:relative;text-align:center}
+.at-hero .badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.2);backdrop-filter:blur(6px);padding:8px 20px;border-radius:100px;font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:600;margin-bottom:32px}
+.at-hero .badge::before{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.at-hero h1{font-family:var(--serif);font-weight:300;font-size:88px;line-height:.95;letter-spacing:-3px;margin-bottom:32px}
+.at-hero h1 em{font-weight:400}
+.at-hero p{font-family:var(--serif);font-weight:300;font-size:22px;line-height:1.5;max-width:760px;margin:0 auto;opacity:.95}
+.at-intro{background:var(--bg-white);padding:120px 56px;text-align:center}
+.at-intro-inner{max-width:880px;margin:0 auto}
+.at-intro h2{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1.2;letter-spacing:-1.2px;margin-bottom:32px}
+.at-intro h2 em{color:var(--cubo-arancio-dark);font-weight:400}
+.at-intro p{font-family:var(--sans);font-size:18px;line-height:1.7;color:var(--ink-soft);margin-bottom:18px}
+.at-formati{background:var(--bg-cream);padding:120px 56px}
+.at-form-header{max-width:1100px;margin:0 auto 64px;text-align:center}
+.at-form-header h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
+.at-form-header h2 em{color:var(--cubo-arancio-dark);font-weight:400}
+.at-form-header p{font-family:var(--serif);font-weight:300;font-size:19px;color:var(--ink-soft);max-width:680px;margin:0 auto}
+.formati-grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.formato-card{background:var(--bg-white);padding:48px 40px;border-radius:var(--radius-card);border-top:3px solid var(--cubo-verde-dark);min-height:380px;display:flex;flex-direction:column}
+.formato-card.lab{border-top-color:var(--cubo-arancio-dark)}
+.formato-card.retreat{border-top-color:var(--cubo-azzurro)}
+.formato-card .f-num{font-family:var(--serif);font-size:14px;text-transform:uppercase;letter-spacing:1.5px;color:var(--cubo-arancio-dark);margin-bottom:12px;font-weight:600}
+.formato-card.lab .f-num{color:var(--cubo-arancio-dark)}
+.formato-card.retreat .f-num{color:var(--cubo-azzurro)}
+.formato-card h3{font-family:var(--serif);font-weight:500;font-size:30px;color:var(--ink);margin-bottom:14px;line-height:1.1}
+.formato-card .ritmo{font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-mute);font-weight:600;margin-bottom:18px}
+.formato-card p{font-size:15px;line-height:1.65;color:var(--ink-soft);margin-bottom:20px;flex-grow:1}
+.formato-card .f-meta{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink);font-weight:600;border-top:1px solid rgba(31,24,19,.1);padding-top:16px}
+.at-cal{background:var(--viola-deep);color:var(--bg-cream);padding:140px 56px}
+.at-cal-inner{max-width:1100px;margin:0 auto}
+.at-cal h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;color:var(--bg-cream);margin-bottom:20px;text-align:center}
+.at-cal h2 em{color:var(--cubo-arancio-light);font-weight:400}
+.at-cal .sub{text-align:center;font-family:var(--serif);font-weight:300;font-size:19px;color:rgba(251,248,242,.78);margin-bottom:64px;max-width:680px;margin-left:auto;margin-right:auto}
+.cal-list{display:flex;flex-direction:column;gap:16px}
+.cal-row{display:grid;grid-template-columns:140px 1fr 200px;gap:32px;align-items:center;padding:24px 28px;background:rgba(251,248,242,.06);border-radius:var(--radius-card);border:1px solid rgba(251,248,242,.12);transition:all .3s}
+.cal-row:hover{background:rgba(251,248,242,.1)}
+.cal-row .data{font-family:var(--serif);font-size:24px;font-weight:300;color:var(--cubo-arancio-light)}
+.cal-row .info h4{font-family:var(--serif);font-weight:500;font-size:20px;color:var(--bg-cream);margin-bottom:4px}
+.cal-row .info p{font-size:13px;color:rgba(251,248,242,.7)}
+.cal-row .tipo{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--cubo-arancio-light);font-weight:600;text-align:right}
+.at-accesso{background:var(--bg-cream);padding:120px 56px}
+.at-acc-inner{max-width:1100px;margin:0 auto;text-align:center}
+.at-acc-inner h2{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1.1;letter-spacing:-1.2px;margin-bottom:48px}
+.at-acc-inner h2 em{color:var(--cubo-arancio-dark);font-weight:400}
+.acc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.acc-card{background:var(--bg-white);padding:36px 28px;border-radius:var(--radius-card);text-align:left}
+.acc-card h4{font-family:var(--serif);font-weight:500;font-size:20px;color:var(--ink);margin-bottom:12px}
+.acc-card p{font-size:14px;line-height:1.6;color:var(--ink-soft)}
+.at-cta{background:linear-gradient(135deg,var(--cubo-arancio-dark),var(--terra-deep));color:#fff;padding:100px 56px;text-align:center}
+.at-cta h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.at-cta h2 em{font-weight:400}
+.at-cta p{font-family:var(--serif);font-weight:300;font-size:20px;max-width:640px;margin:0 auto 40px;opacity:.95}
+.at-cta .btn-primary{background:#fff;color:var(--cubo-arancio-dark);border-color:#fff}
+.at-cta .btn-secondary{color:#fff;border-color:#fff}
+.at-cta .row{display:flex;gap:16px;justify-content:center}
+@media(max-width:1024px){.formati-grid,.acc-grid{grid-template-columns:1fr}.at-hero h1{font-size:48px}.cal-row{grid-template-columns:1fr;gap:8px}.cal-row .tipo{text-align:left}}
+</style><link rel="stylesheet" href="revisione.css">
+</head><body>
+<header class="header"><div class="header-inner"><div class="logo"><a href="homepage.html"><img src="assets/logo-completo.png" alt="Ariadne"></a></div>
+<nav class="nav"><a href="approccio.html">L'approccio</a><a href="scuola.html" class="has-sub">Scuola</a><a href="core-quadrant.html">Core Quadrant®</a><a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a><a href="calendario.html">Calendario</a><a href="#" class="nav-cta">Aziende →</a></nav></div></header>
+
+<section class="at-hero"><div class="at-hero-inner">
+<span class="badge">La community Ariadne</span>
+<h1 class="ari-fade">Atelier.<br><em>La community<br>come infrastruttura</em></h1>
+<p>Dopo i corsi, tra un'edizione e l'altra, con chi viene da altre scuole, con chi non è ancora partito. Un ritmo mensile su cui puoi contare, un'apertura reale a chi non è ancora dentro, una community che esiste perché la vogliamo viva — non perché è un "extra".</p>
+</div></section>
+
+<section class="at-intro"><div class="at-intro-inner">
+<span class="label-cubotto" style="margin:0 auto 24px"><img src="assets/cubotto-arancio.png" alt="">Perché esiste l'Atelier</span>
+<h2>Una community <em>che si pratica,</em><br>non che si dichiara.</h2>
+<p>L'Atelier è il modo in cui Ariadne tiene viva la pratica del coaching tra un programma e l'altro, e il modo in cui il mondo della scuola si mantiene aperto a chi è fuori. Non è un programma fedeltà, non è un upselling: è un'infrastruttura relazionale che esiste perché crediamo che la pratica del coaching abbia bisogno di un terreno comune in cui rimanere viva.</p>
+<p>La community Ariadne è composta da alumni dei nostri programmi, coach formati altrove che vogliono incontrare il nostro modo di lavorare, e persone curiose che si stanno avvicinando al coaching per la prima volta. Tutti e tre questi pubblici trovano un proprio spazio dentro l'Atelier.</p>
+</div></section>
+
+<section class="at-formati"><div class="at-form-header">
+<h2>Tre formati,<br><em>tre ritmi</em></h2>
+<p>L'Atelier vive in tre formati diversi. Ciascuno ha un suo ritmo, un suo grado di apertura, una sua funzione nella vita della community.</p>
+</div>
+<div class="formati-grid">
+<div class="formato-card"><div class="f-num">— 01 / Apericoaching</div><h3>Apericoaching</h3><div class="ritmo">Mensile · in presenza</div><p>Una volta al mese, in presenza, con un tema e un calice. È l'entry point più semplice per incontrare il mondo Ariadne — anche se non lo conosci ancora. Format aperto a tutti, con prenotazione gratuita.</p><div class="f-meta">12 edizioni / anno · accesso libero</div></div>
+<div class="formato-card lab"><div class="f-num">— 02 / Lab</div><h3>Lab Ariadne</h3><div class="ritmo">Mensile + trimestrale</div><p>Dove la pratica continua tra un'edizione e l'altra. Due formati: il Lab mensile online di 90 minuti su un tema specifico, e il Lab trimestrale in presenza di mezza o intera giornata di pratica intensa.</p><div class="f-meta">10 lab/anno · alumni e ospiti</div></div>
+<div class="formato-card retreat"><div class="f-num">— 03 / Retreat</div><h3>Retreat alumni</h3><div class="ritmo">2 volte all'anno</div><p>Due volte all'anno, esclusivo per alumni fan della scuola. Format ancora in definizione, spirito chiaro: ritiro, rigenerazione, outdoor, comunità. Un'esperienza di immersione lunga in luoghi di natura.</p><div class="f-meta">2 retreat/anno · solo alumni</div></div>
+</div></section>
+
+<section class="at-cal"><div class="at-cal-inner">
+<h2>Prossimi <em>appuntamenti</em></h2>
+<p class="sub">Il calendario degli incontri della community per i prossimi mesi. Vai al calendario completo per vedere tutto.</p>
+<div class="cal-list">
+<div class="cal-row"><div class="data">15 mag</div><div class="info"><h4>Apericoaching · Le metafore in coaching</h4><p>Spazio Cascina Ovi, Segrate · h. 19:30</p></div><div class="tipo">Apericoaching</div></div>
+<div class="cal-row"><div class="data">28 mag</div><div class="info"><h4>Lab online · Il contratto di coaching</h4><p>Online via Zoom · 90 minuti · h. 18:00</p></div><div class="tipo">Lab mensile</div></div>
+<div class="cal-row"><div class="data">12 giu</div><div class="info"><h4>Apericoaching · Coaching e creatività</h4><p>Spazio Cascina Ovi, Segrate · h. 19:30</p></div><div class="tipo">Apericoaching</div></div>
+<div class="cal-row"><div class="data">22 giu</div><div class="info"><h4>Lab in presenza · Disegno onirico</h4><p>Milano · giornata intera · h. 9:30-17:30</p></div><div class="tipo">Lab trimestrale</div></div>
+<div class="cal-row"><div class="data">05 lug</div><div class="info"><h4>Retreat estivo · Comunità in natura</h4><p>Località in definizione · 3 giorni · solo alumni</p></div><div class="tipo">Retreat</div></div>
+</div></div></section>
+
+<section class="at-accesso"><div class="at-acc-inner">
+<h2>Tre modi di <em>essere dentro</em></h2>
+<div class="acc-grid">
+<div class="acc-card"><h4>Sei alumnus Ariadne</h4><p>Hai accesso completo a tutti i formati Atelier. Apericoaching, Lab mensili e trimestrali, retreat alumni esclusivi. Ti accedi dall'area riservata.</p></div>
+<div class="acc-card"><h4>Vieni da un'altra scuola</h4><p>Coach formato altrove? Sei benvenuto agli Apericoaching e ai Lab aperti. È il modo per incontrare il nostro modo di lavorare prima di un eventuale percorso insieme.</p></div>
+<div class="acc-card"><h4>Sei curioso del coaching</h4><p>Non sei ancora coach e ti stai avvicinando al mondo? Gli Apericoaching sono l'entry point più naturale per capire se questo è un linguaggio che ti appartiene.</p></div>
+</div></div></section>
+
+<section class="at-cta"><h2>Vuoi <em>partecipare?</em></h2>
+<p>Iscriviti al prossimo Apericoaching o consulta il calendario completo per scoprire tutti gli appuntamenti della community Ariadne nei prossimi mesi.</p>
+<div class="row"><a href="#" class="btn btn-primary">Iscriviti al prossimo Apericoaching →</a><a href="calendario.html" class="btn btn-secondary">Calendario completo</a></div></section>
+
+<footer><div class="footer-grid">
+<div class="footer-brand"><img src="assets/logo-completo.png" alt="Ariadne"><p>La scuola italiana di coaching professionale ICF, dove l'approccio si impara sperimentando.</p></div>
+<div class="footer-col"><h5>Percorso</h5><ul><li><a href="scuola.html" class="has-sub">Scuola</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="professional-coaching.html">Professional (Core+Team)</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+<div class="footer-col"><h5>Community</h5><ul><li></li><li><a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li><li><a href="area-riservata.html">Area riservata</a></li></ul></div>
+<div class="footer-col"><h5>Scuola · Contatti</h5><ul><li><a href="approccio.html">L'approccio</a></li><li><a href="il-metodo.html#trainer">I trainer</a></li><li><a href="#">Ariadne per le aziende</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul><p style="margin-top:16px">Ariadne SRL<br>Via Pietro Paleocapa, 7<br>20121 Milano<br>Tel. +39 339 272 4113<br>info@ariadne.training</p></div></div>
+<div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div><a href="#">Termini</a><a href="#">Privacy</a><a href="#">Cookie</a></div></div></footer>
+<script src="ariadne.js"></script>
+<script src="revisione.js"></script>
+</body></html>

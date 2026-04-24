@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Il tuo percorso — Ariadne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ariadne.css">
+<style>
+.tp-hero{background:var(--bg-cream-deep);padding:140px 56px 100px;text-align:center}
+.tp-hero h1{font-family:var(--serif);font-weight:300;font-size:80px;line-height:.95;letter-spacing:-3px;margin-bottom:24px}
+.tp-hero h1 em{color:var(--terra);font-weight:400}
+.tp-hero p{font-family:var(--serif);font-weight:300;font-size:22px;line-height:1.5;color:var(--ink-soft);max-width:740px;margin:0 auto}
+.tp-percorso{padding:120px 56px}
+.tp-percorso.alt{background:var(--bg-cream)}
+.tp-perc-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+.tp-perc-text .tag{font-family:var(--nav);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.tp-perc-text .tag::before{content:"";width:32px;height:2px;background:currentColor}
+.p1 .tag{color:#df7a4a}.p2 .tag{color:#9ec165}.p3 .tag{color:#d33935}
+.tp-perc-text h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
+.tp-perc-text h2 em{font-weight:400}
+.p1 h2 em{color:#df7a4a}.p2 h2 em{color:#9ec165}.p3 h2 em{color:#d33935}
+.tp-perc-text .cred{font-family:var(--serif);font-size:20px;color:var(--ink-soft);margin-bottom:20px}
+.tp-perc-text p{font-size:16px;line-height:1.7;color:var(--ink-soft);margin-bottom:24px}
+.cubotti-flow{display:flex;flex-direction:column;align-items:center;gap:0}
+.cubotto-step{width:280px;position:relative;text-align:center;text-decoration:none;color:#fff;display:block;transition:transform .2s}
+.cubotto-step:hover{transform:scale(1.03)}
+.cubotto-body{padding:28px 24px 36px;border-radius:16px 16px 0 0;position:relative;z-index:2}
+.cubotto-body .step-label{font-family:var(--nav);font-size:10px;text-transform:uppercase;letter-spacing:1.5px;opacity:.85;margin-bottom:6px;font-weight:600}
+.cubotto-body h4{font-family:var(--serif);font-weight:500;font-size:20px;line-height:1.15}
+.cubotto-arrow{width:0;height:0;border-left:140px solid transparent;border-right:140px solid transparent;border-top:32px solid;position:relative;z-index:1;margin-top:-1px}
+.cubotto-incavo{width:0;height:0;border-left:140px solid transparent;border-right:140px solid transparent;border-bottom:32px solid;position:relative;z-index:3;margin-bottom:-1px}
+.cubotto-step.core .cubotto-body{background:#df7a4a}.cubotto-step.core .cubotto-arrow{border-top-color:#df7a4a}.cubotto-step.core .cubotto-incavo{border-bottom-color:#df7a4a}
+.cubotto-step.advanced .cubotto-body{background:#d33935}.cubotto-step.advanced .cubotto-arrow{border-top-color:#d33935}.cubotto-step.advanced .cubotto-incavo{border-bottom-color:#d33935}
+.cubotto-step.team .cubotto-body{background:#9ec165}.cubotto-step.team .cubotto-arrow{border-top-color:#9ec165}.cubotto-step.team .cubotto-incavo{border-bottom-color:#9ec165}
+.cubotto-step.mentor .cubotto-body{background:#9C8B7B}.cubotto-step.mentor .cubotto-arrow{border-top-color:#9C8B7B}.cubotto-step.mentor .cubotto-incavo{border-bottom-color:#9C8B7B}
+.cubotto-step.esame .cubotto-body{background:#5A4A3D}.cubotto-step.esame .cubotto-arrow{border-top-color:#5A4A3D}.cubotto-step.esame .cubotto-incavo{border-bottom-color:#5A4A3D}
+.credenziale-badge{width:120px;height:120px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--serif);font-weight:500;font-size:28px;color:#fff;margin:24px auto 0;box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.credenziale-badge.acc{background:linear-gradient(135deg,#df7a4a,#b8633a)}
+.credenziale-badge.pcc{background:linear-gradient(135deg,#d33935,#a82c2a)}
+.credenziale-badge.actc{background:linear-gradient(135deg,#9ec165,#7a9c50)}
+.credenziale-badge .cred-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;font-weight:600;opacity:.9}
+.livello-divider{padding:32px 0;text-align:center}
+.livello-divider .label{font-family:var(--nav);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;color:var(--ink-mute);font-weight:600;background:var(--bg-white);display:inline-block;padding:8px 20px;border-radius:100px;border:1px solid rgba(31,24,19,.12)}
+.tp-cta{background:linear-gradient(135deg,#df7a4a,#b8633a);color:#fff;padding:100px 56px;text-align:center}
+.tp-cta h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.tp-cta p{font-family:var(--serif);font-weight:300;font-size:20px;max-width:640px;margin:0 auto 40px;opacity:.95}
+.tp-cta .btn-primary{background:#fff;color:var(--terra);border-color:#fff}
+@media(max-width:1024px){.tp-hero h1{font-size:48px}.tp-perc-inner{grid-template-columns:1fr;gap:48px}.cubotto-step{width:240px}.cubotto-arrow,.cubotto-incavo{border-left-width:120px;border-right-width:120px}}
+</style></head><body>
+<header class="header"><div class="header-inner"><div class="logo"><a href="homepage.html"><img src="assets/logo-completo.png" alt="Ariadne"></a></div>
+<nav class="nav"><a href="approccio.html">L'approccio</a><a href="scuola.html" class="has-sub">Scuola</a><a href="core-quadrant.html">Core Quadrant®</a><a href="training.html">Training</a><a href="workshop.html">Workshop</a><a href="calendario.html">Calendario</a><a href="#" class="nav-cta">Aziende →</a></nav></div></header>
+<section class="tp-hero">
+<h1>Il tuo percorso<br>per la credenziale <em>ICF</em></h1>
+<p>Tre percorsi diversi, tre obiettivi diversi. Tutti partono dal Core Coaching e si differenziano da lì in avanti. Scegli quello che corrisponde a dove vuoi arrivare.</p>
+</section>
+<section class="tp-percorso p1" id="percorso-1"><div class="tp-perc-inner">
+<div class="tp-perc-text"><div class="tag">Percorso 1</div><h2>Professional<br>Coaching <em>Program</em></h2><p class="cred">→ Credenziali ACC e PCC</p><p>Il percorso individuale verso le credenziali ICF di primo e secondo livello. Due annualità progressive: Core Coaching per la ACC, Advanced Coaching per la PCC.</p><a href="scuola.html" class="btn btn-primary" style="background:#df7a4a;border-color:#df7a4a;color:#fff">Scopri cosa è incluso →</a></div>
+<div class="cubotti-flow">
+<div class="livello-divider"><span class="label">Livello 1</span></div>
+<a href="core-coaching.html" class="cubotto-step core"><div class="cubotto-body"><div class="step-label">Modulo formativo</div><h4>Core Coaching</h4></div><div class="cubotto-arrow"></div></a>
+<a href="#" class="cubotto-step mentor"><div class="cubotto-incavo"></div><div class="cubotto-body"><div class="step-label">Accompagnamento</div><h4>Mentoring</h4></div><div class="cubotto-arrow"></div></a>
+<a href="#" class="cubotto-step esame"><div class="cubotto-incavo"></div><div class="cubotto-body"><div class="step-label">Valutazione ICF</div><h4>Esame</h4></div><div class="cubotto-arrow"></div></a>
+<div class="credenziale-badge acc"><span class="cred-label">Credenziale</span>ACC</div>
+<div class="livello-divider" style="margin-top:48px"><span class="label">Livello 2</span></div>
+<a href="advanced-coaching.html" class="cubotto-step advanced"><div class="cubotto-body"><div class="step-label">Modulo formativo</div><h4>Advanced Coaching</h4></div><div class="cubotto-arrow"></div></a>
+<a href="#" class="cubotto-step mentor"><div class="cubotto-incavo"></div><div class="cubotto-body"><div class="step-label">Accompagnamento</div><h4>Mentoring</h4></div><div class="cubotto-arrow"></div></a>
+<a href="#" class="cubotto-step esame"><div class="cubotto-incavo"></div><div class="cubotto-body"><div class="step-label">Valutazione ICF</div><h4>Esame</h4></div><div class="cubotto-arrow"></div></a>
+<div class="credenziale-badge pcc"><span class="cred-label">Credenziale</span>PCC</div>
+</div></div></section>
+<section class="tp-percorso alt p2" id="percorso-2"><div class="tp-perc-inner">
+<div class="tp-perc-text"><div class="tag">Percorso 2</div><h2>Professional Team<br>Coaching <em>Program</em></h2><p class="cred">→ Credenziale ACTC</p><p>Per chi vuole specializzarsi nel team coaching. Core Coaching come base, poi Team Coaching, mentoring ed esame verso la credenziale ACTC.</p><a href="scuola.html" class="btn btn-primary" style="background:#9ec165;border-color:#9ec165;color:#fff">Scopri cosa è incluso →</a></div>
+<div class="cubotti-flow">
+<a href="core-coaching.html" class="cubotto-step core"><div class="cubotto-body"><div class="step-label">Modulo formativo</div><h4>Core Coaching</h4></div><div class="cubotto-arrow"></div></a>
+<a href="team-coaching.html" class="cubotto-step team"><div class="cubotto-incavo"></div><div class="cubotto-body"><div class="step-label">Specializzazione</div><h4>Team Coaching</h4></div><div class="cubotto-arrow"></div></a>
+<a href="#" class="cubotto-step mentor"><div class="cubotto-incavo"></div><div class="cubotto-body"><div class="step-label">Accompagnamento</div><h4>Mentoring</h4></div><div class="cubotto-arrow"></div></a>
+<a href="#" class="cubotto-step esame"><div class="cubotto-incavo"></div><div class="cubotto-body"><div class="step-label">Valutazione ICF</div><h4>Esame</h4></div><div class="cubotto-arrow"></div></a>
+<div class="credenziale-badge actc"><span class="cred-label">Credenziale</span>ACTC</div>
+</div></div></section>
+<section class="tp-percorso p3" id="percorso-3"><div class="tp-perc-inner">
+<div class="tp-perc-text"><div class="tag">Percorso 3</div><h2>Coaching Creativo<br><em>Esperienziale</em></h2><p class="cred">→ Competenze di leadership (senza credenziali ICF)</p><p>Per HR, manager e leader che vogliono acquisire competenze di coaching creativo-esperienziale senza mirare alle credenziali ICF. Il percorso parte dal Core Coaching e prosegue con Advanced e/o Team Coaching, a seconda degli obiettivi.</p><a href="scuola.html" class="btn btn-primary" style="background:#d33935;border-color:#d33935;color:#fff">Scopri cosa è incluso →</a></div>
+<div class="cubotti-flow">
+<a href="core-coaching.html" class="cubotto-step core"><div class="cubotto-body"><div class="step-label">Modulo formativo</div><h4>Core Coaching</h4></div><div class="cubotto-arrow"></div></a>
+<div class="cubotto-step" style="width:280px"><div class="cubotto-incavo" style="border-bottom-color:#d33935"></div><div class="cubotto-body" style="background:linear-gradient(135deg,#d33935 50%,#9ec165 50%)"><div class="step-label">A scelta</div><h4>Advanced e/o Team Coaching</h4></div><div class="cubotto-arrow" style="border-top-color:#9ec165"></div></div>
+<div style="text-align:center;margin-top:24px"><div style="display:inline-block;padding:20px 40px;background:var(--bg-cream);border-radius:16px;border:2px solid var(--terra)"><div style="font-family:var(--nav);font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-mute);font-weight:600;margin-bottom:6px">Risultato</div><div style="font-family:var(--serif);font-weight:500;font-size:22px;color:var(--ink)">Competenze di leadership</div></div></div>
+</div></div></section>
+<section class="tp-cta"><h2>Quale percorso è il tuo?</h2><p>Il modo migliore per scoprirlo è un colloquio conoscitivo con uno dei trainer. Senza impegno, per capire insieme da dove ti conviene partire.</p><a href="#" class="btn btn-primary">Richiedi un colloquio →</a></section>
+<footer><div class="footer-grid"><div class="footer-brand"><img src="assets/logo-completo.png" alt="Ariadne"><p>La scuola italiana di coaching professionale ICF dove l'approccio si impara sperimentando.</p></div><div class="footer-col"><h5>Scuola</h5><ul><li><a href="scuola.html">La proposta Ariadne</a></li><li><a href="il-tuo-percorso.html">Il tuo percorso</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div><div class="footer-col"><h5>Community</h5><ul><li><a href="coaching-atelier.html">Coaching Atelier</a></li><li><a href="laboratori.html">Laboratori Ariadne</a></li><li><a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li></ul></div><div class="footer-col"><h5>Scuola · Contatti</h5><ul><li><a href="approccio.html">L'approccio</a></li><li><a href="approccio.html#trainer">I trainer</a></li><li><a href="#">Ariadne per le aziende</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul><p style="margin-top:16px">Ariadne SRL<br>Via Pietro Paleocapa, 7<br>20121 Milano<br>Tel. +39 339 272 4113<br>info@ariadne.training</p></div></div><div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div><a href="#">Termini</a><a href="#">Privacy</a><a href="#">Cookie</a></div></div></footer>
+<script src="ariadne.js"></script></body></html>

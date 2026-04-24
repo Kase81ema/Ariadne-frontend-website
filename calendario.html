@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Calendario — Ariadne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ariadne.css">
+<style>
+.cal-hero{background:var(--bg-cream-deep);padding:140px 56px 100px;text-align:center;border-bottom:1px solid rgba(31,24,19,.06)}
+.cal-hero h1{font-family:var(--serif);font-weight:300;font-size:96px;line-height:.95;letter-spacing:-3.5px;margin-bottom:32px}
+.cal-hero h1 em{color:var(--terra);font-weight:400}
+.cal-hero p{font-family:var(--serif);font-weight:300;font-size:23px;line-height:1.5;color:var(--ink-soft);max-width:760px;margin:0 auto}
+
+.cal-filtri{background:var(--bg-white);padding:64px 56px 32px;border-bottom:1px solid rgba(31,24,19,.08);position:sticky;top:97px;z-index:50;backdrop-filter:blur(8px);background:rgba(255,255,255,.96)}
+.cal-filtri-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.cal-filtri h3{font-family:var(--serif);font-weight:500;font-size:18px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:1.5px}
+.cal-filtri .filtri{display:flex;gap:10px;flex-wrap:wrap}
+.cal-filtri button{font-family:var(--sans);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;padding:10px 18px;border:1px solid rgba(31,24,19,.15);background:var(--bg-cream);color:var(--ink-soft);border-radius:100px;cursor:pointer;transition:all .3s}
+.cal-filtri button:hover{border-color:var(--terra);color:var(--terra)}
+.cal-filtri button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+.cal-eventi{background:var(--bg-cream);padding:80px 56px 120px}
+.cal-eventi-inner{max-width:1300px;margin:0 auto}
+.mese{margin-bottom:80px}
+.mese-titolo{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1;letter-spacing:-1.5px;color:var(--ink);margin-bottom:32px;padding-bottom:18px;border-bottom:2px solid var(--terra);display:flex;align-items:baseline;justify-content:space-between}
+.mese-titolo em{color:var(--terra);font-weight:400;font-size:20px;letter-spacing:0;text-transform:uppercase;letter-spacing:1.5px;font-style:normal;font-weight:600}
+.eventi-mese{display:flex;flex-direction:column;gap:16px}
+.evento-row{display:grid;grid-template-columns:120px 60px 1fr 200px 120px;gap:32px;align-items:center;background:var(--bg-white);padding:28px 32px;border-radius:var(--radius-card);border-left:4px solid var(--terra);transition:all .3s;cursor:pointer}
+.evento-row:hover{transform:translateX(4px);box-shadow:0 16px 32px -16px rgba(45,38,73,.15)}
+.evento-row.core{border-left-color:var(--cubo-arancio-dark)}
+.evento-row.team{border-left-color:var(--cubo-verde-dark)}
+.evento-row.advanced{border-left-color:var(--cubo-rosso-dark)}
+.evento-row.cq{border-left-color:var(--cubo-azzurro)}
+.evento-row.atelier{border-left-color:var(--cubo-arancio-light)}
+.evento-row.workshop{border-left-color:var(--cubo-rosso-light)}
+.evento-row .data{font-family:var(--serif);font-weight:300;font-size:32px;line-height:1;color:var(--ink);letter-spacing:-1px}
+.evento-row .data .giorno{font-size:14px;display:block;color:var(--ink-mute);font-style:normal;letter-spacing:1px;text-transform:uppercase;font-weight:600;font-family:var(--sans);margin-top:6px}
+.evento-row .tipo-badge{font-family:var(--sans);font-size:9px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;padding:6px 10px;background:rgba(31,24,19,.06);border-radius:100px;text-align:center;color:var(--ink-soft)}
+.evento-row.core .tipo-badge{background:rgba(238,116,60,.12);color:var(--cubo-arancio-dark)}
+.evento-row.team .tipo-badge{background:rgba(148,195,86,.18);color:#7a9c50}
+.evento-row.advanced .tipo-badge{background:rgba(229,34,42,.12);color:var(--cubo-rosso-dark)}
+.evento-row.cq .tipo-badge{background:rgba(74,180,231,.15);color:#568dc1}
+.evento-row.atelier .tipo-badge{background:rgba(249,175,67,.15);color:var(--cubo-arancio-dark)}
+.evento-row.workshop .tipo-badge{background:rgba(234,82,132,.12);color:var(--cubo-rosso-light)}
+.evento-row .info h4{font-family:var(--serif);font-weight:500;font-size:20px;color:var(--ink);margin-bottom:4px;line-height:1.2}
+.evento-row .info p{font-size:13px;color:var(--ink-mute);line-height:1.4}
+.evento-row .luogo{font-size:12px;color:var(--ink-soft);text-align:right}
+.evento-row .luogo strong{display:block;color:var(--ink);font-size:13px;margin-bottom:4px}
+.evento-row .stato{font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;text-align:right;padding:6px 12px;background:var(--bg-cream);border-radius:100px;color:var(--ink-mute)}
+.evento-row .stato.aperte{background:rgba(148,195,86,.18);color:#7a9c50}
+.evento-row .stato.ultimi{background:rgba(238,116,60,.15);color:var(--cubo-arancio-dark)}
+
+.cal-newsletter{background:var(--viola-deep);color:var(--bg-cream);padding:120px 56px;text-align:center}
+.cal-news-inner{max-width:760px;margin:0 auto}
+.cal-newsletter h2{font-family:var(--serif);font-weight:300;font-size:54px;line-height:1.1;letter-spacing:-1.5px;color:var(--bg-cream);margin-bottom:24px}
+.cal-newsletter h2 em{color:var(--terra-light);font-weight:400}
+.cal-newsletter p{font-family:var(--serif);font-weight:300;font-size:19px;color:rgba(251,248,242,.78);margin-bottom:40px}
+.cal-newsletter .btn-primary{background:var(--terra);border-color:var(--terra)}
+
+@media(max-width:1024px){.cal-hero h1{font-size:54px}.evento-row{grid-template-columns:1fr;gap:12px}.cal-filtri{position:static}}
+</style><link rel="stylesheet" href="revisione.css">
+</head><body>
+
+<header class="header"><div class="header-inner"><div class="logo"><a href="homepage.html"><img src="assets/logo-completo.png" alt="Ariadne"></a></div>
+<nav class="nav"><a href="approccio.html">L'approccio</a><a href="scuola.html" class="has-sub">Scuola</a><a href="core-quadrant.html">Core Quadrant®</a><a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a><a href="calendario.html" class="active">Calendario</a><a href="#" class="nav-cta">Aziende →</a></nav></div></header>
+
+<section class="cal-hero">
+<h1 class="ari-fade">Tutto quello<br>che <em>succede</em></h1>
+<p>Il calendario completo degli eventi Ariadne: programmi di formazione, certificazioni internazionali, Atelier community, workshop tematici. Filtrabile per tipo, navigabile per mese.</p>
+</section>
+
+<section class="cal-filtri"><div class="cal-filtri-inner">
+<h3>Filtra per tipo</h3>
+<div class="filtri">
+<button class="active">Tutti</button>
+<button>Core Coaching</button>
+<button>Team Coaching</button>
+<button>Advanced</button>
+<button>Core Quadrant®</button>
+<button>Apericoaching</button>
+<button>Lab</button>
+<button>Workshop</button>
+<button>Webinar</button>
+</div>
+</div></section>
+
+<section class="cal-eventi"><div class="cal-eventi-inner">
+
+<div class="mese">
+<h2 class="mese-titolo">Maggio 2026 <em>5 eventi</em></h2>
+<div class="eventi-mese">
+<div class="evento-row cq"><div class="data">06<span class="giorno">mer</span></div><div class="tipo-badge">Core Quadrant</div><div class="info"><h4>Core Quadrant® · Modulo 1</h4><p>Prima giornata della certificazione internazionale Daniel Ofman</p></div><div class="luogo"><strong>NTT Data, Milano</strong>metro Romolo M2</div><div class="stato aperte">Iscrizioni aperte</div></div>
+<div class="evento-row cq"><div class="data">07<span class="giorno">gio</span></div><div class="tipo-badge">Core Quadrant</div><div class="info"><h4>Core Quadrant® · Modulo 2</h4><p>Seconda giornata della certificazione</p></div><div class="luogo"><strong>NTT Data, Milano</strong>metro Romolo M2</div><div class="stato aperte">Iscrizioni aperte</div></div>
+<div class="evento-row atelier"><div class="data">15<span class="giorno">gio</span></div><div class="tipo-badge">Apericoaching</div><div class="info"><h4>Apericoaching · Le metafore in coaching</h4><p>Tema mensile della community Ariadne</p></div><div class="luogo"><strong>Cascina Ovi, Segrate</strong>h. 19:30</div><div class="stato aperte">Accesso libero</div></div>
+<div class="evento-row team"><div class="data">22<span class="giorno">ven</span></div><div class="tipo-badge">Team Coaching</div><div class="info"><h4>Team Coaching · Modulo 2 (giorno 1)</h4><p>Le dinamiche del team — prima giornata del modulo</p></div><div class="luogo"><strong>Cascina Ovi, Segrate</strong>edizione 2026</div><div class="stato">In corso</div></div>
+<div class="evento-row atelier"><div class="data">28<span class="giorno">mer</span></div><div class="tipo-badge">Lab online</div><div class="info"><h4>Lab online · Il contratto di coaching</h4><p>Lab mensile della community su Zoom</p></div><div class="luogo"><strong>Online via Zoom</strong>90 minuti, h. 18:00</div><div class="stato aperte">Aperto a tutti</div></div>
+</div>
+</div>
+
+<div class="mese">
+<h2 class="mese-titolo">Giugno 2026 <em>4 eventi</em></h2>
+<div class="eventi-mese">
+<div class="evento-row atelier"><div class="data">12<span class="giorno">ven</span></div><div class="tipo-badge">Apericoaching</div><div class="info"><h4>Apericoaching · Coaching e creatività</h4><p>Tema mensile della community Ariadne</p></div><div class="luogo"><strong>Cascina Ovi, Segrate</strong>h. 19:30</div><div class="stato aperte">Accesso libero</div></div>
+<div class="evento-row cq"><div class="data">17<span class="giorno">mer</span></div><div class="tipo-badge">Core Quadrant</div><div class="info"><h4>Core Quadrant® · Modulo 3 finale</h4><p>Terza giornata e certificazione</p></div><div class="luogo"><strong>NTT Data, Milano</strong>metro Romolo M2</div><div class="stato ultimi">Ultimi posti</div></div>
+<div class="evento-row team"><div class="data">18<span class="giorno">gio</span></div><div class="tipo-badge">Team Coaching</div><div class="info"><h4>Team Coaching · Modulo 3 finale</h4><p>Tre giornate di immersione finale e celebrazione</p></div><div class="luogo"><strong>Cascina Ovi, Segrate</strong>edizione 2026</div><div class="stato">Chiuso · alumni</div></div>
+<div class="evento-row workshop"><div class="data">28<span class="giorno">sab</span></div><div class="tipo-badge">Workshop</div><div class="info"><h4>L'arte della domanda potente</h4><p>Una giornata di pratica intensa sulla competenza ICF</p></div><div class="luogo"><strong>Milano</strong>h. 9:30-17:30</div><div class="stato aperte">Iscrizioni aperte</div></div>
+</div>
+</div>
+
+<div class="mese">
+<h2 class="mese-titolo">Luglio 2026 <em>2 eventi</em></h2>
+<div class="eventi-mese">
+<div class="evento-row atelier"><div class="data">05<span class="giorno">dom</span></div><div class="tipo-badge">Retreat</div><div class="info"><h4>Retreat estivo · Comunità in natura</h4><p>Tre giorni di immersione, ritiro e rigenerazione</p></div><div class="luogo"><strong>In definizione</strong>3 giorni · solo alumni</div><div class="stato ultimi">Ultimi posti</div></div>
+<div class="evento-row workshop"><div class="data">11<span class="giorno">sab</span></div><div class="tipo-badge">Workshop</div><div class="info"><h4>Visual thinking per coach</h4><p>Sperimentazione del visual thinking come strumento</p></div><div class="luogo"><strong>Milano</strong>una sera, h. 18:30</div><div class="stato aperte">Iscrizioni aperte</div></div>
+</div>
+</div>
+
+<div class="mese">
+<h2 class="mese-titolo">Settembre 2026 <em>3 eventi</em></h2>
+<div class="eventi-mese">
+<div class="evento-row core"><div class="data">12<span class="giorno">sab</span></div><div class="tipo-badge">Core Coaching</div><div class="info"><h4>Core Coaching · Inizio Edizione 2026</h4><p>Modulo 1 — I fondamenti del coaching ICF</p></div><div class="luogo"><strong>Milano</strong>4 moduli, 12 settimane</div><div class="stato ultimi">Ultimi posti</div></div>
+<div class="evento-row workshop"><div class="data">19<span class="giorno">sab</span></div><div class="tipo-badge">Workshop</div><div class="info"><h4>Disegno onirico Bermolen-Dal Porto™</h4><p>Tre giornate di immersione nel metodo</p></div><div class="luogo"><strong>Milano</strong>3 giorni</div><div class="stato aperte">Iscrizioni aperte</div></div>
+<div class="evento-row atelier"><div class="data">25<span class="giorno">ven</span></div><div class="tipo-badge">Apericoaching</div><div class="info"><h4>Apericoaching · L'inizio del nuovo anno coaching</h4><p>Tema mensile della community Ariadne</p></div><div class="luogo"><strong>Cascina Ovi, Segrate</strong>h. 19:30</div><div class="stato aperte">Accesso libero</div></div>
+</div>
+</div>
+
+</div></section>
+
+<section class="cal-newsletter"><div class="cal-news-inner">
+<h2>Vuoi essere <em>aggiornato?</em></h2>
+<p>Iscriviti alla newsletter Ariadne per ricevere il calendario aggiornato dei prossimi eventi e le anteprime delle nuove edizioni dei programmi.</p>
+<a href="#" class="btn btn-primary">Iscriviti alla newsletter →</a>
+</div></section>
+
+<footer><div class="footer-grid">
+<div class="footer-brand"><img src="assets/logo-completo.png" alt="Ariadne"><p>La scuola italiana di coaching professionale ICF, dove l'approccio si impara sperimentando.</p></div>
+<div class="footer-col"><h5>Percorso</h5><ul><li><a href="scuola.html" class="has-sub">Scuola</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="professional-coaching.html">Professional (Core+Team)</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+<div class="footer-col"><h5>Community</h5><ul><li></li><li><a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li><li><a href="area-riservata.html">Area riservata</a></li></ul></div>
+<div class="footer-col"><h5>Scuola · Contatti</h5><ul><li><a href="approccio.html">L'approccio</a></li><li><a href="il-metodo.html#trainer">I trainer</a></li><li><a href="#">Ariadne per le aziende</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul><p style="margin-top:16px">Ariadne SRL<br>Via Pietro Paleocapa, 7<br>20121 Milano<br>Tel. +39 339 272 4113<br>info@ariadne.training</p></div></div>
+<div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div><a href="#">Termini</a><a href="#">Privacy</a><a href="#">Cookie</a></div></div></footer>
+<script src="ariadne.js"></script>
+<script src="revisione.js"></script>
+</body></html>

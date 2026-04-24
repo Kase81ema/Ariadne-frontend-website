@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core Quadrant® delle Qualità Autentiche — Ariadne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ariadne.css">
+<style>
+.cq-hero{background:linear-gradient(135deg,var(--cubo-azzurro) 0%,var(--cubo-viola) 100%);color:#fff;padding:120px 56px 100px;position:relative;overflow:hidden}
+.cq-hero::before{display:none}
+.cq-hero-inner{max-width:1440px;margin:0 auto;position:relative;display:grid;grid-template-columns:1.4fr 1fr;gap:80px;align-items:end}
+.cq-hero .badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);padding:8px 18px;border-radius:100px;font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:600;margin-bottom:32px}
+.cq-hero .badge::before{content:"★";color:#fff}
+.cq-hero h1{font-family:var(--serif);font-weight:300;font-size:84px;line-height:.95;letter-spacing:-3px;margin-bottom:28px}
+.cq-hero h1 em{font-weight:400}
+.cq-hero .lede{font-family:var(--serif);font-weight:300;font-size:23px;line-height:1.45;max-width:680px;margin-bottom:48px;opacity:.95}
+.cq-unicità{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:36px 32px;border-radius:var(--radius-card);border:1px solid rgba(255,255,255,.2)}
+.cq-unicità .uni-tag{font-size:10px;text-transform:uppercase;letter-spacing:1.8px;opacity:.85;margin-bottom:8px;font-weight:600}
+.cq-unicità h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.15;margin-bottom:14px}
+.cq-unicità p{font-size:14px;line-height:1.6;opacity:.9}
+.cq-intro{background:var(--bg-white);padding:120px 56px;text-align:center}
+.cq-intro-inner{max-width:920px;margin:0 auto}
+.cq-intro h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.1;letter-spacing:-1.5px;margin-bottom:32px}
+.cq-intro h2 em{color:#655a9c;font-weight:400}
+.cq-intro p{font-family:var(--sans);font-size:18px;line-height:1.7;color:var(--ink-soft);margin-bottom:18px}
+.cq-concetti{background:var(--bg-cream);padding:120px 56px}
+.cq-concetti-header{max-width:1100px;margin:0 auto 80px;text-align:center}
+.cq-concetti-header h2{font-family:var(--serif);font-weight:300;font-size:64px;line-height:1.05;letter-spacing:-1.8px;margin-bottom:24px}
+.cq-concetti-header h2 em{color:var(--cubo-viola);font-weight:400}
+.cq-concetti-header p{font-family:var(--serif);font-weight:300;font-size:20px;line-height:1.55;color:var(--ink-soft);max-width:760px;margin:0 auto}
+.concetti-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+.concetto{background:var(--bg-white);padding:48px 44px;border-radius:var(--radius-card);position:relative;border-top:3px solid var(--cubo-azzurro)}
+.concetto.c2{border-top-color:#655a9c}
+.concetto.c3{border-top-color:var(--cubo-viola)}
+.concetto.c4{border-top-color:var(--cubo-viola)}
+.concetto .num{font-family:var(--serif);font-size:14px;color:#655a9c;text-transform:uppercase;letter-spacing:1.8px;font-weight:600;margin-bottom:12px}
+.concetto.c2 .num{color:#655a9c}.concetto.c3 .num{color:var(--cubo-viola)}.concetto.c4 .num{color:var(--cubo-viola)}
+.concetto h3{font-family:var(--serif);font-weight:500;font-size:32px;line-height:1.15;color:var(--ink);margin-bottom:18px}
+.concetto h3 em{font-weight:400;color:var(--ink-soft)}
+.concetto p{font-size:16px;line-height:1.65;color:var(--ink-soft)}
+.cq-foto{background:var(--bg-white);padding:120px 56px}
+.cq-foto-grid{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center}
+.cq-foto-image{aspect-ratio:4/3;border-radius:var(--radius-card);overflow:hidden}
+.cq-foto-image img{width:100%;height:100%;object-fit:cover}
+.cq-foto-text h2{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1.1;letter-spacing:-1.2px;margin-bottom:28px}
+.cq-foto-text h2 em{color:#655a9c;font-weight:400}
+.cq-foto-text p{font-size:17px;line-height:1.7;color:var(--ink-soft);margin-bottom:20px;max-width:540px}
+.cq-pubblici{background:var(--viola-deep);color:var(--bg-cream);padding:140px 56px}
+.cq-pubblici-header{max-width:1100px;margin:0 auto 64px;text-align:center}
+.cq-pubblici-header h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;color:var(--bg-cream);margin-bottom:20px}
+.cq-pubblici-header h2 em{color:#655a9c;font-weight:400}
+.cq-pubblici-header p{font-family:var(--serif);font-weight:300;font-size:19px;color:rgba(251,248,242,.78);max-width:680px;margin:0 auto}
+.pubblici-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.pub-card{background:rgba(251,248,242,.06);padding:40px 32px;border-radius:var(--radius-card);border:1px solid rgba(251,248,242,.15)}
+.pub-card .pub-num{font-family:var(--serif);font-size:14px;color:#655a9c;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+.pub-card h3{font-family:var(--serif);font-weight:500;font-size:22px;color:var(--bg-cream);margin-bottom:14px}
+.pub-card p{font-size:14px;line-height:1.6;color:rgba(251,248,242,.8)}
+.cq-investimento{background:var(--bg-cream);padding:120px 56px}
+.cq-inv-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.cq-inv-text h2{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1.1;letter-spacing:-1.2px;margin-bottom:24px}
+.cq-inv-text h2 em{color:#655a9c;font-weight:400}
+.cq-inv-text .lede{font-family:var(--serif);font-weight:300;font-size:18px;line-height:1.55;color:var(--ink-soft);margin-bottom:24px}
+.cq-inv-text ul{list-style:none}
+.cq-inv-text li{padding:12px 0;border-bottom:1px solid rgba(31,24,19,.1);font-size:15px;color:var(--ink-soft);display:flex;justify-content:space-between}
+.cq-inv-text li strong{color:#655a9c;font-weight:600}
+.cq-inv-price{background:var(--bg-white);border-radius:var(--radius-card);padding:48px 40px;text-align:center;border:1px solid rgba(31,24,19,.08)}
+.cq-inv-price .price-tag{font-size:11px;text-transform:uppercase;letter-spacing:1.8px;color:#655a9c;font-weight:600;margin-bottom:14px}
+.cq-inv-price .price{font-family:var(--serif);font-weight:300;font-size:58px;line-height:1;letter-spacing:-3px;color:var(--ink);margin-bottom:8px}
+.cq-inv-price .price small{font-size:17px;font-weight:300;letter-spacing:0;color:var(--ink-mute)}
+.cq-inv-price .price-note{font-size:13px;color:var(--ink-mute);margin-bottom:32px;line-height:1.5}
+.cq-quote{background:var(--bg-cream-deep);padding:140px 56px;text-align:center}
+.cq-quote-inner{max-width:920px;margin:0 auto}
+.cq-quote blockquote{font-family:var(--serif);font-weight:300;font-style:italic;font-size:34px;line-height:1.35;color:var(--ink);margin-bottom:32px;letter-spacing:-0.6px}
+.cq-quote blockquote::before{content:"“";font-size:80px;line-height:0;vertical-align:-28px;color:var(--cubo-viola);margin-right:8px}
+.cq-quote blockquote::after{content:"”";font-size:80px;line-height:0;vertical-align:-28px;color:var(--cubo-viola);margin-left:4px}
+.cq-quote cite{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-mute);font-style:normal;font-weight:600}
+.cq-quote cite strong{display:block;color:var(--ink);font-size:13px;letter-spacing:1.5px;margin-bottom:4px}
+.cq-cta{background:linear-gradient(135deg,#655a9c 0%,#4a3f7a 100%);color:#fff;padding:100px 56px;text-align:center}
+.cq-cta h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.cq-cta h2 em{font-weight:400}
+.cq-cta p{font-family:var(--serif);font-weight:300;font-size:20px;line-height:1.55;max-width:640px;margin:0 auto 40px;opacity:.95}
+.cq-cta .row{display:flex;gap:16px;justify-content:center}
+.cq-cta .btn-primary{background:#fff;color:var(--cubo-viola);border-color:#fff}
+.cq-cta .btn-secondary{color:#fff;border-color:#fff}
+@media(max-width:1024px){.cq-hero-inner,.cq-foto-grid,.cq-inv-inner,.concetti-grid,.pubblici-grid{grid-template-columns:1fr;gap:48px}.cq-hero h1{font-size:48px}}
+
+/* BLOCCO COLLOQUIO CALLOUT */
+.cc-colloquio-callout{background:var(--bg-cream);padding:80px 56px}
+.cc-callout-inner{max-width:980px;margin:0 auto;padding:48px 56px;background:var(--bg-white);border-left:4px solid var(--terra);border-radius:var(--radius-card);display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.cc-callout-text h3{font-family:var(--serif);font-weight:500;font-size:26px;line-height:1.2;color:var(--ink);margin-bottom:14px}
+.cc-callout-text h3 em{color:var(--terra);font-weight:400}
+.cc-callout-text p{font-family:var(--sans);font-size:15px;line-height:1.65;color:var(--ink-soft)}
+.cc-callout-action{text-align:center}
+.cc-callout-action .btn{white-space:nowrap}
+/* PROSSIME EDIZIONI */
+.cc-edizioni{background:var(--bg-white);padding:100px 56px;border-top:1px solid rgba(31,24,19,.06)}
+.cc-edizioni-header{max-width:1100px;margin:0 auto 48px;text-align:center}
+.cc-edizioni-header h2{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1.1;letter-spacing:-1.2px;margin-bottom:16px}
+.cc-edizioni-header h2 em{color:var(--terra);font-weight:400}
+.cc-edizioni-header p{font-family:var(--serif);font-weight:300;font-size:18px;color:var(--ink-soft)}
+.cc-ed-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.cc-ed-card{background:var(--bg-cream);padding:32px 36px;border-radius:var(--radius-card);border-left:3px solid var(--terra)}
+.cc-ed-card .data{font-family:var(--serif);font-size:22px;color:var(--terra);margin-bottom:8px}
+.cc-ed-card h4{font-family:var(--serif);font-weight:500;font-size:20px;color:var(--ink);margin-bottom:8px}
+.cc-ed-card p{font-size:13px;color:var(--ink-soft);line-height:1.5;margin-bottom:14px}
+.cc-ed-card .stato{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:600;padding:4px 10px;background:rgba(148,195,86,.18);color:#7a9c50;border-radius:100px;display:inline-block}
+.cc-ed-card .stato.ultimi{background:rgba(238,116,60,.15);color:var(--cubo-arancio-dark)}
+/* FAQ */
+.cc-faq{background:var(--bg-cream);padding:120px 56px}
+.cc-faq-header{max-width:900px;margin:0 auto 56px;text-align:center}
+.cc-faq-header h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
+.cc-faq-header h2 em{color:var(--terra);font-weight:400}
+.cc-faq-header p{font-family:var(--serif);font-weight:300;font-size:19px;color:var(--ink-soft)}
+.faq-list{max-width:900px;margin:0 auto}
+.faq-item{background:var(--bg-white);border-radius:var(--radius-card);margin-bottom:16px;overflow:hidden;border-left:3px solid var(--terra)}
+.faq-item summary{padding:28px 36px;cursor:pointer;font-family:var(--serif);font-weight:500;font-size:19px;color:var(--ink);list-style:none;position:relative;padding-right:72px;transition:color .3s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";position:absolute;right:32px;top:50%;transform:translateY(-50%);font-family:var(--serif);font-weight:300;font-size:32px;color:var(--terra);transition:transform .3s}
+.faq-item[open] summary::after{content:"−"}
+.faq-item summary:hover{color:var(--terra)}
+.faq-item .faq-body{padding:0 36px 32px;font-size:15px;line-height:1.7;color:var(--ink-soft)}
+.faq-item .faq-body p{margin-bottom:12px}
+@media(max-width:1024px){.cc-callout-inner,.cc-ed-grid{grid-template-columns:1fr;gap:24px}}
+
+/* Form early bird */
+.eb-form{margin-top:20px}
+.eb-form-fields{display:flex;flex-direction:column;gap:10px}
+.eb-input{font-family:var(--sans);font-size:14px;padding:13px 16px;border:1px solid rgba(31,24,19,.15);background:var(--bg-cream);color:var(--ink);border-radius:var(--radius-btn);width:100%;transition:border-color .3s}
+.eb-input:focus{outline:none;border-color:var(--terra)}
+.eb-btn{width:100%;justify-content:center;margin-top:6px}
+.eb-note{font-family:var(--sans);font-size:11px;color:var(--ink-mute);line-height:1.5;margin-top:8px;text-align:center}
+.cc-investimento .eb-input{background:rgba(251,248,242,.08);border-color:rgba(251,248,242,.2);color:var(--bg-cream)}
+.cc-investimento .eb-input::placeholder{color:rgba(251,248,242,.5)}
+.cc-investimento .eb-input:focus{border-color:var(--terra-light)}
+.cc-investimento .eb-note{color:rgba(251,248,242,.55)}
+.cq-inv-price .eb-input{background:var(--bg-cream);border-color:rgba(31,24,19,.12)}
+</style>
+<link rel="stylesheet" href="revisione.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><a href="homepage.html"><img src="assets/logo-completo.png" alt="Ariadne"></a></div>
+    <nav class="nav">
+      <a href="approccio.html">L'approccio</a>
+      <a href="scuola.html" class="has-sub">Scuola</a>
+      <a href="core-quadrant.html" class="active">Core Quadrant®</a>
+      <a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a>
+      <a href="calendario.html">Calendario</a>
+      <a href="#" class="nav-cta">Aziende →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cq-hero">
+  <div class="cq-hero-inner">
+    <div>
+      <span class="badge">Certificazione internazionale · Daniel Ofman</span>
+      <h1 class="ari-fade">Core Quadrant®<br><em>delle Qualità<br>Autentiche</em></h1>
+      <p class="lede">Una certificazione internazionale che insegniamo in Italia come unica scuola autorizzata da Core Quality International. Un metodo elegante e profondo per riconoscere le qualità autentiche di una persona, e lavorare con i loro lati d'ombra senza giudizio.</p>
+    </div>
+    <div class="cq-unicità">
+      <div class="uni-tag">— Authorized Italian Partner</div>
+      <h3>L'unica scuola italiana</h3>
+      <p>Ariadne è l'unica scuola italiana autorizzata da Core Quality International — l'organizzazione fondata da Daniel Ofman, autore del metodo — a erogare il programma e a rilasciare il certificato internazionale.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cq-intro">
+  <div class="cq-intro-inner">
+    <span class="label-cubotto" style="margin:0 auto 24px"><img src="assets/cubotto-azzurro.png" alt="">L'approccio</span>
+    <h2>Un metodo che lavora<br>con le qualità, <em>non con i difetti</em></h2>
+    <p>Il Core Quadrant® è un metodo creato negli anni '90 dal coach olandese Daniel Ofman. Parte da una premessa semplice e radicale: ogni persona ha qualità autentiche, e ogni qualità ha un suo lato d'ombra che si attiva quando viene portata troppo in là.</p>
+    <p>Il metodo offre una mappa elegante per riconoscere queste dinamiche, lavorarci, e tradurle in consapevolezza utile per il proprio sviluppo personale e professionale. È applicabile in coaching individuale, team coaching, leadership development e formazione.</p>
+  </div>
+</section>
+
+<section class="cq-concetti">
+  <div class="cq-concetti-header">
+    <h2>Il metodo, in <em>quattro concetti</em></h2>
+    <p>Il Core Quadrant® si articola in quattro elementi che insieme formano un quadrante. Ciascuno è in relazione con gli altri tre, e il vero lavoro consiste nel riconoscere le tensioni tra i quattro poli.</p>
+  </div>
+  <div class="concetti-grid">
+    <div class="concetto">
+      <div class="num">— 01 / Qualità autentica</div>
+      <h3>Core Quality</h3>
+      <p>I tratti positivi che ciascuno di noi porta naturalmente — ciò che gli altri riconoscono in noi senza che dobbiamo sforzarci. Sono il punto di partenza del metodo: non difetti da correggere, ma risorse da riconoscere.</p>
+    </div>
+    <div class="concetto c2">
+      <div class="num">— 02 / Trappola</div>
+      <h3>Pitfall <em>(la trappola)</em></h3>
+      <p>Il rischio di esagerare, di portare troppo in là quella stessa qualità fino a trasformarla in un limite. Non è il contrario della qualità — è la qualità stessa, diventata troppo. Chi è "deciso" rischia di diventare "rigido".</p>
+    </div>
+    <div class="concetto c3">
+      <div class="num">— 03 / Sfida</div>
+      <h3>Challenge <em>(la sfida)</em></h3>
+      <p>Il movimento complementare: ciò che, aggiunto alla qualità autentica, la equilibra e la restituisce alla sua forma migliore. Non sostituisce la qualità, la integra. Per chi è "deciso" la sfida è "saper aspettare".</p>
+    </div>
+    <div class="concetto c4">
+      <div class="num">— 04 / Allergia</div>
+      <h3>Allergy <em>(l'allergia)</em></h3>
+      <p>Ciò che più ci disturba negli altri — e spesso è proprio l'opposto della nostra qualità autentica portata all'eccesso. Riconoscerla ci dice qualcosa di importante su di noi, prima che sugli altri. Il "deciso" è allergico ai "passivi".</p>
+    </div>
+  </div>
+</section>
+
+<section class="cq-foto">
+  <div class="cq-foto-grid">
+    <div class="cq-foto-image">
+      <img src="assets/cq-poster.jpg" alt="Sessione Core Quadrant in aula">
+    </div>
+    <div class="cq-foto-text">
+      <span class="label-cubotto"><img src="assets/cubotto-azzurro.png" alt="">In aula</span>
+      <h2>Tre giorni in presenza,<br>un metodo che <em>resta tuo</em></h2>
+      <p>La certificazione si svolge in tre giornate intensive in presenza, in cui ogni partecipante esperisce direttamente il metodo applicandolo a sé prima di poterlo applicare ad altri. Lavoriamo con il poster del Quadrante, le carte, gli esercizi originali del metodo, e con il proprio Core Quadrant personale come prima esperienza fondante.</p>
+      <p>Al termine ricevi il certificato ufficiale di Core Quality International, che ti abilita a usare il metodo nella tua pratica professionale di coach, formatore, leader o consulente.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cq-pubblici">
+  <div class="cq-pubblici-header">
+    <span class="label-cubotto"><img src="assets/cubotto-azzurro.png" alt="">Per chi è</span>
+<h2>Tre profili <em>diversi,</em><br>tre modi di usarlo.</h2>
+    <p>Il Core Quadrant® si rivolge a tre pubblici distinti che lo usano in modi differenti nella propria pratica professionale.</p>
+  </div>
+  <div class="pubblici-grid">
+    <div class="pub-card"><div class="pub-num">— 01 / Coach</div><h3>Coach professionisti</h3><p>Lo usano come strumento di consapevolezza nelle sessioni individuali. Il quadrante diventa una mappa che aiuta il cliente a riconoscere le proprie dinamiche interne in modo non giudicante.</p></div>
+    <div class="pub-card"><div class="pub-num">— 02 / Trainer</div><h3>Formatori e facilitatori</h3><p>Lo portano nei loro percorsi formativi come strumento di team development e di consapevolezza relazionale. Particolarmente efficace nei contesti di leadership e di gestione delle dinamiche di gruppo.</p></div>
+    <div class="pub-card"><div class="pub-num">— 03 / Leader</div><h3>Manager e leader HR</h3><p>Lo usano per comprendere meglio sé stessi e i propri collaboratori, per dare feedback più ricchi, e per affrontare i conflitti senza ridurli a problemi di "carattere".</p></div>
+  </div>
+</section>
+
+<section class="cq-investimento">
+  <div class="cq-inv-inner">
+    <div class="cq-inv-text">
+      <span class="label-cubotto"><img src="assets/cubotto-azzurro.png" alt="">Investimento</span>
+<h2>Cosa è <em>incluso</em></h2>
+      <p class="lede">La quota di certificazione include tutto il necessario per vivere il metodo a fondo e per portarlo nella tua pratica professionale.</p>
+      <ul>
+        <li><span>3 giornate di formazione in presenza</span><strong>incluse</strong></li>
+        <li><span>Materiali ufficiali Core Quality International</span><strong>inclusi</strong></li>
+        <li><span>Certificato internazionale ufficiale</span><strong>incluso</strong></li>
+        <li><span>Carte e poster operativi del metodo</span><strong>inclusi</strong></li>
+        <li><span>Accesso community Ariadne post-corso</span><strong>incluso</strong></li>
+      </ul>
+    </div>
+    <div class="cq-inv-price">
+      <div class="price-tag">— Quota certificazione</div>
+      <div class="price">€ 1.890<small> + IVA</small></div>
+      <div class="price-note">La prossima edizione si tiene il 6-7 maggio + 17 giugno 2026 presso NTT Data, Milano (metro Romolo M2).</div>
+      <form class="eb-form" onsubmit="event.preventDefault();this.querySelector('.eb-success').style.display='block';this.querySelector('.eb-form-fields').style.display='none';">
+<div class="eb-form-fields">
+<input type="text" placeholder="Il tuo nome" required class="eb-input">
+<input type="email" placeholder="La tua email" required class="eb-input">
+<button type="submit" class="btn btn-primary eb-btn">Blocca il prezzo early bird <span class="arrow">→</span></button>
+<p class="eb-note">Ti contatteremo appena apriranno le iscrizioni confermandoti la tariffa early bird. Zero pressione.</p>
+</div>
+<div class="eb-success" style="display:none">
+<p style="font-family:var(--serif);font-size:20px;color:var(--terra);margin-bottom:8px">Grazie, ci siamo.</p>
+<p style="font-size:13px;color:var(--ink-mute)">Ti scriveremo appena apriranno le iscrizioni per confermarti la tariffa early bird.</p>
+</div>
+</form>
+    </div>
+  </div>
+</section>
+
+<section class="cc-colloquio-callout"><div class="cc-callout-inner">
+<div class="cc-callout-text"><h3>Prima dell'iscrizione, <em>un colloquio</em></h3>
+<p>Con uno dei trainer, senza impegno. È il nostro modo per conoscerci, capire se questo è il programma giusto per te in questo momento, rispondere alle tue domande. Fa già parte del modo in cui lavoriamo.</p></div>
+<div class="cc-callout-action"><a href="mailto:info@ariadne.training" class="btn btn-primary">Richiedi un colloquio <span class="arrow">→</span></a></div>
+</div></section>
+<section class="cc-edizioni"><div class="cc-edizioni-header"><h2>Le prossime <em>edizioni</em></h2><p>Core Quadrant® · Prossime certificazioni</p></div><div class="cc-ed-grid"><div class="cc-ed-card"><div class="data">6-7 Maggio + 17 Giugno 2026</div><h4>Core Quadrant® · Edizione primaverile</h4><p>3 giornate · NTT Data, Milano (metro Romolo M2)</p><span class="stato ultimi">Ultimi posti</span></div></div></section>
+<section class="cc-faq"><div class="cc-faq-header"><h2>Domande <em>frequenti</em></h2><p>Le cose che ci chiedono più spesso. Se la tua domanda non è qui, scrivici direttamente.</p></div><div class="faq-list"><details class="faq-item"><summary>Serve essere coach per fare il Core Quadrant®?</summary><div class="faq-body"><p>No. Il Core Quadrant® è accessibile a coach, formatori, facilitatori, manager, leader HR. Ciascun pubblico lo usa nel proprio contesto. Un colloquio preliminare ci permette di valutare insieme l'adeguatezza del percorso al tuo profilo.</p></div></details>
+<details class="faq-item"><summary>Il certificato è riconosciuto?</summary><div class="faq-body"><p>Sì. Il certificato è rilasciato da Core Quality International, l'organizzazione fondata da Daniel Ofman, autore del metodo. È un certificato internazionale riconosciuto a livello globale dalla community Core Quadrant®.</p></div></details>
+<details class="faq-item"><summary>Perché un corso se esiste il libro?</summary><div class="faq-body"><p>Il libro di Daniel Ofman spiega il metodo, ma non lo insegna nel senso operativo. Il Core Quadrant® si esperisce — si applica a sé stessi per capirlo davvero — e questo si può fare solo in aula, con un facilitatore autorizzato e un gruppo.</p></div></details>
+<details class="faq-item"><summary>Ariadne è davvero l'unica scuola italiana autorizzata?</summary><div class="faq-body"><p>Sì. Siamo Authorized Italian Partner di Core Quality International, l'unica realtà italiana autorizzata a erogare il programma certificante e a rilasciare il certificato ufficiale in Italia.</p></div></details></div></section>
+<section class="cq-quote">
+  <div class="cq-quote-inner">
+    <blockquote>Dopo vent'anni di formazione, raramente mi era capitato di trovare uno strumento così semplice e così potente. Il Core Quadrant® mi ha cambiato il modo di guardare le persone, e quindi anche il modo di lavorare con loro.</blockquote>
+    <cite><strong>Coach certificato</strong>Core Quadrant® · 2024</cite>
+  </div>
+</section>
+
+<section class="cq-cta">
+  <h2>Vuoi <em>certificarti?</em></h2>
+  <p>Le iscrizioni alla prossima edizione 2026 sono aperte. La certificazione è in presenza per scelta — perché il metodo si esperisce, non si studia.</p>
+  <div class="row">
+    <a href="#" class="btn btn-primary">Iscriviti →</a>
+    <a href="calendario.html" class="btn btn-secondary">Vedi le date</a>
+  </div>
+</section>
+
+<footer><div class="footer-grid">
+<div class="footer-brand"><img src="assets/logo-completo.png" alt="Ariadne"><p>La scuola italiana di coaching professionale ICF, dove l'approccio si impara sperimentando.</p></div>
+<div class="footer-col"><h5>Percorso</h5><ul><li><a href="scuola.html" class="has-sub">Scuola</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="professional-coaching.html">Professional (Core+Team)</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+<div class="footer-col"><h5>Community</h5><ul><li></li><li><a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li><li><a href="area-riservata.html">Area riservata</a></li></ul></div>
+<div class="footer-col"><h5>Scuola · Contatti</h5><ul><li><a href="approccio.html">L'approccio</a></li><li><a href="il-metodo.html#trainer">I trainer</a></li><li><a href="#">Ariadne per le aziende</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul><p style="margin-top:16px">Ariadne SRL<br>Via Pietro Paleocapa, 7<br>20121 Milano<br>Tel. +39 339 272 4113<br>info@ariadne.training</p></div></div>
+<div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div><a href="#">Termini</a><a href="#">Privacy</a><a href="#">Cookie</a></div></div></footer>
+<script src="ariadne.js"></script>
+<script src="revisione.js"></script>
+</body>
+</html>

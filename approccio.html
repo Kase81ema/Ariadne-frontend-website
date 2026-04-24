@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il metodo — Ariadne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ariadne.css">
+<style>
+.met-hero{background:var(--bg-cream-deep);padding:140px 56px 120px;text-align:center;border-bottom:1px solid rgba(31,24,19,.06)}
+.met-hero h1{font-family:var(--serif);font-weight:300;font-size:96px;line-height:.95;letter-spacing:-3.5px;margin-bottom:32px}
+.met-hero h1 em{color:var(--terra);font-weight:400}
+.met-hero .lede{font-family:var(--serif);font-weight:300;font-size:23px;line-height:1.5;color:var(--ink-soft);max-width:800px;margin:0 auto}
+.met-manifesto{background:var(--bg-white);padding:140px 56px;text-align:center}
+.met-manifesto-inner{max-width:920px;margin:0 auto}
+.met-manifesto p{font-family:var(--serif);font-weight:300;font-size:32px;line-height:1.4;color:var(--ink);margin-bottom:24px;letter-spacing:-0.5px}
+.met-manifesto p em{color:var(--terra);font-weight:400}
+.met-valori{background:var(--bg-cream);padding:140px 56px}
+.met-val-header{max-width:1100px;margin:0 auto 80px;text-align:center}
+.met-val-header h2{font-family:var(--serif);font-weight:300;font-size:64px;line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+.met-val-header h2 em{color:var(--terra);font-weight:400}
+.met-val-header p{font-family:var(--serif);font-weight:300;font-size:20px;color:var(--ink-soft);max-width:760px;margin:0 auto}
+.valori-list{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+.valore-row{background:var(--bg-white);padding:48px 48px;border-radius:var(--radius-card);display:grid;grid-template-columns:96px 1fr;gap:40px;align-items:start}
+.valore-row .v-cubotto{width:96px;height:96px}
+.valore-row h3{font-family:var(--serif);font-weight:500;font-size:30px;color:var(--ink);margin-bottom:14px;line-height:1.15}
+.valore-row h3 em{color:var(--ink-soft);font-weight:400}
+.valore-row p{font-size:17px;line-height:1.65;color:var(--ink-soft)}
+.met-creativo{background:#655a9c;color:var(--bg-cream);padding:140px 56px}
+.met-creativo-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+.met-creativo h2{font-family:var(--serif);font-weight:300;font-size:60px;line-height:1.05;letter-spacing:-1.8px;color:var(--bg-cream);margin-bottom:24px}
+.met-creativo h2 em{color:var(--terra-light);font-weight:400}
+.met-creativo .lede{font-family:var(--serif);font-weight:300;font-size:19px;line-height:1.55;color:rgba(251,248,242,.78)}
+.met-creativo .text-col p{font-size:16px;line-height:1.75;color:rgba(251,248,242,.85);margin-bottom:18px}
+.met-creativo .text-col p strong{color:var(--terra-light);font-weight:600}
+.met-trainer{background:var(--bg-white);padding:140px 56px}
+.met-trainer-header{max-width:1100px;margin:0 auto 80px;text-align:center}
+.met-trainer-header h2{font-family:var(--serif);font-weight:300;font-size:64px;line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+.met-trainer-header h2 em{color:var(--terra);font-weight:400}
+.met-trainer-header p{font-family:var(--serif);font-weight:300;font-size:20px;color:var(--ink-soft);max-width:680px;margin:0 auto}
+.trainer-list{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:48px}
+.trainer-row{display:grid;grid-template-columns:240px 1fr;gap:56px;align-items:start;padding-bottom:48px;border-bottom:1px solid rgba(31,24,19,.1)}
+.trainer-row:last-child{border-bottom:none;padding-bottom:0}
+.trainer-row .t-pic{width:240px;height:240px;border-radius:16px;overflow:hidden;background:var(--bg-cream-deep)}
+.trainer-row .t-pic img{width:100%;height:100%;object-fit:cover}
+.trainer-row .t-pic .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:64px;color:var(--ink-mute);background:linear-gradient(135deg,#F5EFE3,#EAE0CC)}
+.trainer-row h3{font-family:var(--serif);font-weight:500;font-size:34px;color:var(--ink);margin-bottom:6px;line-height:1.1}
+.trainer-row .role{font-family:var(--sans);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra);font-weight:600;margin-bottom:18px}
+.trainer-row p{font-size:16px;line-height:1.65;color:var(--ink-soft);margin-bottom:14px;max-width:640px}
+
+.met-partner{background:var(--bg-cream);padding:140px 56px}
+.met-partner-header{max-width:1100px;margin:0 auto 64px;text-align:center}
+.met-partner-header h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:24px}
+.met-partner-header h2 em{color:var(--terra);font-weight:400}
+.partner-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.partner-card{background:var(--bg-white);padding:48px 44px;border-radius:var(--radius-card);border-top:3px solid var(--terra)}
+.partner-card.cqi{border-top-color:var(--cubo-azzurro)}
+.partner-card .p-tag{font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;color:var(--terra);font-weight:600;margin-bottom:14px}
+.partner-card.cqi .p-tag{color:var(--cubo-azzurro)}
+.partner-card h3{font-family:var(--serif);font-weight:500;font-size:28px;color:var(--ink);margin-bottom:16px;line-height:1.15}
+.partner-card p{font-size:15px;line-height:1.65;color:var(--ink-soft)}
+
+.met-quote{background:var(--bg-cream-deep);padding:160px 56px;text-align:center}
+.met-quote-inner{max-width:920px;margin:0 auto}
+.met-quote blockquote{font-family:var(--serif);font-weight:300;font-style:italic;font-size:42px;line-height:1.3;color:var(--ink);margin-bottom:32px;letter-spacing:-1px}
+.met-quote blockquote::before,.met-quote blockquote::after{font-size:80px;line-height:0;vertical-align:-28px;color:var(--terra)}
+.met-quote blockquote::before{content:"“";margin-right:8px}
+.met-quote blockquote::after{content:"”";margin-left:4px}
+.met-quote cite{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-mute);font-style:normal;font-weight:600}
+.met-quote cite strong{display:block;color:var(--ink);font-size:14px;letter-spacing:1.5px;margin-bottom:4px}
+.met-cta{background:linear-gradient(135deg,var(--terra),var(--terra-deep));color:#fff;padding:100px 56px;text-align:center}
+.met-cta h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.1;margin-bottom:20px;letter-spacing:-1.5px}
+.met-cta h2 em{font-weight:400}
+.met-cta p{font-family:var(--serif);font-weight:300;font-size:20px;line-height:1.55;max-width:640px;margin:0 auto 40px;opacity:.95}
+.met-cta .btn-primary{background:#fff;color:var(--terra);border-color:#fff}
+.met-cta .btn-secondary{color:#fff;border-color:#fff}
+.met-cta .row{display:flex;gap:16px;justify-content:center}
+
+@media(max-width:1024px){.met-hero h1{font-size:54px}.valore-row{grid-template-columns:1fr;gap:24px}.met-creativo-inner,.partner-grid,.trainer-row{grid-template-columns:1fr;gap:32px}.trainer-row .t-pic{width:180px;height:180px}}
+</style>
+<link rel="stylesheet" href="revisione.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><a href="homepage.html"><img src="assets/logo-completo.png" alt="Ariadne"></a></div>
+    <nav class="nav">
+      <a href="approccio.html">L'approccio</a>
+      <a href="scuola.html" class="has-sub">Scuola</a>
+      <a href="core-quadrant.html">Core Quadrant®</a>
+      <a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a>
+      <a href="calendario.html">Calendario</a>
+      <a href="#" class="nav-cta">Aziende →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="met-hero">
+  <h1 class="ari-fade">L'approccio<br><em>creativo-esperienziale</em></h1>
+  <p class="lede">Ariadne è una scuola di coaching creativo-esperienziale. Crediamo che il potenziale si sviluppi attraverso un processo di espressione creativa di sé, di consapevolezza delle proprie dinamiche interiori, e di scoperta delle risorse evolutive ancora inesplorate.</p>
+</section>
+<div style="max-width:1440px;margin:0 auto;padding:0 56px">
+<div style="width:100%;aspect-ratio:21/9;border-radius:16px;overflow:hidden;margin-top:-60px;position:relative;z-index:2">
+<img src="assets/hero-workshop.jpg" alt="Esperienza in aula Ariadne" style="width:100%;height:100%;object-fit:cover">
+</div>
+</div>
+<section class="met-manifesto">
+  <div class="met-manifesto-inner">
+    <p>Non insegniamo una tecnica da applicare. Facciamo accadere <em>un'esperienza che trasforma</em> il modo in cui lavori con te stesso e con gli altri.</p>
+  </div>
+</section>
+
+<section class="met-creativo">
+  <div class="met-creativo-inner">
+    <div>
+      <span class="label-cubotto" style="color:var(--terra-light)"><img src="assets/cubotto-arancio.png" alt="">Cosa intendiamo</span>
+      <h2>Cosa intendiamo per<br><em>creativo-esperienziale</em></h2>
+      <p class="lede">Le due parole che fanno il differenziale di Ariadne, spiegate non come slogan ma come pratica concreta.</p>
+    </div>
+    <div class="text-col">
+      <p><strong>Creativo</strong> non significa "che usa giochi". Significa che riconosciamo che il pensiero del coach non basta — servono modalità di esplorazione che attraversano il corpo, le metafore, le immagini, gli oggetti, gli spazi. Lavoriamo con metodologie come Lego® Serious Play®, disegno onirico, lavoro con metafore visive, e altre forme di esplorazione che mettono in moto parti di noi che la pura conversazione non raggiunge.</p>
+      <p><strong>Esperienziale</strong> non significa "che fa esercizi pratici". Significa che la pratica del coaching si apprende attraverso cicli di azione-riflessione-integrazione, non attraverso lo studio di teorie da applicare poi. In aula si fanno cose, si riflette su quello che è successo, si capisce cosa è andato e cosa no, si torna a fare meglio. La teoria arriva quando serve a dare senso a quello che si è già vissuto.</p>
+      <p>Le due parole insieme descrivono un metodo che si distingue tanto dalla formazione tradizionale (che parte dalla teoria) quanto dal coaching puramente conversazionale (che resta solo nelle parole). Ariadne sta nel mezzo, e da quel mezzo sviluppa il suo metodo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="met-valori">
+  <div class="met-val-header">
+    <h2>I valori<br>che ci <em>ispirano</em></h2>
+    <p>Quattro coppie di principi che guidano il nostro lavoro. Non sono slogan: sono il modo in cui pensiamo l'apprendimento adulto e la pratica del coaching.</p>
+  </div>
+  <div class="valori-list">
+    <div class="valore-row">
+      <img src="assets/cubotto-arancio.png" class="v-cubotto" alt="">
+      <div>
+        <h3>Esplorazione <em>↔ Integrazione</em></h3>
+        <p>Uscire dai confini di ciò che conosciamo, e poi trovare il modo di riportarlo dentro. La scoperta diventa utile solo quando riesce a farsi parte di te. L'esplorazione apre, l'integrazione consolida — l'una senza l'altra non produce trasformazione.</p>
+      </div>
+    </div>
+    <div class="valore-row">
+      <img src="assets/cubotto-verde.png" class="v-cubotto" alt="">
+      <div>
+        <h3>Esperienza <em>↔ Riflessione</em></h3>
+        <p>Non si impara davvero qualcosa solo facendola, né solo pensandoci. Il coaching che ci interessa vive nel movimento continuo tra i due. Crediamo nell'apprendimento adulto come ciclo continuo tra azione e pensiero, dove ogni esperienza chiede di essere compresa per diventare patrimonio.</p>
+      </div>
+    </div>
+    <div class="valore-row">
+      <img src="assets/cubotto-rosso.png" class="v-cubotto" alt="">
+      <div>
+        <h3>Creatività <em>↔ Focus</em></h3>
+        <p>La creatività apre spazi, il focus li rende navigabili. L'una senza l'altro si disperde, o si rigidisce. Aprire possibilità e scegliere ciò che è essenziale: due movimenti complementari che insieme generano scelte vere, non solo opzioni.</p>
+      </div>
+    </div>
+    <div class="valore-row">
+      <img src="assets/cubotto-azzurro.png" class="v-cubotto" alt="">
+      <div>
+        <h3>Profondità <em>↔ Leggerezza</em></h3>
+        <p>Si può andare in profondità senza pesantezza. È una delle cose che distinguono di più il nostro modo di stare in aula, e una delle cose che le persone ci dicono più spesso quando raccontano la loro esperienza Ariadne ad altri.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="met-trainer" id="trainer">
+  <div class="met-trainer-header">
+    <h2>I trainer<br>che <em>tengono la scuola</em></h2>
+    <p>Tre coach con percorsi molto diversi e una visione comune del lavoro: il potenziale si libera attraverso l'esperienza, il dialogo creativo, la presenza relazionale.</p>
+  </div>
+  <div class="trainer-list">
+    <div class="trainer-row">
+      <div class="t-pic"><img src="assets/trainer-arianna.jpg" alt="Arianna Perrone"></div>
+      <div>
+        <h3>Arianna Perrone</h3>
+        <div class="role">Master Certified Coach · ICF</div>
+        <p>Master Certified Coach con oltre 2500 ore di coaching certificate. Formatrice esperienziale specializzata in soft skills e intelligenza emotiva, facilitatrice certificata Lego® Serious Play® e Modello Sikkhona®. Docente in master universitari e business school sui temi del Personal Empowerment.</p>
+        <p>Ha 18 anni di esperienza in azienda nella valutazione e sviluppo del potenziale, e dal 2009 ricopre il ruolo di Responsabile Sviluppo Risorse Umane in contesti corporate. È partner Ariadne dalla fondazione.</p>
+      </div>
+    </div>
+    <div class="trainer-row">
+      <div class="t-pic"><img src="assets/trainer-ciccarelli.jpg" alt="Emanuele Ciccarelli"></div>
+      <div>
+        <h3>Emanuele Ciccarelli</h3>
+        <div class="role">Integral Coach™</div>
+        <p>Integral Coach specializzato in processi e metodi creativo-esperienziali per lo sviluppo sistemico del potenziale. Fondatore di LABORINTUS, ecosistema per lo sviluppo creativo del potenziale. Trainer di KAOSPILOT Business & Leadership School per la masterclass "Designing & Facilitating Learning Spaces".</p>
+        <p>Facilitatore Lego® Serious Play® e creatore del metodo Hero's Journey per lo sviluppo personale. Facilitatore in Disegno Onirico Bermolen-Dal Porto™. Oltre 7 anni di esperienza in azienda e consulenza in ambito HR Transformation.</p>
+      </div>
+    </div>
+    <div class="trainer-row">
+      <div class="t-pic"><div class="placeholder">EC</div></div>
+      <div>
+        <h3>Emanuele Casero</h3>
+        <div class="role">Professional Certified Coach · ICF</div>
+        <p>Professional Certified Coach operante tra Italia e Svizzera. Specializzato in team coaching, sviluppo organizzativo e accompagnamento di leader e team complessi in contesti aziendali e formativi.</p>
+        <p>Partner Ariadne, contribuisce alla scuola con un focus particolare sui programmi avanzati e sul lavoro con organizzazioni complesse, anche internazionali.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="met-cta">
+  <h2>Vuoi <em>conoscerci?</em></h2>
+  <p>Il modo migliore per capire se Ariadne è il posto giusto per te è un colloquio conoscitivo con uno dei trainer. Senza impegno, per parlare di te e di quello che cerchi.</p>
+  <div class="row">
+    <a href="#" class="btn btn-primary">Richiedi un colloquio →</a>
+    <a href="scuola.html" class="has-sub">Scuola</a>
+  </div>
+</section>
+
+<section class="met-partner">
+  <div class="met-partner-header">
+    <h2>Le nostre<br><em>partnership</em></h2>
+  </div>
+  <div class="partner-grid">
+    <div class="partner-card">
+      <div class="p-tag">— Accreditamento internazionale</div>
+      <h3>International Coaching Federation</h3>
+      <p>I nostri programmi Core Coaching, Team Coaching e Professional Coaching sono accreditati ICF Level 1 e Level 2. Questo significa che le ore di formazione contano per le credenziali ufficiali ICF, e che il nostro approccio è verificato secondo gli standard internazionali del coaching professionale. ICF è la più grande organizzazione mondiale di coach professionisti, con oltre 50.000 membri in più di 140 Paesi.</p>
+    </div>
+    <div class="partner-card cqi">
+      <div class="p-tag">— Authorized Italian Partner</div>
+      <h3>Core Quality International</h3>
+      <p>Ariadne è l'unica scuola italiana autorizzata da Core Quality International — l'organizzazione fondata da Daniel Ofman, autore del metodo Core Quadrant® delle Qualità Autentiche — a erogare il programma di certificazione e a rilasciare il certificato internazionale. Una partnership che ci rende il riferimento italiano per chi vuole apprendere questo metodo direttamente dalla sua fonte ufficiale.</p>
+    </div>
+  </div>
+</section>
+
+<section class="met-quote">
+  <div class="met-quote-inner">
+    <blockquote>Non chiederti di cosa ha bisogno il mondo. Chiediti piuttosto cosa ti rende vivo, vai e realizzalo. Perché ciò di cui il mondo ha bisogno sono persone che realizzino ciò che le rende vive.</blockquote>
+    <cite><strong>Howard Thurman</strong>Il riferimento di Ariadne</cite>
+  </div>
+</section>
+
+
+
+<footer><div class="footer-grid">
+<div class="footer-brand"><img src="assets/logo-completo.png" alt="Ariadne"><p>La scuola italiana di coaching professionale ICF, dove l'approccio si impara sperimentando.</p></div>
+<div class="footer-col"><h5>Percorso</h5><ul><li><a href="scuola.html" class="has-sub">Scuola</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="professional-coaching.html">Professional (Core+Team)</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+<div class="footer-col"><h5>Community</h5><ul><li></li><li><a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li><li><a href="area-riservata.html">Area riservata</a></li></ul></div>
+<div class="footer-col"><h5>Scuola · Contatti</h5><ul><li><a href="approccio.html">L'approccio</a></li><li><a href="il-metodo.html#trainer">I trainer</a></li><li><a href="#">Ariadne per le aziende</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul><p style="margin-top:16px">Ariadne SRL<br>Via Pietro Paleocapa, 7<br>20121 Milano<br>Tel. +39 339 272 4113<br>info@ariadne.training</p></div></div>
+<div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div><a href="#">Termini</a><a href="#">Privacy</a><a href="#">Cookie</a></div></div></footer>
+<script src="ariadne.js"></script>
+<script src="revisione.js"></script>
+</body>
+</html>
