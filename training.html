@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Training — Ariadne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ariadne.css">
+<style>
+.tr-hero{background:linear-gradient(135deg,#655a9c 0%,#4a3f7a 100%);color:#fff;padding:140px 56px 100px}
+.tr-hero-inner{max-width:1100px;margin:0 auto;text-align:center}
+.tr-hero .badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);padding:8px 20px;border-radius:100px;font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:600;margin-bottom:32px}
+.tr-hero h1{font-family:var(--serif);font-weight:300;font-size:84px;line-height:.95;letter-spacing:-3px;margin-bottom:28px}
+.tr-hero .lede{font-family:var(--serif);font-weight:300;font-size:23px;line-height:1.45;max-width:760px;margin:0 auto;opacity:.95}
+.tr-doppio{background:var(--bg-white);padding:120px 56px}
+.tr-doppio-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.tr-target{padding:56px 48px;border-radius:16px;border-top:4px solid #655a9c}
+.tr-target.azienda{border-top-color:#df7a4a}
+.tr-target h3{font-family:var(--serif);font-weight:500;font-size:28px;color:var(--ink);margin-bottom:16px}
+.tr-target p{font-size:16px;line-height:1.65;color:var(--ink-soft);margin-bottom:20px}
+.tr-target .tag{font-size:11px;text-transform:uppercase;letter-spacing:1.8px;color:#655a9c;font-weight:600;margin-bottom:14px}
+.tr-target.azienda .tag{color:#df7a4a}
+.tr-catalogo{background:var(--bg-cream);padding:120px 56px}
+.tr-cat-header{max-width:1100px;margin:0 auto 64px;text-align:center}
+.tr-cat-header h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
+.tr-cat-header h2 em{color:#655a9c;font-weight:400}
+.tr-cat-header p{font-family:var(--serif);font-weight:300;font-size:19px;color:var(--ink-soft);max-width:680px;margin:0 auto}
+.tr-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tr-card{background:var(--bg-white);padding:44px 40px;border-radius:16px;border-top:4px solid #655a9c;text-decoration:none;color:inherit;display:flex;flex-direction:column;min-height:380px;transition:transform .3s}
+.tr-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(45,38,73,.15)}
+.tr-card .tr-tag{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#655a9c;font-weight:600;margin-bottom:14px}
+.tr-card h3{font-family:var(--serif);font-weight:500;font-size:26px;color:var(--ink);margin-bottom:14px;line-height:1.15}
+.tr-card .tr-sub{font-family:var(--serif);font-size:16px;color:var(--terra);margin-bottom:16px}
+.tr-card p{font-size:15px;line-height:1.6;color:var(--ink-soft);flex-grow:1}
+.tr-card .tr-bottom{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;font-weight:600;color:#655a9c;border-top:1px solid rgba(31,24,19,.1);padding-top:16px;margin-top:20px}
+.tr-card .dual{display:flex;gap:8px;margin-top:12px}
+.tr-card .dual span{font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(101,90,156,.1);color:#655a9c;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+.tr-card .dual span.az{background:rgba(223,122,74,.1);color:#df7a4a}
+.tr-spazi{background:#655a9c;color:#fff;padding:120px 56px}
+.tr-spazi-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:center}
+.tr-spazi h2{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1.1;letter-spacing:-1.2px;margin-bottom:24px}
+.tr-spazi p{font-family:var(--serif);font-weight:300;font-size:18px;line-height:1.6;opacity:.9;margin-bottom:20px}
+.tr-spazi-img{aspect-ratio:4/3;border-radius:16px;overflow:hidden}
+.tr-spazi-img img{width:100%;height:100%;object-fit:cover}
+.tr-cta{background:var(--bg-white);padding:100px 56px;text-align:center}
+.tr-cta h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.tr-cta h2 em{color:#655a9c;font-weight:400}
+.tr-cta p{font-family:var(--serif);font-weight:300;font-size:20px;max-width:640px;margin:0 auto 40px;color:var(--ink-soft)}
+.tr-cta .row{display:flex;gap:16px;justify-content:center}
+.tr-cta .btn-primary{background:#655a9c;border-color:#655a9c;color:#fff}
+@media(max-width:1024px){.tr-hero h1{font-size:48px}.tr-doppio-inner,.tr-grid,.tr-spazi-inner{grid-template-columns:1fr}}
+</style></head><body>
+<header class="header"><div class="header-inner"><div class="logo"><a href="homepage.html"><img src="assets/logo-ariadne.png" alt="Ariadne"></a></div>
+<nav class="nav"><a href="il-filo-di-ariadne.html">Il filo di Ariadne</a><a href="scuola.html" class="has-sub">Scuola di coaching</a><a href="core-quadrant.html">Core Quadrant®</a><a href="training.html" class="active">Training</a><a href="workshop.html">Workshop</a><a href="calendario.html">Calendario</a><a href="#" class="nav-cta">Aziende →</a></nav></div></header>
+
+<section class="tr-hero"><div class="tr-hero-inner">
+<span class="badge">Formazione esperienziale</span>
+<h1>Training<br>esperienziale</h1>
+<p class="lede">Percorsi di formazione che usano il corpo, le metafore, gli oggetti e gli spazi per sviluppare competenze che la formazione tradizionale non raggiunge. Per individui che vogliono crescere e per organizzazioni che vogliono trasformarsi.</p>
+</div></section>
+
+<section class="tr-doppio"><div class="tr-doppio-inner">
+<div class="tr-target">
+<div class="tag">— Per te</div>
+<h3>Partecipa individualmente</h3>
+<p>Iscriviti alle edizioni aperte dei nostri training: Lego® Serious Play®, Kaospilot, Core Quadrant®. Acquisisci una certificazione, una metodologia, un modo nuovo di lavorare con le persone. Ogni training è un percorso completo che ti abilita a qualcosa di concreto.</p>
+<a href="calendario.html" class="btn btn-primary" style="background:#655a9c;border-color:#655a9c;color:#fff">Vedi le prossime edizioni →</a>
+</div>
+<div class="tr-target azienda">
+<div class="tag">— Per la tua organizzazione</div>
+<h3>Portalo nel tuo team</h3>
+<p>Ogni training può essere portato nella tua azienda come esperienza dedicata per il tuo team. Progettiamo insieme il percorso, scegliamo gli spazi, adattiamo i contenuti. Dal team building alla leadership development, dalla facilitazione al coaching interno.</p>
+<a href="#" class="btn btn-primary" style="background:#df7a4a;border-color:#df7a4a;color:#fff">Contattaci per un progetto →</a>
+</div>
+</div></section>
+
+<section class="tr-catalogo"><div class="tr-cat-header">
+<h2>I nostri <em>training</em></h2>
+<p>Tre percorsi di formazione esperienziale, ciascuno con la sua certificazione e la possibilità di essere portato in azienda.</p>
+</div>
+<div class="tr-grid">
+<a href="training-lsp.html" class="tr-card">
+<div class="tr-tag">— Certificazione facilitatore</div>
+<h3>Lego® Serious Play®</h3>
+<div class="tr-sub">Facilitatore certificato LSP</div>
+<p>Il percorso completo per diventare facilitatore certificato Lego® Serious Play®. Un metodo che usa la costruzione con i mattoncini come linguaggio per esplorare problemi complessi, prendere decisioni, sviluppare strategie.</p>
+<div class="dual"><span>Individuale</span><span class="az">In azienda</span></div>
+<div class="tr-bottom">Scopri il training →</div>
+</a>
+<a href="training-kaospilot.html" class="tr-card">
+<div class="tr-tag">— Masterclass</div>
+<h3>Kaospilot<br>Masterclass Learning Design</h3>
+<div class="tr-sub">Designing & Facilitating Learning Spaces</div>
+<p>La masterclass internazionale di Kaospilot per chi progetta e facilita esperienze di apprendimento. Un percorso che cambia il modo in cui pensi la formazione, la facilitazione, il design di spazi di apprendimento.</p>
+<div class="dual"><span>Individuale</span><span class="az">In azienda</span></div>
+<div class="tr-bottom">Scopri il training →</div>
+</a>
+<a href="core-quadrant.html" class="tr-card">
+<div class="tr-tag">— Certificazione internazionale</div>
+<h3>Core Quadrant®<br>per le organizzazioni</h3>
+<div class="tr-sub">Daniel Ofman · Authorized Italian Partner</div>
+<p>Lo stesso percorso certificante del Core Quadrant® portato nella tua organizzazione. Un'edizione dedicata per il tuo team, con lo stesso rigore metodologico e la stessa certificazione internazionale.</p>
+<div class="dual"><span>Individuale</span><span class="az">In azienda</span></div>
+<div class="tr-bottom">Scopri il training →</div>
+</a>
+</div>
+</section>
+
+<section class="tr-spazi"><div class="tr-spazi-inner">
+<div>
+<h2>Progettazione in spazi esterni</h2>
+<p>I nostri training possono essere progettati e realizzati in spazi esterni all'azienda — location selezionate per la loro capacità di creare il contesto giusto per l'apprendimento esperienziale.</p>
+<p>Dal team building in natura alla leadership development in spazi industriali riconvertiti, progettiamo l'esperienza intorno agli obiettivi del team e alle caratteristiche dello spazio.</p>
+</div>
+<div class="tr-spazi-img"><img src="assets/hero-workshop.png" alt="Training esperienziale in spazi esterni"></div>
+</div></section>
+
+<section class="tr-cta">
+<h2>Vuoi saperne <em>di più</em></h2>
+<p>Che tu voglia partecipare individualmente o portare un training nella tua organizzazione, il primo passo è una conversazione.</p>
+<div class="row">
+<a href="#" class="btn btn-primary">Contattaci →</a>
+<a href="calendario.html" class="btn btn-secondary" style="color:#655a9c;border-color:#655a9c">Vedi il calendario</a>
+</div>
+</section>
+
+<footer><div class="footer-grid">
+<div class="footer-brand"><img src="assets/logo-ariadne.png" alt="Ariadne"><p>La scuola italiana di coaching professionale ICF dove l'approccio si impara sperimentando.</p></div>
+<div class="footer-col"><h5>Scuola</h5><ul><li><a href="scuola.html">La proposta Ariadne</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+<div class="footer-col"><h5>Community</h5><ul><li><a href="coaching-atelier.html">Coaching Atelier</a></li><li><a href="laboratori.html">Laboratori Ariadne</a></li><li><a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li></ul></div>
+<div class="footer-col"><h5>Scuola · Contatti</h5><ul><li><a href="il-filo-di-ariadne.html">Il filo di Ariadne</a></li><li><a href="il-filo-di-ariadne.html#trainer">I trainer</a></li><li><a href="#">Ariadne per le aziende</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul><p style="margin-top:16px">Ariadne SRL<br>Via Pietro Paleocapa, 7<br>20121 Milano<br>Tel. +39 339 272 4113<br>info@ariadne.training</p></div></div>
+<div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div><a href="#">Termini</a><a href="#">Privacy</a><a href="#">Cookie</a></div></div></footer>
+<script src="ariadne.js"></script></body></html>

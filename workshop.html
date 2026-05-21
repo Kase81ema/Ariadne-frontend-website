@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Workshop — Ariadne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ariadne.css">
+<style>
+.ws-hero{background:linear-gradient(135deg,var(--cubo-rosso-light) 0%,var(--cubo-rosso-dark) 100%);color:#fff;padding:140px 56px 100px;position:relative;overflow:hidden}
+.ws-hero::before{display:none}
+.ws-hero-inner{max-width:1100px;margin:0 auto;position:relative;text-align:center}
+.ws-hero .badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.2);backdrop-filter:blur(6px);padding:8px 20px;border-radius:100px;font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:600;margin-bottom:32px}
+.ws-hero .badge::before{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.ws-hero h1{font-family:var(--serif);font-weight:300;font-size:88px;line-height:.95;letter-spacing:-3px;margin-bottom:32px}
+.ws-hero h1 em{font-weight:400}
+.ws-hero p{font-family:var(--serif);font-weight:300;font-size:22px;line-height:1.5;max-width:780px;margin:0 auto;opacity:.95}
+.ws-intro{background:var(--bg-white);padding:120px 56px;text-align:center}
+.ws-intro-inner{max-width:880px;margin:0 auto}
+.ws-intro h2{font-family:var(--serif);font-weight:300;font-size:48px;line-height:1.2;letter-spacing:-1.2px;margin-bottom:32px}
+.ws-intro h2 em{color:var(--cubo-rosso-dark);font-weight:400}
+.ws-intro p{font-family:var(--sans);font-size:18px;line-height:1.7;color:var(--ink-soft);margin-bottom:18px}
+.famiglia{padding:120px 56px}
+.famiglia.f1{background:var(--bg-cream)}
+.famiglia.f2{background:var(--bg-white);border-top:1px solid rgba(31,24,19,.08)}
+.famiglia-header{max-width:1100px;margin:0 auto 64px}
+.famiglia-tag{font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.famiglia-tag::before{content:"";width:32px;height:2px;background:currentColor}
+.f1 .famiglia-tag{color:var(--cubo-rosso-dark)}
+.f2 .famiglia-tag{color:var(--cubo-azzurro)}
+.famiglia-header h2{font-family:var(--serif);font-weight:300;font-size:60px;line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+.famiglia-header h2 em{font-weight:400}
+.f1 .famiglia-header h2 em{color:var(--cubo-rosso-dark)}
+.f2 .famiglia-header h2 em{color:var(--cubo-azzurro)}
+.famiglia-header p{font-family:var(--serif);font-weight:300;font-size:19px;line-height:1.55;color:var(--ink-soft);max-width:720px}
+.famiglia-header .ideale{font-size:13px;color:var(--ink-mute);margin-top:14px}
+.ws-grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.ws-card{background:var(--bg-white);padding:36px 32px;border-radius:var(--radius-card);border-top:3px solid var(--cubo-rosso-dark);transition:all .3s;cursor:pointer}
+.f2 .ws-card{background:var(--bg-cream);border-top-color:var(--cubo-azzurro)}
+.ws-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px -16px rgba(45,38,73,.12)}
+.ws-card .tipo{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--cubo-rosso-dark);font-weight:600;margin-bottom:10px}
+.f2 .ws-card .tipo{color:var(--cubo-azzurro)}
+.ws-card h3{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.2;color:var(--ink);margin-bottom:12px}
+.ws-card p{font-size:14px;line-height:1.6;color:var(--ink-soft);margin-bottom:16px}
+.ws-card .ws-meta{font-size:12px;color:var(--ink-mute);border-top:1px solid rgba(31,24,19,.08);padding-top:14px;display:flex;justify-content:space-between}
+.ws-card .ws-meta strong{color:var(--ink);font-weight:600}
+.ws-cta{background:linear-gradient(135deg,var(--cubo-rosso-dark),#a8161c);color:#fff;padding:100px 56px;text-align:center}
+.ws-cta h2{font-family:var(--serif);font-weight:300;font-size:56px;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.ws-cta h2 em{font-weight:400}
+.ws-cta p{font-family:var(--serif);font-weight:300;font-size:20px;max-width:640px;margin:0 auto 40px;opacity:.95}
+.ws-cta .btn-primary{background:#fff;color:var(--cubo-rosso-dark);border-color:#fff}
+.ws-cta .btn-secondary{color:#fff;border-color:#fff}
+.ws-cta .row{display:flex;gap:16px;justify-content:center}
+@media(max-width:1024px){.ws-grid{grid-template-columns:1fr}.ws-hero h1{font-size:48px}.famiglia-header h2{font-size:42px}}
+</style><link rel="stylesheet" href="revisione.css">
+</head><body>
+<header class="header"><div class="header-inner"><div class="logo"><a href="homepage.html"><img src="assets/logo-ariadne.png" alt="Ariadne"></a></div>
+<nav class="nav"><a href="il-filo-di-ariadne.html">Il filo di Ariadne</a><a href="scuola.html" class="has-sub">Scuola di coaching</a><a href="core-quadrant.html">Core Quadrant®</a><a href="workshop.html" class="active">Workshop</a><a href="calendario.html">Calendario</a><a href="#" class="nav-cta">Aziende →</a></nav></div></header>
+
+<section class="ws-hero"><div class="ws-hero-inner">
+<span class="badge">Spazio di contaminazione</span>
+<h1 class="ari-fade">Workshop.<br><em>Dove le cose<br>si incontrano</em></h1>
+<p>Lo spazio dove invitiamo trainer che stimiamo, esploriamo temi adiacenti al coaching, mescoliamo pubblici che di solito non si incontrano. Alcuni sono brevi — mezza giornata, una sera. Altri sono percorsi di approfondimento che durano più giornate. Tutti condividono la stessa logica: non un corso del catalogo, ma un incontro che vale per quello che succede lì dentro.</p>
+</div></section>
+
+<section class="ws-intro"><div class="ws-intro-inner">
+<span class="label-cubotto" style="margin:0 auto 24px"><img src="assets/Ariadne_cubotto rosso_grande.png" alt="">Perché workshop</span>
+<h2>Due famiglie distinte,<br><em>una sola logica</em></h2>
+<p>I Workshop Ariadne vivono in due famiglie che servono pubblici diversi. Le trovi qui sotto, separate visivamente. La logica comune è una sola: non sono mini-corsi del nostro catalogo, ma incontri editoriali curati che valgono per quello che ci succede dentro, non per quello che si "porta a casa".</p>
+</div></section>
+
+<section class="famiglia f1">
+<div class="famiglia-header">
+<div class="famiglia-tag">Famiglia 01 · Per tutti</div>
+<h2>Workshop brevi <em>e tematici</em></h2>
+<p>Incontri di mezza o una giornata, su temi che attraversano il coaching: leadership, facilitazione, creatività, strumenti specifici. Alcuni sono curati da noi, altri ospitano trainer che stimiamo e che portano nelle nostre sale il loro modo di lavorare.</p>
+<p class="ideale">→ Ideale per chi si avvicina al coaching o per chi vuole un assaggio di un tema specifico.</p>
+</div>
+<div class="ws-grid">
+
+
+<div class="ws-card"><div class="tipo">— 2 weekend</div><h3>Parent Coaching</h3><p>Percorso di specializzazione sul coaching applicato alla genitorialità. Per coach che vogliono lavorare con genitori e famiglie nel proprio studio. Edizione primavera 2026.</p><div class="ws-meta"><span>Primavera 2026</span><strong>€ 980</strong></div></div>
+</div>
+</section>
+
+<section class="ws-cta"><h2>Vuoi <em>partecipare?</em></h2>
+<p>Iscriviti al prossimo workshop o consulta il calendario completo. Le iscrizioni aprono di solito 60 giorni prima dell'evento.</p>
+<div class="row"><a href="calendario.html" class="btn btn-primary">Calendario completo →</a><a href="#" class="btn btn-secondary">Iscriviti alla newsletter</a></div></section>
+
+<footer><div class="footer-grid">
+<div class="footer-brand"><img src="assets/logo-ariadne.png" alt="Ariadne"><p>La scuola italiana di coaching professionale ICF, dove l'approccio si impara sperimentando.</p></div>
+<div class="footer-col"><h5>Percorso</h5><ul><li><a href="scuola.html" class="has-sub">Scuola di coaching</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+<div class="footer-col"><h5>Community</h5><ul><li></li><li><a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li></ul></div>
+<div class="footer-col"><h5>Scuola · Contatti</h5><ul><li><a href="il-filo-di-ariadne.html">Il filo di Ariadne</a></li><li><a href="il-filo-di-ariadne.html#trainer">I trainer</a></li><li><a href="#">Ariadne per le aziende</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul><p style="margin-top:16px">Ariadne SRL<br>Via Pietro Paleocapa, 7<br>20121 Milano<br>Tel. +39 339 272 4113<br>info@ariadne.training</p></div></div>
+<div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div><a href="#">Termini</a><a href="#">Privacy</a><a href="#">Cookie</a></div></div></footer>
+<script src="ariadne.js"></script>
+<script src="revisione.js"></script>
+</body></html>

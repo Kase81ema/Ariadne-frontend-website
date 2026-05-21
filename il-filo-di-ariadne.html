@@ -1,0 +1,653 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Il filo di Ariadne — Chi siamo, l'approccio, i valori</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-white:#FFFFFF;--bg:#FDFBF7;--bg-cream:#FBF8F2;--bg-cream-deep:#F5EFE3;
+  --ink:#1F1813;--ink-soft:#5A4A3D;--ink-mute:#9C8B7B;
+  --terra:#df7a4a;--terra-deep:#b8633a;--terra-light:#e8a070;
+  --p1:#df7a4a;--p2:#d33935;--p3:#9ec165;--p4:#7a9c50;
+  --viola:#655a9c;--viola-deep:#4a3f7a;--azzurro:#67b2e2;--giallo:#d4d965;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --radius-card:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg-white);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ═══ HEADER ═══ */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;backdrop-filter:blur(12px);background:rgba(255,255,255,.85);border-bottom:1px solid rgba(31,24,19,.06)}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:-.5px}
+.nav{display:flex;gap:32px;font-size:14px}
+.nav a{position:relative;transition:color .3s}
+.nav a:hover{color:var(--terra)}
+.nav a.active{color:var(--terra)}
+.nav-cta{padding:10px 20px;background:var(--ink);color:var(--bg-white)!important;border-radius:100px;font-size:13px;font-weight:500}
+
+/* ═══ ANIMATIONS ═══ */
+.reveal-mask{display:inline-block;overflow:hidden;vertical-align:bottom}
+.reveal-mask>span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.reveal-mask.in>span{transform:translateY(0)}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.in{opacity:1;transform:translateY(0)}
+
+/* ═══ HERO ═══ */
+.hero{padding:200px 48px 100px;text-align:center;background:var(--bg-white);position:relative;overflow:hidden}
+.hero .eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:32px;font-weight:500;display:block}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(56px,9vw,144px);line-height:.9;letter-spacing:-4px;margin-bottom:32px;max-width:1300px;margin-left:auto;margin-right:auto}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--terra)}
+.hero .lede{font-family:var(--serif);font-weight:300;font-size:clamp(19px,2vw,26px);line-height:1.55;color:var(--ink-soft);max-width:780px;margin:0 auto 48px}
+.hero .lede em{font-style:italic;color:var(--terra)}
+
+/* Filo decorativo SVG che scorre dietro */
+.filo-decor{position:absolute;left:50%;top:140px;transform:translateX(-50%);width:1px;height:60px;background:var(--terra);opacity:.5}
+.filo-decor::after{content:"";position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:var(--terra)}
+
+/* ═══ APERTURA MITICA — Il labirinto ═══ */
+.mito{padding:160px 48px 140px;background:var(--bg-white);position:relative;overflow:hidden}
+.mito-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:center;position:relative}
+
+/* Disegno del labirinto a sinistra */
+.mito-art{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.mito-art svg{width:100%;height:100%;max-width:480px}
+
+.mito-text .frag{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:32px;font-weight:500;display:block}
+.mito-text h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.05;letter-spacing:-2px;margin-bottom:32px}
+.mito-text h2 em{font-style:italic;font-weight:400;color:var(--terra)}
+.mito-text .quote-mito{font-family:var(--serif);font-style:italic;font-weight:300;font-size:21px;line-height:1.55;color:var(--ink);margin-bottom:32px;padding-left:24px;border-left:2px solid var(--terra);max-width:580px}
+.mito-text p{font-size:17px;line-height:1.75;color:var(--ink-soft);margin-bottom:18px;max-width:580px}
+.mito-text p strong{color:var(--ink);font-weight:500}
+
+/* ═══ POTENZIALE — la tesi della pagina ═══ */
+.potenziale{padding:160px 48px;background:var(--bg-white);text-align:center;position:relative}
+.potenziale-inner{max-width:1100px;margin:0 auto}
+.potenziale .frag{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:32px;font-weight:500;display:block}
+.potenziale-statement{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.5vw,56px);line-height:1.2;letter-spacing:-1.5px;margin-bottom:48px;color:var(--ink)}
+.potenziale-statement em{font-style:italic;font-weight:400;color:var(--terra)}
+.potenziale-tre{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;max-width:1100px;margin:80px auto 0;text-align:left}
+.potenziale-tre .pt-item{padding-top:32px;border-top:1px solid rgba(31,24,19,.12)}
+.potenziale-tre .pt-num{font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;color:var(--terra);margin-bottom:14px}
+.potenziale-tre .pt-item h3{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.25;margin-bottom:14px;color:var(--ink);letter-spacing:-.5px}
+.potenziale-tre .pt-item h3 em{font-style:italic;color:var(--terra)}
+.potenziale-tre .pt-item p{font-size:15px;line-height:1.65;color:var(--ink-soft)}
+
+/* ═══ APPROCCIO ESPERIENZIALE-CREATIVO ═══ */
+.approccio{padding:0 48px 0;background:var(--bg-white);position:relative}
+.approccio-inner{max-width:1300px;margin:0 auto;border-top:1px solid rgba(31,24,19,.12);padding:160px 0}
+.approccio-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.approccio-text .frag{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:32px;font-weight:500;display:block}
+.approccio-text h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,4.5vw,64px);line-height:1.05;letter-spacing:-1.8px;margin-bottom:32px}
+.approccio-text h2 em{font-style:italic;font-weight:400;color:var(--terra)}
+.approccio-text .quote-mito{font-family:var(--serif);font-style:italic;font-weight:300;font-size:18px;line-height:1.55;color:var(--ink);margin-bottom:32px;padding-left:24px;border-left:2px solid var(--terra)}
+.approccio-text p{font-size:17px;line-height:1.75;color:var(--ink-soft);margin-bottom:18px}
+.approccio-text p strong{color:var(--ink);font-weight:500}
+.approccio-img{aspect-ratio:4/5;background:var(--bg-cream-deep);border-radius:8px;overflow:hidden;position:relative;box-shadow:0 24px 64px -24px rgba(31,24,19,.18)}
+.approccio-img::before{content:"FORMAZIONE ESPERIENZIALE";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--sans);color:var(--ink-mute);font-size:11px;letter-spacing:3px;font-weight:500}
+
+/* ═══ STRUMENTI — carousel di card colorate ═══ */
+.strumenti{padding:160px 0 160px;background:var(--bg-white);position:relative;overflow:hidden}
+.strumenti-head{max-width:1300px;margin:0 auto 80px;padding:0 48px}
+.strumenti-head .frag{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:32px;font-weight:500;display:block}
+.strumenti-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.05;letter-spacing:-2px;margin-bottom:24px;max-width:900px}
+.strumenti-head h2 em{font-style:italic;font-weight:400;color:var(--terra)}
+.strumenti-head p{font-family:var(--serif);font-weight:300;font-size:19px;color:var(--ink-soft);max-width:700px;line-height:1.55}
+
+/* Carousel scorribile */
+.strumenti-carousel{display:flex;gap:24px;padding:20px 48px 60px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.strumenti-carousel::-webkit-scrollbar{display:none}
+.strum-card{flex:0 0 420px;scroll-snap-align:center;border-radius:20px;padding:48px 40px;color:#fff;display:flex;flex-direction:column;min-height:520px;position:relative;overflow:hidden;transition:transform .4s ease,box-shadow .4s ease;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.strum-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px -16px rgba(0,0,0,.18)}
+.strum-card.s-viola{background:linear-gradient(155deg,#655a9c 0%,#4a3f7a 100%)}
+.strum-card.s-arancio{background:linear-gradient(155deg,#df7a4a 0%,#b8633a 100%)}
+.strum-card.s-verde{background:linear-gradient(155deg,#9ec165 0%,#7a9c50 100%)}
+.strum-card.s-giallo{background:linear-gradient(155deg,#d4d965 0%,#bfc54a 100%);color:#3d3a14}
+.strum-card.s-rosso{background:linear-gradient(155deg,#d33935 0%,#a82c2a 100%)}
+.strum-card.s-azzurro{background:linear-gradient(155deg,#67b2e2 0%,#4a8fc1 100%)}
+.strum-card.s-rosa{background:linear-gradient(155deg,#ea5284 0%,#c43f6b 100%)}
+.strum-card.s-grigio{background:linear-gradient(155deg,#5A4A3D 0%,#3a2f24 100%)}
+
+.strum-card .s-num{font-family:var(--serif);font-style:italic;font-size:14px;opacity:.7;margin-bottom:24px;font-weight:400}
+.strum-card .s-tag{font-family:var(--sans);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;opacity:.85;margin-bottom:16px}
+.strum-card h3{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1;letter-spacing:-.8px;margin-bottom:8px}
+.strum-card h3 em{font-style:italic;font-weight:500}
+.strum-card .s-author{font-family:var(--serif);font-style:italic;font-size:16px;opacity:.8;margin-bottom:24px}
+.strum-card .s-desc{font-size:14.5px;line-height:1.65;opacity:.92;margin-bottom:28px;flex:1}
+.strum-card .s-links{padding-top:24px;border-top:1px solid rgba(255,255,255,.18)}
+.strum-card .s-links-label{font-family:var(--sans);font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:10px;font-weight:600}
+.strum-card .s-links a{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;border-bottom:1px solid currentColor;padding-bottom:2px;margin-right:18px;margin-bottom:6px;transition:opacity .3s}
+.strum-card .s-links a:hover{opacity:.7}
+.strum-card.s-giallo .s-links a{color:#3d3a14}
+
+/* Indicatori carousel */
+.strumenti-controls{max-width:1300px;margin:0 auto;padding:0 48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.strum-indicator{font-family:var(--sans);font-size:13px;color:var(--ink-mute);letter-spacing:.5px}
+.strum-indicator strong{color:var(--ink);font-weight:600}
+.strum-arrows{display:flex;gap:12px}
+.strum-arrow{width:48px;height:48px;border-radius:50%;background:var(--bg-white);border:1.5px solid rgba(31,24,19,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;color:var(--ink)}
+.strum-arrow:hover{border-color:var(--terra);color:var(--terra);transform:translateY(-1px)}
+.strum-arrow svg{width:18px;height:18px}
+
+/* ═══ I VALORI — coppie polari ═══ */
+.valori{padding:160px 48px;background:var(--bg-white);position:relative}
+.valori-inner{max-width:1300px;margin:0 auto}
+.valori-head{margin-bottom:80px;display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:end;border-top:1px solid rgba(31,24,19,.12);padding-top:80px}
+.valori-head .frag{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:24px;font-weight:500;display:block}
+.valori-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.05;letter-spacing:-2px}
+.valori-head h2 em{font-style:italic;font-weight:400;color:var(--terra)}
+.valori-head p{font-family:var(--serif);font-weight:300;font-size:18px;color:var(--ink-soft);line-height:1.6;max-width:600px}
+
+.valori-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(31,24,19,.1);border:1px solid rgba(31,24,19,.1);border-radius:8px;overflow:hidden}
+.valore-cell{background:var(--bg-white);padding:48px 44px;display:flex;gap:24px;align-items:flex-start;transition:background .35s}
+.valore-cell:hover{background:var(--bg-cream)}
+.valore-num{font-family:var(--serif);font-style:italic;font-weight:400;font-size:32px;color:var(--terra);line-height:1;flex-shrink:0;margin-top:6px}
+.valore-text h3{font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.2;margin-bottom:14px;letter-spacing:-.5px;color:var(--ink)}
+.valore-text h3 em{font-style:italic;font-weight:400;color:var(--terra)}
+.valore-text p{font-size:15px;line-height:1.65;color:var(--ink-soft)}
+
+/* ═══ TRAINER ═══ */
+.trainer{padding:160px 48px;background:var(--bg-white)}
+.trainer-inner{max-width:1300px;margin:0 auto;border-top:1px solid rgba(31,24,19,.12);padding-top:80px}
+.trainer-head{margin-bottom:80px;text-align:center}
+.trainer-head .frag{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:24px;font-weight:500;display:block}
+.trainer-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+.trainer-head h2 em{font-style:italic;font-weight:400;color:var(--terra)}
+.trainer-head p{font-family:var(--serif);font-weight:300;font-size:18px;color:var(--ink-soft);max-width:680px;margin:0 auto;line-height:1.55}
+
+.trainer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.t-card{display:flex;flex-direction:column;gap:24px}
+.t-foto{aspect-ratio:1/1;background:var(--bg-cream-deep);border-radius:8px;overflow:hidden;position:relative}
+.t-foto::before{content:attr(data-name);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--sans);color:var(--ink-mute);font-size:11px;letter-spacing:2.5px;font-weight:500;text-transform:uppercase}
+.t-info h3{font-family:var(--serif);font-weight:500;font-size:28px;letter-spacing:-.5px;margin-bottom:6px;color:var(--ink)}
+.t-info .role{font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;color:var(--terra);margin-bottom:18px;font-weight:600}
+.t-info .bio{font-size:15px;line-height:1.7;color:var(--ink-soft);margin-bottom:24px}
+.t-percorsi{padding-top:20px;border-top:1px solid rgba(31,24,19,.12)}
+.t-percorsi-label{font-family:var(--sans);font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--ink-mute);font-weight:600;margin-bottom:12px;display:block}
+.t-percorsi a{display:inline-block;font-size:13px;color:var(--ink);border-bottom:1px solid var(--terra);padding-bottom:2px;margin-right:14px;margin-bottom:8px;transition:color .3s}
+.t-percorsi a:hover{color:var(--terra)}
+
+/* ═══ THURMAN ═══ */
+.thurman{padding:180px 48px;background:var(--bg-cream);text-align:center;position:relative;overflow:hidden}
+.thurman::before{content:"\201C";position:absolute;top:80px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:200px;line-height:.5;color:var(--terra);opacity:.18;font-weight:400}
+.thurman-inner{max-width:1000px;margin:0 auto;position:relative}
+.thurman blockquote{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(28px,3.5vw,44px);line-height:1.3;color:var(--ink);letter-spacing:-1px;margin-bottom:32px}
+.thurman blockquote em{font-style:normal;font-weight:400;color:var(--terra)}
+.thurman cite{font-family:var(--sans);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink-mute);font-style:normal;font-weight:600}
+.thurman cite strong{color:var(--ink);display:block;font-size:13px;letter-spacing:2px;margin-bottom:4px}
+
+/* ═══ CTA FINALE ═══ */
+.final{padding:160px 48px;background:var(--bg-white);text-align:center;position:relative}
+.final-inner{max-width:900px;margin:0 auto}
+.final .frag{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--terra);margin-bottom:32px;font-weight:500;display:block}
+.final h2{font-family:var(--serif);font-weight:300;font-size:clamp(48px,7vw,96px);line-height:1.05;letter-spacing:-3px;margin-bottom:32px}
+.final h2 em{font-style:italic;font-weight:400;color:var(--terra)}
+.final p{font-family:var(--serif);font-weight:300;font-size:21px;line-height:1.55;color:var(--ink-soft);max-width:600px;margin:0 auto 48px}
+.final-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-primary{display:inline-block;padding:18px 40px;background:var(--terra);color:#fff;border-radius:100px;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.5px;transition:transform .3s,background .3s;border:none;cursor:pointer}
+.btn-primary:hover{transform:translateY(-2px);background:var(--terra-deep)}
+.btn-secondary{display:inline-block;padding:18px 40px;background:transparent;color:var(--terra);border-radius:100px;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.5px;transition:all .3s;border:1.5px solid var(--terra)}
+.btn-secondary:hover{background:var(--bg-cream-deep);transform:translateY(-2px)}
+
+/* ═══ FOOTER ═══ */
+footer{padding:80px 48px 48px;background:var(--bg-white);border-top:1px solid rgba(31,24,19,.08);font-size:13px;color:var(--ink-mute)}
+.footer-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px}
+.footer-brand p{font-family:var(--serif);font-weight:300;font-size:14px;line-height:1.55;margin-top:16px;color:var(--ink-soft);max-width:280px}
+footer h5{font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink);font-weight:600;margin-bottom:16px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:8px}
+footer ul a{transition:color .3s}
+footer ul a:hover{color:var(--terra)}
+.footer-bottom{max-width:1400px;margin:64px auto 0;padding-top:32px;border-top:1px solid rgba(31,24,19,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:12px}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .header{padding:16px 24px}
+  .nav{display:none}
+  .hero{padding:140px 24px 80px}
+  .mito,.potenziale,.strumenti,.valori,.trainer,.thurman,.final{padding:80px 24px}
+  .approccio-inner{padding:80px 0}
+  .approccio{padding:0 24px}
+  .strumenti-head,.strumenti-controls{padding-left:24px;padding-right:24px}
+  .strumenti-carousel{padding-left:24px;padding-right:24px}
+  .mito-inner,.approccio-grid,.valori-head{grid-template-columns:1fr;gap:48px}
+  .valori-grid{grid-template-columns:1fr}
+  .potenziale-tre,.trainer-grid{grid-template-columns:1fr;gap:32px}
+  .strum-card{flex:0 0 320px;min-height:480px;padding:36px 32px}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:600px){
+  .footer-inner{grid-template-columns:1fr}
+  .strum-card{flex:0 0 280px}
+}
+</style>
+</head><body>
+
+<header class="header"><div class="header-inner">
+<a href="homepage.html" class="logo" style="display:inline-flex;align-items:center"><img src="assets/logo-ariadne.png" alt="Ariadne" style="height:48px;width:auto;display:block"></a>
+<nav class="nav">
+<a href="il-filo-di-ariadne.html" class="active">Il filo di Ariadne</a>
+<a href="scuola.html" class="has-sub">Scuola di coaching</a>
+<a href="core-quadrant.html">Core Quadrant®</a>
+<a href="training.html">Training</a>
+<a href="workshop.html">Workshop</a>
+<a href="calendario.html">Calendario</a>
+<a href="#" class="nav-cta">Aziende →</a>
+</nav>
+</div></header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+<span class="eyebrow fade-in">Chi siamo · L'approccio · I valori</span>
+<h1><span class="reveal-mask"><span>Il filo</span></span><br><span class="reveal-mask"><span>di <em>Ariadne</em></span></span></h1>
+<p class="lede fade-in">C'è un filo che attraversa ogni cosa che facciamo. Lega <em>chi accompagniamo</em> al potenziale che hanno dentro, ai labirinti che attraversano, alle uscite che scelgono.</p>
+<span class="filo-decor"></span>
+</section>
+
+<!-- ═══ MITO — il labirinto e il filo ═══ -->
+<section class="mito">
+<div class="mito-inner">
+
+<div class="mito-art fade-in">
+<svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+<!-- Labirinto stilizzato a spirale quadrata -->
+<g fill="none" stroke="#df7a4a" stroke-width="1.5" opacity="0.5">
+<rect x="60" y="60" width="360" height="360" rx="2"/>
+<rect x="100" y="100" width="280" height="280" rx="2"/>
+<rect x="140" y="140" width="200" height="200" rx="2"/>
+<rect x="180" y="180" width="120" height="120" rx="2"/>
+<line x1="240" y1="60" x2="240" y2="100"/>
+<line x1="100" y1="240" x2="140" y2="240"/>
+<line x1="240" y1="300" x2="240" y2="380"/>
+<line x1="340" y1="240" x2="380" y2="240"/>
+</g>
+<!-- Centro: punto del Minotauro -->
+<circle cx="240" cy="240" r="6" fill="#df7a4a"/>
+<!-- Filo che esce -->
+<path d="M 240 240 Q 280 220 280 180 Q 280 140 240 140 Q 200 140 200 180 Q 200 240 240 280 Q 320 280 320 200 Q 320 100 220 100 Q 80 100 80 240 Q 80 420 240 460" 
+fill="none" stroke="#df7a4a" stroke-width="2" stroke-linecap="round" stroke-dasharray="0 0"
+style="stroke-dashoffset:1200;stroke-dasharray:1200" class="filo-anim"/>
+</svg>
+</div>
+
+<div class="mito-text">
+<span class="frag fade-in">Frammento I · Il filo</span>
+<h2 class="fade-in">Un filo per <em>uscire</em><br>dal labirinto</h2>
+<p class="quote-mito fade-in">«Arianna donò a Teseo un filo perché non si perdesse nel labirinto. Quando ebbe affrontato il Minotauro, il filo gli mostrò la via del ritorno.»</p>
+<p class="fade-in">Nel mito greco, il filo di Arianna è ciò che permette a Teseo di <strong>entrare nel labirinto, affrontare la sfida, e uscirne trasformato</strong>. Senza il filo, l'eroe resterebbe smarrito tra i corridoi. Senza la sfida, non avrebbe nulla di nuovo da portare fuori.</p>
+<p class="fade-in">Il nostro lavoro è esattamente questo. Le persone che incontriamo non hanno bisogno di una mappa che eviti il labirinto — hanno bisogno di un filo che li accompagni <em>attraverso</em> le sfide del proprio sviluppo. Quel filo è la presenza, lo sguardo competente, le domande che aprono. È la nostra parte. La sfida — quella resta sempre la loro.</p>
+</div>
+
+</div>
+</section>
+
+<!-- ═══ POTENZIALE — la tesi ═══ -->
+<section class="potenziale">
+<div class="potenziale-inner">
+<span class="frag fade-in">Frammento II · La tesi</span>
+<p class="potenziale-statement fade-in">Ogni persona, ogni team, ogni organizzazione ha già <em>tutto il potenziale</em> di cui ha bisogno. Il nostro lavoro è creare le condizioni perché possa <em>esprimersi</em>.</p>
+
+<div class="potenziale-tre">
+<div class="pt-item fade-in">
+<div class="pt-num">i.</div>
+<h3>Il potenziale<br>è già <em>lì</em></h3>
+<p>Non lo aggiungiamo dall'esterno. Lo riconosciamo, lo attiviamo, gli diamo spazio. È la differenza tra insegnare qualcosa di nuovo e liberare ciò che è già presente.</p>
+</div>
+<div class="pt-item fade-in">
+<div class="pt-num">ii.</div>
+<h3>Si esprime<br>nelle <em>sfide</em></h3>
+<p>Senza ostacoli reali, il potenziale resta latente. Le sfide professionali, relazionali, di leadership sono i luoghi in cui si manifesta — o resta nascosto.</p>
+</div>
+<div class="pt-item fade-in">
+<div class="pt-num">iii.</div>
+<h3>Diventa visibile<br>nell'<em>esperienza</em></h3>
+<p>Non basta capire intellettualmente: il potenziale si vede solo quando passa attraverso un'azione, una scelta, un'esperienza vissuta in prima persona.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ APPROCCIO — l'apprendimento esperienziale-creativo ═══ -->
+<section class="approccio">
+<div class="approccio-inner">
+<div class="approccio-grid">
+
+<div class="approccio-text">
+<span class="frag fade-in">Frammento III · Il metodo</span>
+<h2 class="fade-in">Si impara<br><em>sperimentando</em></h2>
+<p class="quote-mito fade-in">«Per uscire dal labirinto, Teseo non lesse un manuale. Camminò.»</p>
+<p class="fade-in">Il nostro approccio è <strong>creativo-esperienziale</strong>. Significa che il punto di partenza non è la teoria, ma l'esperienza. Le persone non studiano il coaching, la leadership, il team coaching — li <em>fanno</em>. In aula, tra colleghi, con metafore, oggetti, il corpo, la riflessione.</p>
+<p class="fade-in">Crediamo che l'apprendimento adulto si consolidi quando passa <strong>dall'azione alla riflessione, e di nuovo all'azione</strong>. Per questo i nostri programmi non sono frontali: ogni concetto si traduce in un esercizio, ogni esercizio diventa occasione di consapevolezza, ogni consapevolezza si applica nella pratica.</p>
+<p class="fade-in">È un metodo che richiede di <em>mettersi in gioco</em>. Ma è anche il motivo per cui chi passa da Ariadne ricorda cosa ha imparato — perché non lo ha studiato, lo ha vissuto.</p>
+</div>
+
+<div class="approccio-img fade-in"></div>
+
+</div>
+</div>
+</section>
+
+<!-- ═══ STRUMENTI — il kit Ariadne in carousel ═══ -->
+<section class="strumenti">
+<div class="strumenti-head">
+<span class="frag fade-in">Frammento IV · Gli strumenti</span>
+<h2 class="fade-in">Il <em>kit Ariadne</em></h2>
+<p class="fade-in">Otto metodologie che usiamo nel nostro lavoro — alcune nostre, altre prese da maestri internazionali e integrate nei nostri programmi. Ognuna è uno strumento del filo: serve a illuminare un pezzo del labirinto.</p>
+</div>
+
+<div class="strumenti-carousel" id="carousel">
+
+<div class="strum-card s-viola">
+<div class="s-num">i.</div>
+<div class="s-tag">Modello fondativo</div>
+<h3>Core <em>Quadrant®</em></h3>
+<div class="s-author">Daniel Ofman</div>
+<div class="s-desc">Il quadrante delle qualità autentiche per esplorare punti di forza, trappole, sfide e allergie di persone, team e organizzazioni. Ariadne è l'unico partner italiano di Core Quality International.</div>
+<div class="s-links">
+<div class="s-links-label">Lo trovi in</div>
+<a href="core-quadrant.html">Training di certificazione</a>
+<a href="scuola.html">Programmi di coaching</a>
+</div>
+</div>
+
+<div class="strum-card s-arancio">
+<div class="s-num">ii.</div>
+<div class="s-tag">Leadership creativa</div>
+<h3>Creative <em>Leadership</em></h3>
+<div class="s-author">KaosPilot Business School</div>
+<div class="s-desc">Il modello danese per progettare e facilitare spazi di apprendimento ad alto coinvolgimento. Crea contesti dove la creatività non è un orpello ma il motore della trasformazione.</div>
+<div class="s-links">
+<div class="s-links-label">Lo trovi in</div>
+<a href="training-kaospilot.html">Masterclass Kaospilot</a>
+<a href="advanced-coaching.html">Advanced Coaching</a>
+</div>
+</div>
+
+<div class="strum-card s-verde">
+<div class="s-num">iii.</div>
+<div class="s-tag">Comunicazione</div>
+<h3>Comunicazione<br><em>Nonviolenta</em></h3>
+<div class="s-author">Marshall Rosenberg</div>
+<div class="s-desc">Il linguaggio dei bisogni e delle emozioni come strumento per trasformare i conflitti in occasioni di connessione autentica. Una grammatica della relazione.</div>
+<div class="s-links">
+<div class="s-links-label">Lo trovi in</div>
+<a href="core-coaching.html">Core Coaching</a>
+<a href="team-coaching.html">Team Coaching</a>
+</div>
+</div>
+
+<div class="strum-card s-giallo">
+<div class="s-num">iv.</div>
+<div class="s-tag">Cambiamento</div>
+<h3>Immunità al<br><em>Cambiamento</em></h3>
+<div class="s-author">Robert Kegan & Lisa Lahey</div>
+<div class="s-desc">Il framework per capire perché le persone non riescono a cambiare anche quando lo desiderano. Mette in luce gli "impegni concorrenti" che sabotano i nostri obiettivi più importanti.</div>
+<div class="s-links">
+<div class="s-links-label">Lo trovi in</div>
+<a href="advanced-coaching.html">Advanced Coaching</a>
+</div>
+</div>
+
+<div class="strum-card s-rosso">
+<div class="s-num">v.</div>
+<div class="s-tag">Apprendimento esperienziale</div>
+<h3>LEGO® <em>Serious Play®</em></h3>
+<div class="s-author">Metodologia ufficiale</div>
+<div class="s-desc">Pensare con le mani: usiamo i mattoncini Lego per esplorare strategie, identità, dinamiche di team. Le metafore costruite raccontano molto più delle parole.</div>
+<div class="s-links">
+<div class="s-links-label">Lo trovi in</div>
+<a href="training-lsp.html">Training LSP</a>
+<a href="team-coaching.html">Team Coaching</a>
+</div>
+</div>
+
+<div class="strum-card s-azzurro">
+<div class="s-num">vi.</div>
+<div class="s-tag">Emozioni</div>
+<h3>Mood <em>Meter</em></h3>
+<div class="s-author">Marc Brackett · Yale</div>
+<div class="s-desc">Una mappa delle emozioni come strumento di consapevolezza e regolazione. Riconoscere l'energia e la valenza di ciò che si sente è il primo passo per sceglierne l'espressione.</div>
+<div class="s-links">
+<div class="s-links-label">Lo trovi in</div>
+<a href="core-coaching.html">Core Coaching</a>
+<a href="laboratori.html">Laboratori Ariadne</a>
+</div>
+</div>
+
+<div class="strum-card s-rosa">
+<div class="s-num">vii.</div>
+<div class="s-tag">Dinamiche di team</div>
+<h3>Structural <em>Dynamics</em></h3>
+<div class="s-author">David Kantor</div>
+<div class="s-desc">Il modello per leggere come si muove un sistema relazionale: chi propone, chi segue, chi si oppone, chi osserva. Decifrare le danze dei team è il primo passo per intervenire.</div>
+<div class="s-links">
+<div class="s-links-label">Lo trovi in</div>
+<a href="team-coaching.html">Team Coaching</a>
+</div>
+</div>
+
+<div class="strum-card s-grigio">
+<div class="s-num">viii.</div>
+<div class="s-tag">Complessità</div>
+<h3>Pensiero <em>sistemico</em></h3>
+<div class="s-author">Gestalt · Bateson · Snowden · Beau Lotto</div>
+<div class="s-desc">Una famiglia di approcci per leggere ciò che è complesso senza ridurlo. Dalla Gestalt al Cynefin di Snowden, fino al neuro-design di Beau Lotto: le lenti per vedere ciò che è invisibile a colpo d'occhio.</div>
+<div class="s-links">
+<div class="s-links-label">Lo trovi in</div>
+<a href="advanced-coaching.html">Advanced Coaching</a>
+<a href="team-coaching.html">Team Coaching</a>
+</div>
+</div>
+
+</div>
+
+<div class="strumenti-controls">
+<div class="strum-indicator"><strong id="curr">01</strong> / 08 strumenti</div>
+<div class="strum-arrows">
+<button class="strum-arrow" id="prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg></button>
+<button class="strum-arrow" id="next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg></button>
+</div>
+</div>
+</section>
+
+<!-- ═══ VALORI — coppie polari ═══ -->
+<section class="valori">
+<div class="valori-inner">
+
+<div class="valori-head">
+<div>
+<span class="frag fade-in">Frammento V · I valori</span>
+<h2 class="fade-in">Quattro coppie<br>che <em>guidano</em> il lavoro</h2>
+</div>
+<p class="fade-in">Non sono valori dichiarati: sono i quattro assi di tensione dentro i quali ogni nostro programma trova il suo equilibrio. Ciascuno è una coppia, perché crediamo che ogni qualità reale viva nel suo opposto complementare.</p>
+</div>
+
+<div class="valori-grid">
+<div class="valore-cell fade-in">
+<div class="valore-num">i.</div>
+<div class="valore-text">
+<h3>Esplorazione <em>↔ Integrazione</em></h3>
+<p>Dare nome a ciò che conta e tradurlo in direzione. L'esplorazione apre, l'integrazione consolida — l'una senza l'altra non produce trasformazione.</p>
+</div>
+</div>
+<div class="valore-cell fade-in">
+<div class="valore-num">ii.</div>
+<div class="valore-text">
+<h3>Esperienza <em>↔ Riflessione</em></h3>
+<p>Apprendere facendo e consolidare con senso critico. Crediamo nell'apprendimento adulto come ciclo continuo tra azione e pensiero.</p>
+</div>
+</div>
+<div class="valore-cell fade-in">
+<div class="valore-num">iii.</div>
+<div class="valore-text">
+<h3>Creatività <em>↔ Focus</em></h3>
+<p>Aprire possibilità nuove e stringere su ciò che vale. Senza creatività non c'è movimento, senza focus non c'è risultato.</p>
+</div>
+</div>
+<div class="valore-cell fade-in">
+<div class="valore-num">iv.</div>
+<div class="valore-text">
+<h3>Profondità <em>↔ Leggerezza</em></h3>
+<p>Andare in profondità senza appesantire i processi. È una delle cose che più ci distinguono nel modo in cui lavoriamo con persone e team.</p>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- ═══ TRAINER ═══ -->
+<section class="trainer">
+<div class="trainer-inner">
+<div class="trainer-head">
+<span class="frag fade-in">Frammento VI · Le persone</span>
+<h2 class="fade-in">I trainer che<br>tengono <em>il filo</em></h2>
+<p class="fade-in">Tre coach con percorsi diversi e una visione comune del lavoro: il potenziale si libera attraverso l'esperienza, il dialogo creativo e la presenza.</p>
+</div>
+
+<div class="trainer-grid">
+
+<div class="t-card fade-in">
+<div class="t-foto" data-name="ARIANNA PERRONE"></div>
+<div class="t-info">
+<h3>Arianna Perrone</h3>
+<div class="role">Master Certified Coach · ICF</div>
+<p class="bio">MCC con oltre 2500 ore di coaching. Formatrice esperienziale specializzata in soft skills, intelligenza emotiva e Lego® Serious Play®. Esperienza pluriennale come Responsabile Sviluppo Risorse Umane in azienda di grandi dimensioni.</p>
+<div class="t-percorsi">
+<span class="t-percorsi-label">I suoi percorsi</span>
+<a href="core-coaching.html">Core Coaching</a>
+<a href="team-coaching.html">Team Coaching</a>
+<a href="core-quadrant.html">Core Quadrant®</a>
+</div>
+</div>
+</div>
+
+<div class="t-card fade-in">
+<div class="t-foto" data-name="EMANUELE CICCARELLI"></div>
+<div class="t-info">
+<h3>Emanuele Ciccarelli</h3>
+<div class="role">Integral Coach™</div>
+<p class="bio">Integral Coach specializzato in processi creativo-esperienziali per lo sviluppo sistemico del potenziale. Fondatore di LABORINTUS, trainer KaosPilot Business & Leadership School, facilitatore Lego® Serious Play®.</p>
+<div class="t-percorsi">
+<span class="t-percorsi-label">I suoi percorsi</span>
+<a href="core-coaching.html">Core Coaching</a>
+<a href="training-lsp.html">Training LSP</a>
+<a href="training-kaospilot.html">Masterclass Kaospilot</a>
+<a href="core-quadrant.html">Core Quadrant®</a>
+</div>
+</div>
+</div>
+
+<div class="t-card fade-in">
+<div class="t-foto" data-name="EMANUELE CASERO"></div>
+<div class="t-info">
+<h3>Emanuele Casero</h3>
+<div class="role">Professional Certified Coach · ICF</div>
+<p class="bio">Oltre 15 anni di esperienza manageriale su temi gestionali e finanziari. Coach ICF (PCC) e team coach, senior practitioner EMCC, trainer su comunicazione e dinamiche relazionali, assessor Hogan. Opera tra Italia e Svizzera.</p>
+<div class="t-percorsi">
+<span class="t-percorsi-label">I suoi percorsi</span>
+<a href="team-coaching.html">Team Coaching</a>
+<a href="advanced-coaching.html">Advanced Coaching</a>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ═══ THURMAN — la chiusura ═══ -->
+<section class="thurman">
+<div class="thurman-inner">
+<blockquote class="fade-in">Non chiederti di cosa ha bisogno il mondo. Chiediti piuttosto <em>cosa ti rende vivo</em>, vai e realizzalo. Perché ciò di cui il mondo ha bisogno sono persone che realizzino ciò che <em>le rende vive</em>.</blockquote>
+<cite class="fade-in"><strong>Howard Thurman</strong>Teologo e attivista · 1899—1981</cite>
+</div>
+</section>
+
+<!-- ═══ CTA FINALE ═══ -->
+<section class="final">
+<div class="final-inner">
+<span class="frag fade-in">Frammento VII · L'incontro</span>
+<h2 class="fade-in">Conosciamoci<br><em>di persona</em></h2>
+<p class="fade-in">Il filo si tende solo se qualcuno lo prende dall'altra parte. Un colloquio gratuito di 30 minuti con uno dei trainer per capire da dove conviene iniziare.</p>
+<div class="final-btns">
+<a href="#" class="btn-primary">Richiedi un colloquio →</a>
+<a href="scuola.html" class="btn-secondary">Vedi i programmi</a>
+</div>
+</div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer><div class="footer-inner">
+<div class="footer-brand"><a href="homepage.html" style="display:inline-block"><img src="assets/logo-ariadne.png" alt="Ariadne" style="height:60px;width:auto;display:block"></a><p>La scuola italiana di coaching professionale ICF dove l'approccio si impara sperimentando.</p></div>
+<div><h5>Scuola</h5><ul><li><a href="scuola.html">La proposta Ariadne</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+<div><h5>Community</h5><ul><li><a href="coaching-atelier.html">Coaching Atelier</a></li><li><a href="laboratori.html">Laboratori Ariadne</a></li><li><a href="webinar.html">Webinar</a></li><li><a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li></ul></div>
+<div><h5>Contatti</h5><ul><li><a href="il-filo-di-ariadne.html">Il filo di Ariadne</a></li><li><a href="il-filo-di-ariadne.html#trainer">I trainer</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul></div>
+</div>
+<div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div>Via Pietro Paleocapa, 7 · 20121 Milano</div></div>
+</footer>
+
+<script>
+// Fade-in / mask reveal observer
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') });
+}, {threshold:0.15, rootMargin:'-50px'});
+document.querySelectorAll('.reveal-mask, .fade-in').forEach(el => io.observe(el));
+
+// Carousel strumenti
+const carousel = document.getElementById('carousel');
+const cards = carousel.querySelectorAll('.strum-card');
+const currEl = document.getElementById('curr');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+function getCardWidth() {
+  const card = cards[0];
+  const styles = window.getComputedStyle(carousel);
+  return card.offsetWidth + parseInt(styles.gap || 24);
+}
+
+function getCurrent() {
+  const cardW = getCardWidth();
+  const idx = Math.round(carousel.scrollLeft / cardW);
+  return Math.max(0, Math.min(cards.length - 1, idx));
+}
+
+function updateIndicator() {
+  const i = getCurrent() + 1;
+  currEl.textContent = String(i).padStart(2, '0');
+}
+
+prevBtn.addEventListener('click', () => {
+  carousel.scrollBy({left: -getCardWidth(), behavior: 'smooth'});
+});
+nextBtn.addEventListener('click', () => {
+  carousel.scrollBy({left: getCardWidth(), behavior: 'smooth'});
+});
+carousel.addEventListener('scroll', () => {
+  clearTimeout(window._scrollT);
+  window._scrollT = setTimeout(updateIndicator, 80);
+});
+
+// Filo SVG animato
+window.addEventListener('load', () => {
+  const filo = document.querySelector('.filo-anim');
+  if (filo) {
+    const len = filo.getTotalLength();
+    filo.style.strokeDasharray = len;
+    filo.style.strokeDashoffset = len;
+    filo.style.transition = 'stroke-dashoffset 3s ease-in-out';
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          filo.style.strokeDashoffset = '0';
+        }
+      });
+    }, {threshold:0.3});
+    obs.observe(filo.parentElement.parentElement);
+  }
+});
+</script>
+
+</body></html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core Quadrant® — Training di certificazione · Ariadne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ariadne.css">
+<style>
+/* Fallback tokens — duplicated from ariadne.css for resilience */
+:root{--bg-cream:#FBF8F2;--bg-cream-deep:#F5EFE3;--bg-white:#FFFFFF;--ink:#1F1813;--ink-soft:#5A4A3D;--ink-mute:#9C8B7B;--viola-deep:#655a9c;--viola-deep-soft:#7a6fb0;--terra:#df7a4a;--terra-deep:#b8633a;--terra-light:#e8a070;--cubo-viola:#655a9c;--cubo-azzurro:#67b2e2;--serif:'Playfair Display',Georgia,serif;--nav:'Montserrat',sans-serif;--sans:'Open Sans',-apple-system,sans-serif;--radius-card:16px;--radius-btn:6px}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg-cream);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.header{border-bottom:1px solid rgba(31,24,19,.08);padding:24px 56px;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);background:rgba(251,248,242,.95)}
+.header-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.logo img{height:58px;width:auto}
+.nav{display:flex;align-items:center;gap:36px}
+.nav a{font-size:15px;color:var(--ink);font-weight:400;transition:color .3s;position:relative}
+.nav a:hover,.nav a.active{color:var(--terra)}
+.nav-cta{background:var(--viola-deep);color:var(--bg-cream)!important;padding:11px 24px;font-size:14px;font-weight:500;border-radius:var(--radius-btn);transition:all .3s}
+.nav-cta:hover{background:var(--terra)!important}
+.btn{display:inline-flex;align-items:center;gap:12px;font-family:var(--sans);font-size:14px;font-weight:500;padding:16px 28px;text-decoration:none;transition:all .3s;border:1px solid;cursor:pointer;border-radius:var(--radius-btn)}
+.btn-primary{background:var(--terra);color:#fff;border-color:var(--terra)}
+.btn-primary:hover{background:var(--terra-deep);border-color:var(--terra-deep)}
+.btn-secondary{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-secondary:hover{background:var(--ink);color:var(--bg-cream)}
+footer{background:var(--viola-deep);color:var(--bg-cream);padding:100px 56px 40px}
+.footer-grid{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:64px;padding-bottom:64px;border-bottom:1px solid rgba(251,248,242,.15)}
+.footer-brand img{height:62px;margin-bottom:24px;filter:brightness(0) invert(1)}
+.footer-brand p{font-family:var(--serif);font-weight:300;font-size:17px;line-height:1.55;color:rgba(251,248,242,.7);max-width:360px;font-style:italic}
+.footer-col h5{font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;color:var(--terra-light);font-weight:600;margin-bottom:20px}
+.footer-col ul{list-style:none}.footer-col li{margin-bottom:12px}
+.footer-col a{font-size:14px;color:rgba(251,248,242,.78);transition:color .3s}
+.footer-col a:hover{color:var(--terra-light)}
+.footer-col p{font-size:13px;color:rgba(251,248,242,.68);line-height:1.7}
+.footer-bottom{max-width:1440px;margin:0 auto;padding-top:40px;display:flex;justify-content:space-between;font-size:12px;color:rgba(251,248,242,.45)}
+.footer-bottom a{color:rgba(251,248,242,.45);margin-left:24px}
+
+/* ═══ HERO — gradient azzurro → viola ═══ */
+.cq-hero{background:linear-gradient(115deg,var(--cubo-azzurro) 0%,#7d8dc8 45%,var(--cubo-viola) 100%);color:#fff;padding:160px 56px 130px;position:relative;overflow:hidden}
+.cq-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 30%,rgba(255,255,255,.18) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(74,63,122,.25) 0%,transparent 55%);pointer-events:none}
+.cq-hero-inner{max-width:1440px;margin:0 auto;position:relative;display:grid;grid-template-columns:1.4fr 1fr;gap:80px;align-items:end}
+.cq-hero .badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);padding:10px 20px;border-radius:100px;font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:600;margin-bottom:36px;border:1px solid rgba(255,255,255,.22)}
+.cq-hero .badge::before{content:"★";color:#fff;font-size:11px}
+.cq-hero h1{font-family:var(--serif);font-weight:400;font-size:96px;line-height:.95;letter-spacing:-3px;margin-bottom:32px;color:#fff}
+.cq-hero h1 em{font-style:italic;font-weight:400;display:block}
+.cq-hero h1 sup{font-size:.45em;font-weight:400;vertical-align:super}
+.cq-hero .lede{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.5;max-width:620px;color:rgba(255,255,255,.95)}
+.cq-unicità{background:rgba(255,255,255,.13);backdrop-filter:blur(12px);padding:36px 32px;border-radius:var(--radius-card);border:1px solid rgba(255,255,255,.22)}
+.cq-unicità .uni-tag{font-family:var(--sans);font-size:10px;text-transform:uppercase;letter-spacing:1.8px;color:rgba(255,255,255,.85);margin-bottom:10px;font-weight:600}
+.cq-unicità h3{font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.15;margin-bottom:16px;color:#fff}
+.cq-unicità p{font-family:var(--sans);font-size:14px;line-height:1.65;color:rgba(255,255,255,.88)}
+
+/* ═══ DANIEL OFMAN — apertura narrativa ═══ */
+.cq-ofman{background:var(--bg-cream);padding:140px 56px}
+.cq-ofman-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:center}
+.cq-ofman-foto{aspect-ratio:4/5;background:var(--bg-cream-deep);border-radius:var(--radius-card);overflow:hidden;position:relative;box-shadow:0 24px 64px -24px rgba(31,24,19,.2)}
+.cq-ofman-foto::before{content:"DANIEL OFMAN";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--sans);color:var(--ink-mute);font-size:11px;letter-spacing:3px;font-weight:500}
+.cq-ofman-foto::after{content:"";position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(0,0,0,.15),transparent)}
+.cq-ofman-text .section-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:24px;font-weight:600;display:block}
+.cq-ofman-text h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,4.5vw,60px);line-height:1.05;letter-spacing:-1.8px;margin-bottom:32px;color:var(--ink)}
+.cq-ofman-text h2 em{font-style:italic;font-weight:400;color:var(--cubo-viola)}
+.cq-ofman-text .quote{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.5;color:var(--ink);margin-bottom:32px;padding-left:24px;border-left:2px solid var(--cubo-viola);font-weight:300}
+.cq-ofman-text p{font-family:var(--sans);font-size:16px;line-height:1.7;color:var(--ink-soft);margin-bottom:18px}
+.cq-ofman-text p strong{color:var(--ink);font-weight:600}
+.cq-ofman-text p em{font-style:italic;color:var(--cubo-viola)}
+.cq-ofman-text .cite-book{font-family:var(--sans);font-size:11px;color:var(--ink-mute);margin-top:24px;letter-spacing:1.2px;text-transform:uppercase;font-weight:600}
+
+/* ═══ PROGRAMMA — i 4 capitoli ═══ */
+.cq-programma{padding:160px 56px;background:var(--bg-white)}
+.cq-programma-head{max-width:900px;margin:0 auto 100px;text-align:center}
+.cq-programma-head .eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--cubo-viola);margin-bottom:24px;font-weight:600;display:block}
+.cq-programma-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,68px);line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+.cq-programma-head h2 em{font-style:italic;font-weight:400;color:var(--cubo-viola)}
+.cq-programma-head p{font-family:var(--serif);font-weight:300;font-size:19px;color:var(--ink-soft);max-width:680px;margin:0 auto;line-height:1.55}
+
+.flow-wrap{max-width:920px;margin:0 auto;position:relative;padding-left:80px}
+.flow-line{position:absolute;left:24px;top:40px;bottom:40px;width:2px;background:rgba(101,90,156,.18)}
+.flow-node{position:relative;margin-bottom:72px}
+.flow-node::before{content:"";position:absolute;left:-66px;top:14px;width:18px;height:18px;border-radius:50%;background:var(--bg-white);border:2px solid var(--cubo-viola);z-index:2}
+.flow-node .cap-label{font-family:var(--sans);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--cubo-viola);font-weight:600;margin-bottom:12px}
+.flow-node h3{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.2;letter-spacing:-.5px;margin-bottom:14px;color:var(--ink)}
+.flow-node h3 em{font-style:italic;font-weight:500;color:var(--cubo-viola)}
+.flow-node ul{list-style:none;margin-top:14px}
+.flow-node ul li{padding:8px 0;font-family:var(--sans);font-size:15.5px;line-height:1.6;color:var(--ink-soft);position:relative;padding-left:24px}
+.flow-node ul li::before{content:"";position:absolute;left:0;top:18px;width:10px;height:1px;background:var(--cubo-viola);opacity:.5}
+
+.diploma-cqi{margin-top:32px;padding:48px 48px 40px;background:var(--bg-cream-deep);border:2px dashed var(--cubo-viola);border-radius:var(--radius-card);position:relative}
+.diploma-cqi .coccarda{position:absolute;top:24px;right:24px;width:56px;height:56px;color:var(--cubo-viola)}
+.diploma-cqi .coccarda svg{width:100%;height:100%}
+.diploma-cqi .d-eyebrow{font-family:var(--sans);font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:var(--cubo-viola);font-weight:600;margin-bottom:14px}
+.diploma-cqi h4{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.15;color:var(--ink);margin-bottom:16px;letter-spacing:-.5px;padding-right:80px}
+.diploma-cqi h4 em{font-style:italic;font-weight:500;color:var(--cubo-viola)}
+.diploma-cqi .d-desc{font-family:var(--sans);font-size:15px;line-height:1.6;color:var(--ink-soft);margin-bottom:14px}
+.diploma-cqi .d-desc strong{color:var(--ink);font-weight:600}
+.diploma-cqi .d-firma{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--ink-mute);margin-top:14px;padding-top:14px;border-top:1px solid rgba(101,90,156,.2)}
+
+/* ═══ COSA È INCLUSO ═══ */
+.cq-incluso{padding:160px 56px;background:var(--bg-cream)}
+.cq-incluso-inner{max-width:1100px;margin:0 auto}
+.cq-incluso-head{margin-bottom:64px;display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:end}
+.cq-incluso-head .eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:20px;font-weight:600;display:block}
+.cq-incluso-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,68px);line-height:1.05;letter-spacing:-2px;color:var(--ink)}
+.cq-incluso-head h2 em{font-style:italic;font-weight:400;color:var(--cubo-viola)}
+.cq-incluso-head .lede{font-family:var(--serif);font-weight:300;font-size:18px;line-height:1.55;color:var(--ink-soft)}
+
+.cq-incluso-list{border-top:1px solid rgba(31,24,19,.12)}
+.cq-incluso-item{display:grid;grid-template-columns:60px 1fr auto;gap:32px;padding:32px 0;border-bottom:1px solid rgba(31,24,19,.08);align-items:center}
+.cq-incluso-item .num{font-family:var(--serif);font-style:italic;font-weight:400;font-size:24px;color:var(--cubo-viola)}
+.cq-incluso-item .text{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.35;color:var(--ink);letter-spacing:-.3px}
+.cq-incluso-item .text em{font-style:italic;color:var(--cubo-viola)}
+.cq-incluso-item .text small{display:block;font-family:var(--sans);font-style:normal;font-size:13px;color:var(--ink-mute);margin-top:6px;line-height:1.5;font-weight:400}
+.cq-incluso-item .badge-placeholder{width:64px;height:64px;border:1px dashed var(--cubo-viola);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:9px;color:var(--cubo-viola);text-align:center;line-height:1.2;letter-spacing:.5px;font-weight:600;padding:6px}
+
+/* ═══ A CHI È RIVOLTO — Tre profili (sezione viola) ═══ */
+.cq-pubblici{background:linear-gradient(180deg,var(--viola-deep) 0%,#5a4f8c 100%);color:var(--bg-cream);padding:160px 56px;position:relative;overflow:hidden}
+.cq-pubblici::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(103,178,226,.15) 0%,transparent 60%);pointer-events:none}
+.cq-pubblici-inner{max-width:1200px;margin:0 auto;position:relative}
+.cq-pubblici-header{max-width:900px;margin:0 auto 80px;text-align:center}
+.cq-pubblici-header .eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:rgba(251,248,242,.7);margin-bottom:24px;font-weight:600;display:block}
+.cq-pubblici-header h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,68px);line-height:1.05;letter-spacing:-2px;color:var(--bg-cream);margin-bottom:24px}
+.cq-pubblici-header h2 em{font-style:italic;font-weight:400}
+.cq-pubblici-header p{font-family:var(--serif);font-weight:300;font-size:19px;color:rgba(251,248,242,.82);max-width:640px;margin:0 auto;line-height:1.55}
+.pubblici-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pub-card{background:rgba(251,248,242,.08);padding:40px 32px;border-radius:var(--radius-card);border:1px solid rgba(251,248,242,.15);backdrop-filter:blur(8px);transition:transform .3s,background .3s}
+.pub-card:hover{transform:translateY(-4px);background:rgba(251,248,242,.12)}
+.pub-card .pub-num{font-family:var(--sans);font-size:11px;color:rgba(251,248,242,.6);text-transform:uppercase;letter-spacing:1.8px;font-weight:600;margin-bottom:18px}
+.pub-card h3{font-family:var(--serif);font-weight:500;font-size:22px;color:var(--bg-cream);margin-bottom:16px;line-height:1.25}
+.pub-card p{font-family:var(--sans);font-size:14px;line-height:1.65;color:rgba(251,248,242,.82)}
+
+/* ═══ TRAINER ═══ */
+.cq-trainer{padding:160px 56px;background:var(--bg-white)}
+.cq-trainer-inner{max-width:1200px;margin:0 auto}
+.cq-trainer-head{margin-bottom:80px;text-align:center}
+.cq-trainer-head .eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:24px;font-weight:600;display:block}
+.cq-trainer-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,68px);line-height:1.05;letter-spacing:-2px}
+.cq-trainer-head h2 em{font-style:italic;font-weight:400;color:var(--cubo-viola)}
+.trainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.trainer-card{display:flex;flex-direction:column;gap:32px}
+.trainer-foto{aspect-ratio:1/1;background:var(--bg-cream-deep);border-radius:var(--radius-card);overflow:hidden;position:relative;max-width:380px}
+.trainer-foto::before{content:attr(data-name);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--sans);color:var(--ink-mute);font-size:11px;letter-spacing:2.5px;font-weight:600;text-transform:uppercase}
+.trainer-info h3{font-family:var(--serif);font-weight:500;font-size:32px;letter-spacing:-.8px;margin-bottom:8px;color:var(--ink)}
+.trainer-info .role{font-family:var(--sans);font-size:14px;color:var(--cubo-viola);margin-bottom:20px;line-height:1.5;font-weight:600;letter-spacing:.3px}
+.trainer-info ul{list-style:none}
+.trainer-info ul li{padding:10px 0;font-family:var(--sans);font-size:14.5px;line-height:1.55;color:var(--ink-soft);position:relative;padding-left:20px;border-bottom:1px dotted rgba(31,24,19,.08)}
+.trainer-info ul li:last-child{border-bottom:none}
+.trainer-info ul li::before{content:"—";position:absolute;left:0;color:var(--cubo-viola);font-weight:400}
+.trainer-foot{margin-top:80px;padding-top:48px;border-top:1px solid rgba(31,24,19,.12);max-width:900px;margin-left:auto;margin-right:auto;text-align:center}
+.trainer-foot p{font-family:var(--serif);font-weight:300;font-size:18px;line-height:1.65;color:var(--ink-soft);margin-bottom:16px}
+.trainer-foot .partner-line{font-family:var(--sans);font-size:12px;color:var(--cubo-viola);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding-top:16px}
+
+/* ═══ EDIZIONI + INVESTIMENTO ═══ */
+.cq-edizioni{padding:160px 56px;background:var(--bg-cream-deep);position:relative;overflow:hidden}
+.cq-edizioni::before{content:"";position:absolute;top:-300px;right:-300px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(101,90,156,.07) 0%,transparent 70%);pointer-events:none}
+.cq-edizioni-head{max-width:1200px;margin:0 auto 80px;text-align:center;position:relative}
+.cq-edizioni-head .eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--cubo-viola);margin-bottom:24px;font-weight:600;display:block}
+.cq-edizioni-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.05;letter-spacing:-2.5px;margin-bottom:24px}
+.cq-edizioni-head h2 em{font-style:italic;font-weight:400;color:var(--cubo-viola)}
+.cq-edizioni-head p{font-family:var(--serif);font-weight:300;font-size:19px;color:var(--ink-soft);max-width:680px;margin:0 auto;line-height:1.55}
+
+.cq-edizioni-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start;position:relative}
+
+.invest-block{background:var(--bg-white);padding:44px 40px;border-radius:var(--radius-card);box-shadow:0 24px 48px -24px rgba(31,24,19,.12);position:sticky;top:120px}
+.invest-block .invest-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--cubo-viola);font-weight:600;margin-bottom:16px;display:block}
+.invest-block .prezzo{font-family:var(--serif);font-weight:400;font-size:64px;color:var(--ink);letter-spacing:-2.5px;line-height:.95;margin-bottom:8px}
+.invest-block .prezzo-sub{font-family:var(--sans);font-size:11px;color:var(--ink-mute);margin-bottom:32px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+.invest-block .luogo{font-family:var(--sans);font-size:14px;line-height:1.65;color:var(--ink-soft);padding-top:24px;border-top:1px solid rgba(31,24,19,.1)}
+.invest-block .luogo .l-label{display:block;font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px;font-weight:600}
+.invest-block .luogo strong{font-family:var(--serif);font-size:16px;color:var(--ink);font-weight:500;display:block;margin-bottom:6px}
+
+.edizioni{display:flex;flex-direction:column;gap:24px}
+.edizione-card{background:var(--bg-white);border-radius:var(--radius-card);padding:36px 36px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.edizione-card.attiva{box-shadow:0 24px 56px -20px rgba(101,90,156,.25);border:1px solid rgba(101,90,156,.15)}
+.edizione-card.prossima{box-shadow:0 1px 0 rgba(0,0,0,.04);border:1px solid rgba(31,24,19,.08);background:var(--bg-cream)}
+.edizione-card:hover{transform:translateY(-2px)}
+.edizione-card.attiva::before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:var(--cubo-viola)}
+
+.ed-header{margin-bottom:28px}
+.ed-status{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(101,90,156,.1);color:var(--cubo-viola);border-radius:100px;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+.ed-status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cubo-viola);animation:pulse 2s ease-in-out infinite}
+.edizione-card.prossima .ed-status{background:rgba(156,139,123,.15);color:var(--ink-mute)}
+.edizione-card.prossima .ed-status::before{background:var(--ink-mute);animation:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+.ed-title{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1;letter-spacing:-1px;color:var(--ink);margin-bottom:6px}
+.edizione-card.prossima .ed-title{color:var(--ink-soft);font-size:26px}
+.ed-title em{font-style:italic;color:var(--cubo-viola)}
+.ed-sub{font-family:var(--sans);font-size:13px;color:var(--ink-mute);letter-spacing:.3px}
+
+.ed-moduli{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.ed-modulo{padding:20px 22px;background:var(--bg-cream);border-radius:8px;border-left:2px solid var(--cubo-viola)}
+.edizione-card.prossima .ed-modulo{background:var(--bg-white);border-left-color:var(--ink-mute);opacity:.75}
+.ed-modulo .em-label{font-family:var(--sans);font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--cubo-viola);font-weight:600;margin-bottom:8px}
+.edizione-card.prossima .ed-modulo .em-label{color:var(--ink-mute)}
+.ed-modulo .em-data{font-family:var(--serif);font-weight:400;font-size:21px;color:var(--ink);letter-spacing:-.3px;margin-bottom:6px;line-height:1.2}
+.ed-modulo .em-info{font-family:var(--sans);font-size:12px;color:var(--ink-mute);line-height:1.5}
+
+.ed-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.ed-posti{font-family:var(--sans);font-size:12px;color:var(--ink-mute);margin-left:auto;letter-spacing:.3px}
+.ed-posti strong{color:var(--cubo-viola);font-weight:600}
+.btn-iscrizione{display:inline-block;padding:13px 26px;background:var(--cubo-viola);color:#fff;border-radius:var(--radius-btn);font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.3px;transition:transform .3s,background .3s}
+.btn-iscrizione:hover{transform:translateY(-1px);background:var(--viola-deep)}
+.btn-interessato{display:inline-block;padding:13px 26px;background:transparent;color:var(--cubo-viola);border-radius:var(--radius-btn);font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.3px;transition:all .3s;border:1.5px solid rgba(101,90,156,.3)}
+.btn-interessato:hover{border-color:var(--cubo-viola);background:rgba(101,90,156,.05)}
+
+/* ═══ CTA FINALE ═══ */
+.cq-final{padding:160px 56px;background:var(--bg-cream);text-align:center;position:relative;overflow:hidden}
+.cq-final::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(101,90,156,.08),transparent 60%);pointer-events:none}
+.cq-final-inner{max-width:900px;margin:0 auto;position:relative}
+.cq-final h2{font-family:var(--serif);font-weight:300;font-size:clamp(48px,7vw,88px);line-height:1.05;letter-spacing:-3px;margin-bottom:32px}
+.cq-final h2 em{font-style:italic;font-weight:400;color:var(--cubo-viola)}
+.cq-final p{font-family:var(--serif);font-weight:300;font-size:21px;line-height:1.55;color:var(--ink-soft);max-width:600px;margin:0 auto 40px}
+.cq-final p small{display:block;font-family:var(--sans);font-style:normal;font-size:13px;color:var(--ink-mute);margin-top:14px;letter-spacing:.5px}
+.cq-final-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* ═══ Responsive ═══ */
+@media(max-width:1024px){
+  .cq-hero{padding:110px 24px 80px}
+  .cq-hero h1{font-size:56px}
+  .cq-hero-inner,.cq-ofman-inner,.cq-incluso-head,.trainer-grid,.cq-edizioni-inner{grid-template-columns:1fr;gap:48px}
+  .cq-ofman,.cq-programma,.cq-incluso,.cq-pubblici,.cq-trainer,.cq-edizioni,.cq-final{padding:80px 24px}
+  .pubblici-grid{grid-template-columns:1fr;gap:20px}
+  .flow-wrap{padding-left:48px}
+  .flow-node::before{left:-44px}
+  .invest-block{position:relative;top:0}
+  .ed-moduli{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .cq-incluso-item{grid-template-columns:40px 1fr;gap:16px}
+  .cq-incluso-item .badge-placeholder{grid-column:1 / -1;margin-top:8px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><a href="homepage.html"><img src="assets/logo-ariadne.png" alt="Ariadne"></a></div>
+    <nav class="nav">
+      <a href="il-filo-di-ariadne.html">Il filo di Ariadne</a>
+      <a href="scuola.html" class="has-sub">Scuola di coaching</a>
+      <a href="core-quadrant.html" class="active">Core Quadrant®</a>
+      <a href="training.html">Training</a>
+      <a href="workshop.html">Workshop</a>
+      <a href="calendario.html">Calendario</a>
+      <a href="#" class="nav-cta">Aziende →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="cq-hero">
+  <div class="cq-hero-inner">
+    <div>
+      <span class="badge">Certificazione internazionale · Daniel Ofman</span>
+      <h1 class="ari-fade">Core Quadrant<sup>®</sup><br><em>delle Qualità<br>Autentiche</em></h1>
+      <p class="lede">Una certificazione internazionale che insegniamo in Italia come unica scuola autorizzata da Core Quality International. Un metodo elegante e profondo per riconoscere le qualità autentiche di una persona, e lavorare con i loro lati d'ombra senza giudizio.</p>
+    </div>
+    <div class="cq-unicità">
+      <div class="uni-tag">— Authorized Italian Partner</div>
+      <h3>L'unica scuola italiana</h3>
+      <p>Ariadne è l'unica scuola italiana autorizzata da Core Quality International — l'organizzazione fondata da Daniel Ofman, autore del metodo — a erogare il programma e a rilasciare il certificato internazionale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DANIEL OFMAN ═══ -->
+<section class="cq-ofman">
+  <div class="cq-ofman-inner">
+    <div class="cq-ofman-foto"></div>
+    <div class="cq-ofman-text">
+      <span class="section-eyebrow">Il modello</span>
+      <h2>Ispirazione e creatività<br>per lo sviluppo del <em>potenziale</em></h2>
+      <p class="quote">«Daniel Ofman si è imposto all'attenzione degli studiosi e degli operatori di tutto il mondo focalizzando l'analisi dei processi di sviluppo delle organizzazioni sulla centralità e l'importanza dei valori.»</p>
+      <p>Il <strong>Quadrante delle Qualità Autentiche</strong> è uno strumento-guida originale all'universo dei valori più profondi, grazie al quale si aprono nuove possibilità di esame e comprensione dei punti di forza e di debolezza di persone, team e organizzazioni.</p>
+      <p>Ofman considera le organizzazioni come <em>organismi viventi</em>, capaci di influenzare il proprio mondo interno e la realtà esterna. Saper riconoscere e sviluppare le qualità autentiche dei singoli individui significa disporre di uno strumento indispensabile per ogni processo di crescita.</p>
+      <p class="cite-book">— Le Qualità Autentiche · Franco Angeli · Milano 2007</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRAMMA — i 4 capitoli ═══ -->
+<section class="cq-programma">
+  <div class="cq-programma-head">
+    <span class="eyebrow">Il programma</span>
+    <h2>Quattro <em>capitoli</em><br>per diventare Core Quadrant® Trainer</h2>
+    <p>Un percorso esperienziale che parte da te, attraversa la profondità del modello, arriva al lavoro con gruppi e organizzazioni, e si chiude con la pratica applicativa.</p>
+  </div>
+
+  <div class="flow-wrap">
+    <div class="flow-line"></div>
+
+    <div class="flow-node">
+      <div class="cap-label">Capitolo 01</div>
+      <h3>Esplorazione personale<br><em>a partire da sé</em></h3>
+      <ul>
+        <li>Andare in profondità — con la guida del trainer e la risonanza del gruppo — alla scoperta di sé, delle proprie qualità, trappole, sfide e allergie.</li>
+        <li>Integrazione degli elementi chiave del modello a livello individuale e one-to-one.</li>
+      </ul>
+    </div>
+
+    <div class="flow-node">
+      <div class="cap-label">Capitolo 02</div>
+      <h3>Il quadrante in tutta<br>la sua <em>profondità</em></h3>
+      <ul>
+        <li>Esplorazione e sperimentazione degli elementi più complessi del modello: il "quadrante doppio" e il "quadrante maschera".</li>
+        <li>I diversi stili di intervento, le dinamiche ricorrenti, le modalità di applicazione integrale del modello.</li>
+      </ul>
+    </div>
+
+    <div class="flow-node">
+      <div class="cap-label">Capitolo 03</div>
+      <h3>Lo sviluppo del potenziale<br>di gruppi, team e <em>organizzazioni</em></h3>
+      <ul>
+        <li>L'applicazione del Core Quadrant® nel lavoro con gruppi, team e organizzazioni per facilitare l'espressione del potenziale, la creatività, il contributo di valore.</li>
+        <li>Modalità per avere un impatto sistemico sulla cultura organizzativa.</li>
+      </ul>
+    </div>
+
+    <div class="flow-node">
+      <div class="cap-label">Capitolo 04</div>
+      <h3>Apprendere nella <em>pratica</em><br>molteplici possibilità applicative</h3>
+      <ul>
+        <li>Con individui, gruppi e team, nei percorsi di coaching e mentoring, nella gestione dei conflitti, nella valutazione delle performance.</li>
+        <li>Per la facilitazione di processi organizzativi di change management, per lo sviluppo della leadership, nella formazione e nei contesti educativi.</li>
+      </ul>
+    </div>
+
+    <div class="flow-node">
+      <div class="diploma-cqi">
+        <div class="coccarda"><svg viewBox="0 0 56 56" fill="none"><circle cx="28" cy="22" r="16" fill="currentColor" opacity="0.12"/><circle cx="28" cy="22" r="16" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="28" cy="22" r="10" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M28 14 L30 19 L34 19 L31 22 L32 26 L28 24 L24 26 L25 22 L22 19 L26 19 Z" fill="currentColor"/><path d="M19 36 L24 54 L28 48 L32 54 L37 36 Z" fill="currentColor" opacity="0.85"/></svg></div>
+        <div class="d-eyebrow">Certificazione internazionale</div>
+        <h4>Core Quadrant® <em>Trainer</em></h4>
+        <p class="d-desc">Diploma di certificazione ufficiale rilasciato da <strong>Core Quality International</strong> che abilita all'utilizzo professionale del Quadrante delle Qualità Autentiche di Daniel Ofman in tutti i contesti professionali.</p>
+        <div class="d-firma">Firmato da Core Quality International · 24 ore di formazione certificate</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ COSA È INCLUSO ═══ -->
+<section class="cq-incluso">
+  <div class="cq-incluso-inner">
+    <div class="cq-incluso-head">
+      <div>
+        <span class="eyebrow">L'investimento include</span>
+        <h2>Sei cose<br>che porti <em>con te</em></h2>
+      </div>
+      <p class="lede">Non solo le giornate di training. Quando ti certifichi entri in una rete internazionale e ricevi tutto ciò che serve per portare il Core Quadrant® nella tua pratica.</p>
+    </div>
+
+    <div class="cq-incluso-list">
+      <div class="cq-incluso-item">
+        <div class="num">i.</div>
+        <div class="text">La partecipazione alle <em>2+1 giornate</em> di training in presenza<small>Modulo 1 di 2 giorni full-time + Modulo 2 di 1 giorno di follow-up a distanza di circa 6 settimane</small></div>
+        <div class="badge-placeholder">2+1<br>GIORNI</div>
+      </div>
+      <div class="cq-incluso-item">
+        <div class="num">ii.</div>
+        <div class="text">Due libri di <em>Daniel Ofman</em> sulla metodologia<small>Materiali di approfondimento per la pratica autonoma e per i tuoi clienti</small></div>
+        <div class="badge-placeholder">2<br>LIBRI</div>
+      </div>
+      <div class="cq-incluso-item">
+        <div class="num">iii.</div>
+        <div class="text">L'attestato di partecipazione con <em>24 ore di CCE</em> approvate ICF<small>Core Competencies: 18 ore · Resource Development: 6 ore</small></div>
+        <div class="badge-placeholder">ICF<br>CCE 24H</div>
+      </div>
+      <div class="cq-incluso-item">
+        <div class="num">iv.</div>
+        <div class="text">La <em>certificazione ufficiale</em> di Core Quadrant® Trainer<small>Rilasciata da Core Quality International, valida in tutti i contesti professionali</small></div>
+        <div class="badge-placeholder">CQI<br>TRAINER</div>
+      </div>
+      <div class="cq-incluso-item">
+        <div class="num">v.</div>
+        <div class="text">L'accesso alla <em>cartella Dropbox</em> con tutti i materiali aggiornati<small>Risorse, esercizi, presentazioni, sempre aggiornate dalla rete Core Quality International</small></div>
+        <div></div>
+      </div>
+      <div class="cq-incluso-item">
+        <div class="num">vi.</div>
+        <div class="text">L'adesione al <em>network internazionale</em> con oltre 2000 professionisti<small>Webinar, masterclass e conferenze dedicate a chi è certificato</small></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRE PROFILI — sezione viola ═══ -->
+<section class="cq-pubblici">
+  <div class="cq-pubblici-inner">
+    <div class="cq-pubblici-header">
+      <span class="eyebrow">A chi è rivolto</span>
+      <h2>Tre profili<br>tre modi di <em>usarlo.</em></h2>
+      <p>Il Core Quadrant® si rivolge a tre pubblici distinti che lo usano in modi differenti nella propria pratica professionale.</p>
+    </div>
+    <div class="pubblici-grid">
+      <div class="pub-card">
+        <div class="pub-num">— 01 / Coach</div>
+        <h3>Coach professionisti</h3>
+        <p>Lo usano come strumento di consapevolezza nelle sessioni individuali. Il quadrante diventa una mappa che aiuta il cliente a riconoscere le proprie dinamiche interne in modo non giudicante.</p>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">— 02 / Trainer</div>
+        <h3>Formatori e facilitatori</h3>
+        <p>Lo portano nei loro percorsi formativi come strumento di team development e di consapevolezza relazionale. Particolarmente efficace nei contesti di leadership e di gestione delle dinamiche di gruppo.</p>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">— 03 / Leader</div>
+        <h3>Manager e leader HR</h3>
+        <p>Lo usano per comprendere meglio sé stessi e i propri collaboratori, per dare feedback più ricchi, e per affrontare i conflitti senza ridurli a problemi di "carattere".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRAINER ═══ -->
+<section class="cq-trainer">
+  <div class="cq-trainer-inner">
+    <div class="cq-trainer-head">
+      <span class="eyebrow">I trainer</span>
+      <h2>Arianna ed Emanuele,<br>i tuoi <em>trainer</em></h2>
+    </div>
+
+    <div class="trainer-grid">
+      <div class="trainer-card">
+        <div class="trainer-foto" data-name="ARIANNA PERRONE"></div>
+        <div class="trainer-info">
+          <h3>Arianna Perrone</h3>
+          <div class="role">Master Certified Coach (MCC) · ICF<br>Oltre 2500 ore di coaching</div>
+          <ul>
+            <li>Formatrice esperienziale, specializzata in soft skills e intelligenza emotiva</li>
+            <li>Facilitatrice certificata Lego® Serious Play®</li>
+            <li>Facilitatrice certificata nel Modello Sikkhona®</li>
+            <li>Docente in Master Universitari e Business Schools sui temi del Personal Empowerment</li>
+            <li>18 anni di esperienza in azienda HR — Responsabile Sviluppo Risorse Umane dal 2009</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trainer-card">
+        <div class="trainer-foto" data-name="EMANUELE CICCARELLI"></div>
+        <div class="trainer-info">
+          <h3>Emanuele Ciccarelli</h3>
+          <div class="role">Integral Coach™<br>Specializzato in metodi creativo-esperienziali</div>
+          <ul>
+            <li>Fondatore di LABORINTUS, ecosistema per lo sviluppo creativo del potenziale</li>
+            <li>Trainer di Kaospilot Business & Leadership School per la masterclass Designing & Facilitating Learning Spaces</li>
+            <li>Facilitatore certificato Lego® Serious Play® e creatore del metodo Hero's Journey</li>
+            <li>Facilitatore in Disegno Onirico Bermolen-Dal Porto™</li>
+            <li>Oltre 7 anni di esperienza in azienda e consulenza in ambito HR Transformation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="trainer-foot">
+      <p>Da anni Arianna ed Emanuele portano il Core Quadrant® nelle organizzazioni, nelle scuole e nella pratica di coaching. Dal 2023 hanno avviato la collaborazione diretta con Daniel Ofman e Niels-Peter van Doorn dando inizio al percorso formativo come Train-the-Trainers.</p>
+      <div class="partner-line">— Ariadne · Unico partner italiano di Core Quality International</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EDIZIONI + INVESTIMENTO ═══ -->
+<section class="cq-edizioni">
+  <div class="cq-edizioni-head">
+    <span class="eyebrow">Le edizioni del programma</span>
+    <h2>Quando <em>diventi</em> Trainer certificato</h2>
+    <p>Due edizioni l'anno, sempre a Milano, sempre con numero chiuso a 12 partecipanti per garantire la massima qualità del lavoro.</p>
+  </div>
+
+  <div class="cq-edizioni-inner">
+    <div class="invest-block">
+      <span class="invest-eyebrow">L'investimento</span>
+      <div class="prezzo">€1.895</div>
+      <div class="prezzo-sub">+ IVA</div>
+      <div class="luogo">
+        <span class="l-label">Sede</span>
+        <strong>NTT Data Milano</strong>
+        A 5 minuti a piedi dalla fermata Metro 2 (verde) Romolo. Tutte le giornate si svolgono in presenza, dalle 9:00 alle 18:00.
+      </div>
+    </div>
+
+    <div class="edizioni">
+      <div class="edizione-card attiva">
+        <div class="ed-header">
+          <span class="ed-status">Iscrizioni aperte</span>
+          <div class="ed-title">Edizione <em>Primavera 2026</em></div>
+          <div class="ed-sub">Numero chiuso · Massimo 12 partecipanti</div>
+        </div>
+        <div class="ed-moduli">
+          <div class="ed-modulo">
+            <div class="em-label">Modulo 1 · 2 giorni</div>
+            <div class="em-data">6 – 7 Maggio 2026</div>
+            <div class="em-info">Due giornate full-time consecutive</div>
+          </div>
+          <div class="ed-modulo">
+            <div class="em-label">Modulo 2 · 1 giorno</div>
+            <div class="em-data">17 Giugno 2026</div>
+            <div class="em-info">Follow-up a circa 6 settimane</div>
+          </div>
+        </div>
+        <div class="ed-cta">
+          <a href="https://form.jotform.com/222913968057364" class="btn-iscrizione">Iscriviti ora →</a>
+          <a href="mailto:info@ariadne.training" class="btn-interessato">Richiedi un colloquio</a>
+          <span class="ed-posti"><strong>Posti limitati</strong> · 12 partecipanti</span>
+        </div>
+      </div>
+
+      <div class="edizione-card prossima">
+        <div class="ed-header">
+          <span class="ed-status">Pre-iscrizioni aperte</span>
+          <div class="ed-title">Edizione Autunno 2026</div>
+          <div class="ed-sub">Date in via di definizione · Pre-iscriviti per ricevere il calendario</div>
+        </div>
+        <div class="ed-moduli">
+          <div class="ed-modulo">
+            <div class="em-label">Modulo 1 · 2 giorni</div>
+            <div class="em-data">Ottobre 2026</div>
+            <div class="em-info">Date in definizione</div>
+          </div>
+          <div class="ed-modulo">
+            <div class="em-label">Modulo 2 · 1 giorno</div>
+            <div class="em-data">Novembre 2026</div>
+            <div class="em-info">Follow-up a circa 6 settimane</div>
+          </div>
+        </div>
+        <div class="ed-cta">
+          <a href="mailto:info@ariadne.training" class="btn-interessato">Lascia il tuo contatto →</a>
+          <span class="ed-posti">Sarai tra i primi a sapere quando si aprono le iscrizioni</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA FINALE ═══ -->
+<section class="cq-final">
+  <div class="cq-final-inner">
+    <h2>Pronto a <em>certificarti?</em></h2>
+    <p>Per iscriverti è necessario compilare il modulo e sostenere un colloquio con uno dei trainer.<small>Numero chiuso · Massimo 12 partecipanti per edizione</small></p>
+    <div class="cq-final-btns">
+      <a href="https://form.jotform.com/222913968057364" class="btn btn-primary">Modulo di iscrizione →</a>
+      <a href="mailto:info@ariadne.training" class="btn btn-secondary">Scrivici per informazioni</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><img src="assets/logo-ariadne.png" alt="Ariadne"><p>La scuola italiana di coaching professionale ICF, dove l'approccio si impara sperimentando.</p></div>
+    <div class="footer-col"><h5>Percorso</h5><ul><li><a href="scuola.html">Scuola di coaching</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+    <div class="footer-col"><h5>Community</h5><ul><li><a href="training.html">Training</a></li><li><a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li></ul></div>
+    <div class="footer-col"><h5>Scuola · Contatti</h5><ul><li><a href="il-filo-di-ariadne.html">Il filo di Ariadne</a></li><li><a href="il-filo-di-ariadne.html#trainer">I trainer</a></li><li><a href="#">Ariadne per le aziende</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul><p style="margin-top:16px">Ariadne SRL<br>Via Pietro Paleocapa, 7<br>20121 Milano<br>Tel. +39 339 272 4113<br>info@ariadne.training</p></div>
+  </div>
+  <div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div><a href="#">Termini</a><a href="#">Privacy</a><a href="#">Cookie</a></div></div>
+</footer>
+
+<script src="ariadne.js"></script>
+</body>
+</html>
