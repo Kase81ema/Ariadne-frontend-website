@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Piano di lavoro · Sito e community Ariadne</title>
+<meta name="description" content="Piano di lavoro con fasi, task, dipendenze e Gantt per il nuovo sito e la community Ariadne. File autonomo: lo stato si salva nel browser e si incorpora nel file con «Salva file aggiornato».">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFFFF; --panna:#FBF8F2; --crema:#F5EFE3; --line:#E9E2D6;
+  --ink:#1F1813; --ink2:#5A4A3D; --ink3:#9C8B7B;
+  --viola:#655a9c; --arancio:#df7a4a; --rosso:#d33935; --magenta:#d95d84; --verde:#9ec165; --azzurro:#568dc1;
+  --ok-bg:#E5F4E4; --ok-fg:#2f5a21; --run-bg:#E7F1FB; --run-fg:#234d78; --blk-bg:#FBEBEB; --blk-fg:#8f2420; --todo-bg:#F5EFE3; --todo-fg:#5A4A3D;
+  --r-card:16px; --r-btn:6px; --shadow:0 6px 24px rgba(31,24,19,.08);
+  --font-ui:"Montserrat",system-ui,sans-serif; --font-body:"Open Sans",system-ui,sans-serif; --font-title:"Playfair Display",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{margin:0;font-weight:600}
+a{color:var(--viola)}
+.wrap{max-width:1360px;margin:0 auto;padding:0 24px}
+@media (max-width:720px){.wrap{padding:0 16px}.top{position:static}.top .wrap{padding-top:12px;padding-bottom:10px;gap:10px}.brand h1{font-size:20px}.actions{width:100%;gap:8px}.btn,.seg button{padding:7px 11px;font-size:11px}}
+
+/* Topbar */
+.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.cubes{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:30px;height:30px;flex:none}
+.cubes i{display:block;border-radius:3px}
+.cubes i:nth-child(1){background:var(--arancio)} .cubes i:nth-child(2){background:var(--rosso)} .cubes i:nth-child(3){background:var(--verde)} .cubes i:nth-child(4){background:var(--viola)}
+.brand h1{font-family:var(--font-title);font-size:22px;line-height:1.15;letter-spacing:-.01em}
+.brand .sub{margin:2px 0 0;font-family:var(--font-ui);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+.actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r-btn);overflow:hidden;background:var(--white)}
+.seg button{background:transparent;border:0;padding:8px 14px;font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2)}
+.seg button.on{background:var(--ink);color:var(--white)}
+.btn{border:1px solid var(--line);background:var(--white);border-radius:var(--r-btn);padding:8px 14px;font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2);position:relative;white-space:nowrap}
+.btn:hover{border-color:var(--ink3)}
+.btn.primary{background:var(--viola);border-color:var(--viola);color:var(--white)}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.ghost{border-color:transparent;color:var(--ink3)}
+.btn .dot{position:absolute;top:-4px;right:-4px;width:10px;height:10px;border-radius:50%;background:var(--arancio);border:2px solid var(--white);display:none}
+.btn.unsaved .dot{display:block}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--white);padding:10px 16px;border-radius:8px;font-size:13px;opacity:0;pointer-events:none;transition:all .25s;z-index:60;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Summary */
+.summary{padding:26px 0 8px}
+.phases{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:1000px){.phases{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.phases{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pcard{border:1px solid var(--line);border-radius:var(--r-card);padding:14px 14px 12px;background:var(--white);position:relative;overflow:hidden;cursor:pointer;transition:box-shadow .2s}
+.pcard:hover{box-shadow:var(--shadow)}
+.pcard::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:var(--c)}
+.pcard .k{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.pcard .n{font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.25;margin:4px 0 8px;min-height:36px}
+.pcard .d{font-size:12px;color:var(--ink3)}
+.bar{height:6px;background:var(--crema);border-radius:999px;overflow:hidden;margin:8px 0 6px}
+.bar i{display:block;height:100%;background:var(--c);border-radius:999px;transition:width .4s}
+.pcard .m{display:flex;justify-content:space-between;font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--ink2)}
+.overall{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;margin-top:16px;padding:14px 18px;border-radius:var(--r-card);background:var(--panna)}
+@media (max-width:720px){.overall{grid-template-columns:1fr}}
+.overall .bar{margin:6px 0 0;height:8px;--c:var(--viola)}
+.overall .lbl{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.counts{display:flex;gap:8px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.pill.todo{background:var(--todo-bg);color:var(--todo-fg)} .pill.run{background:var(--run-bg);color:var(--run-fg)} .pill.done{background:var(--ok-bg);color:var(--ok-fg)} .pill.blk{background:var(--blk-bg);color:var(--blk-fg)}
+.pill.btnlike{cursor:pointer;border:0}
+.pill.btnlike:hover{filter:brightness(.96)}
+
+.twoweeks{margin-top:16px;border:1px solid var(--line);border-radius:var(--r-card);padding:14px 18px}
+.twoweeks .lbl{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.twoweeks ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:6px 18px}
+.twoweeks li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;cursor:pointer;padding:6px 0;border-bottom:1px dashed var(--line);min-width:0}
+.twoweeks li:hover{color:var(--viola)}
+.twoweeks .id{font-family:var(--font-ui);font-weight:700;font-size:11px;color:var(--white);background:var(--c);border-radius:4px;padding:1px 6px;flex:none;margin-top:2px}
+.twoweeks .tx{min-width:0;flex:1;line-height:1.35}
+.twoweeks .when{display:block;font-size:11.5px;color:var(--ink3);margin-top:2px}
+.twoweeks .late{color:var(--rosso);font-weight:600}
+
+details.premesse{margin-top:16px;border:1px solid var(--line);border-radius:var(--r-card);padding:0 18px;background:var(--white)}
+details.premesse summary{cursor:pointer;padding:12px 0;font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);list-style:none;display:flex;align-items:center;gap:8px}
+details.premesse summary::-webkit-details-marker{display:none}
+details.premesse summary::before{content:"";width:8px;height:8px;border-right:2px solid var(--ink3);border-bottom:2px solid var(--ink3);transform:rotate(-45deg);transition:transform .2s;margin-right:4px}
+details[open].premesse summary::before{transform:rotate(45deg)}
+details.premesse .body{padding:0 0 16px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:860px){details.premesse .body{grid-template-columns:1fr}}
+details.premesse ol{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink2)}
+details.premesse li{margin:0 0 8px}
+details.premesse h3{font-family:var(--font-ui);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin:4px 0 8px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12.5px;color:var(--ink2);align-items:center}
+.legend .sw{display:inline-block;width:22px;height:12px;border-radius:4px;vertical-align:-1px;margin-right:6px}
+
+/* Filters */
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:18px 0 6px}
+.filters select,.filters input{border:1px solid var(--line);border-radius:var(--r-btn);padding:8px 10px;background:var(--white);font-size:13px;min-width:0}
+.filters input{flex:1 1 220px}
+.filters .sp{flex:1}
+.filters .lnk{background:none;border:0;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);padding:6px 4px}
+.filters .lnk:hover{color:var(--viola)}
+
+/* List view */
+.phase{margin:26px 0 10px}
+.phead{display:flex;align-items:flex-start;gap:14px;padding:6px 0 10px;border-bottom:2px solid var(--c)}
+.phead .num{flex:none;width:38px;height:38px;border-radius:8px;background:var(--c);color:var(--ct);display:grid;place-items:center;font-family:var(--font-ui);font-weight:700;font-size:15px}
+.phead h2{font-family:var(--font-ui);font-size:17px;line-height:1.2}
+.phead .meta{font-size:12.5px;color:var(--ink3);margin-top:2px}
+.phead .descr{font-size:13px;color:var(--ink2);margin-top:4px;max-width:760px}
+.phead .right{margin-left:auto;text-align:right;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);white-space:nowrap}
+.task{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:var(--r-card);margin:10px 0;background:var(--white);transition:box-shadow .2s}
+.task:hover{box-shadow:var(--shadow)}
+.task.hidden{display:none}
+.trow{display:grid;grid-template-columns:52px minmax(0,1fr) 190px 150px 118px 28px;gap:12px;align-items:center;padding:12px 14px 12px 12px;cursor:pointer}
+.trow .id{font-family:var(--font-ui);font-weight:700;font-size:13px;color:var(--c)}
+.trow .title{font-family:var(--font-ui);font-weight:600;font-size:14.5px;line-height:1.3}
+.trow .title .bar{margin:6px 0 0;height:4px;max-width:260px}
+.trow .owners{display:flex;gap:6px;flex-wrap:wrap}
+.ow{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--ink2);white-space:nowrap}
+.ow i{width:8px;height:8px;border-radius:50%;background:var(--oc);display:inline-block}
+.trow .dates{font-size:12.5px;color:var(--ink2);white-space:nowrap}
+.trow .dates small{display:block;color:var(--ink3);font-size:11px}
+.chev{width:10px;height:10px;border-right:2px solid var(--ink3);border-bottom:2px solid var(--ink3);transform:rotate(45deg);transition:transform .2s;justify-self:center}
+.task.open .chev{transform:rotate(-135deg)}
+.task.done .trow .title{color:var(--ink3)}
+@media (max-width:980px){
+  .trow{grid-template-columns:44px minmax(0,1fr) 118px 24px;gap:10px}
+  .trow .owners,.trow .dates{display:none}
+}
+@media (max-width:560px){
+  .trow{grid-template-columns:40px minmax(0,1fr) 24px;padding:12px 12px 12px 10px}
+  .trow .status{grid-column:2;justify-self:start}
+}
+.detail{display:none;padding:4px 16px 18px 16px;border-top:1px dashed var(--line)}
+.task.open .detail{display:block}
+.dgrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:22px;margin-top:12px}
+@media (max-width:860px){.dgrid{grid-template-columns:1fr}}
+.dlbl{font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:0 0 8px}
+.sub{list-style:none;margin:0;padding:0}
+.sub li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.sub li:last-child{border-bottom:0}
+.sub input{margin:4px 0 0;width:16px;height:16px;flex:none;accent-color:var(--c)}
+.sub li.ok span{color:var(--ink3);text-decoration:line-through;text-decoration-color:rgba(31,24,19,.3)}
+.prova{background:var(--panna);border-radius:12px;padding:12px 14px;font-size:13.5px;color:var(--ink2)}
+.prova b{color:var(--ink)}
+.deps{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.dep{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:3px 10px 3px 6px;font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--ink2);cursor:pointer;background:var(--white)}
+.dep i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.dep:hover{border-color:var(--ink3)}
+.note{width:100%;min-height:72px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px;resize:vertical;background:var(--white)}
+.note:focus{outline:2px solid var(--viola);outline-offset:1px;border-color:transparent}
+.rif{font-size:12px;color:var(--ink3);margin-top:10px}
+.dtop{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.dtop select{border:1px solid var(--line);border-radius:var(--r-btn);padding:6px 10px;font-size:13px;background:var(--white)}
+
+/* Gantt */
+.gwrap{margin:22px 0 40px;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
+.gscroll{overflow:auto;height:calc(100vh - 100px);min-height:420px;position:relative}
+@media (max-width:720px){.gscroll{height:80vh}}
+.gtable{display:grid;grid-template-columns:var(--lw) 1fr;min-width:max-content}
+.gleft{position:sticky;left:0;z-index:5;background:var(--white);border-right:1px solid var(--line)}
+.gright{position:relative}
+.ghead{position:sticky;top:0;z-index:6;background:var(--white);border-bottom:1px solid var(--line)}
+.gleft .ghead{z-index:7}
+.ghead .months{display:flex;height:26px}
+.ghead .months div{border-left:1px solid var(--line);font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);padding:5px 8px;white-space:nowrap;overflow:hidden}
+.ghead .weeks{display:flex;height:22px}
+.ghead .weeks div{border-left:1px solid var(--line);font-size:10px;color:var(--ink3);padding:4px 0 0 4px;white-space:nowrap;overflow:hidden;font-family:var(--font-ui)}
+.gleft .ghead{height:48px;display:flex;align-items:flex-end;padding:0 12px 6px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.grow{height:36px;border-bottom:1px solid var(--line);position:relative}
+.grow.ph{height:40px;background:var(--panna)}
+.grow.hidden{display:none}
+.gleft .grow{display:flex;align-items:center;gap:8px;padding:0 10px 0 12px;cursor:pointer;overflow:hidden}
+.gleft .grow:hover{background:var(--panna)}
+.gleft .grow .id{font-family:var(--font-ui);font-weight:700;font-size:12px;color:var(--c);flex:none;width:30px}
+.gleft .grow .t{font-family:var(--font-ui);font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gleft .grow.ph .t{font-size:13px;color:var(--ink)}
+.gleft .grow.ph .id{width:auto;color:var(--ct);background:var(--c);border-radius:4px;padding:0 6px;line-height:20px}
+.gleft .grow .st{margin-left:auto;width:8px;height:8px;border-radius:50%;flex:none}
+.gleft .grow .st.todo{background:var(--line)} .gleft .grow .st.run{background:var(--azzurro)} .gleft .grow .st.done{background:#5fa15a} .gleft .grow .st.blk{background:var(--rosso)}
+.gright .grow{cursor:pointer}
+.gright .grow:hover{background:rgba(251,248,242,.6)}
+.gridlines{position:absolute;inset:0;pointer-events:none}
+.gridlines i{position:absolute;top:0;bottom:0;width:0;border-left:1px solid var(--line)}
+.gridlines i.m{border-left-color:#D9D0C0}
+.today{position:absolute;top:0;bottom:0;width:0;border-left:2px solid var(--arancio);z-index:3;pointer-events:none}
+.today::after{content:"oggi";position:absolute;top:50px;left:4px;font-family:var(--font-ui);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--arancio);background:var(--white);padding:0 3px;border-radius:3px}
+.gbar{position:absolute;top:9px;height:18px;border-radius:6px;background:var(--c);z-index:2;transition:box-shadow .15s}
+.gbar.todo{background:var(--white);border:2px solid var(--c)}
+.gbar.todo .fill{display:none}
+.gbar.done{opacity:.5}
+.gbar.blk{background:repeating-linear-gradient(135deg,var(--c) 0 6px,rgba(255,255,255,.55) 6px 10px)}
+.gbar .fill{position:absolute;left:0;top:0;bottom:0;background:rgba(31,24,19,.22);border-radius:6px 0 0 6px}
+.gbar.hl{box-shadow:0 0 0 3px rgba(31,24,19,.25)}
+.gbar.dephl{box-shadow:0 0 0 3px var(--c),0 0 0 5px var(--white)}
+.glbl{position:absolute;top:9px;height:18px;line-height:18px;font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--ink2);white-space:nowrap;padding-left:8px;z-index:2;pointer-events:none}
+.glbl.done{color:var(--ink3)}
+.gphase{position:absolute;top:15px;height:10px;border-radius:999px;background:var(--c);opacity:.35}
+.gms{position:absolute;top:12px;width:14px;height:14px;background:var(--c);transform:translateX(-7px) rotate(45deg);border-radius:3px;z-index:4;border:2px solid var(--white);box-shadow:0 0 0 1px var(--c);cursor:pointer}
+.gms:hover{transform:translateX(-7px) rotate(45deg) scale(1.15)}
+.mslist{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px 18px;padding:14px 18px;border-top:1px solid var(--line);background:var(--panna)}
+.mslist div{display:flex;gap:10px;align-items:baseline;font-size:13px}
+.mslist .dia{width:10px;height:10px;background:var(--c);transform:rotate(45deg);border-radius:2px;flex:none;position:relative;top:-1px}
+.mslist .when{margin-left:auto;font-size:11.5px;color:var(--ink3);white-space:nowrap;font-family:var(--font-ui);font-weight:600}
+.gtip{position:fixed;z-index:70;background:var(--ink);color:var(--white);padding:8px 12px;border-radius:8px;font-size:12px;max-width:320px;pointer-events:none;opacity:0;transition:opacity .12s;line-height:1.4}
+.gtip.show{opacity:1}
+
+/* Drawer */
+.scrim{position:fixed;inset:0;background:rgba(31,24,19,.28);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100vw);background:var(--white);z-index:50;transform:translateX(100%);transition:transform .25s;box-shadow:-10px 0 40px rgba(31,24,19,.12);display:flex;flex-direction:column}
+.drawer.show{transform:none}
+.dhead{display:flex;align-items:flex-start;gap:12px;padding:18px 20px 12px;border-bottom:1px solid var(--line);border-top:5px solid var(--c)}
+.dhead .id{font-family:var(--font-ui);font-weight:700;font-size:13px;color:var(--c);margin-top:3px}
+.dhead h3{font-family:var(--font-ui);font-size:16px;line-height:1.3;flex:1}
+.dhead .x{border:0;background:var(--crema);width:32px;height:32px;border-radius:50%;font-size:18px;line-height:1;flex:none}
+.dbody{padding:4px 20px 24px;overflow:auto}
+.dbody .dgrid{grid-template-columns:1fr}
+
+footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid var(--line);margin-top:20px}
+@media print{
+  .top .actions,.filters,.twoweeks,details.premesse,.drawer,.scrim{display:none!important}
+  .task .detail{display:block}
+  .gscroll{max-height:none;overflow:visible}
+  body{font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <span class="cubes" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <div>
+        <h1 id="title">Sito e community Ariadne</h1>
+        <p class="sub">Piano di lavoro · aggiornato <span id="updated"></span></p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="seg" role="tablist">
+        <button data-view="elenco" class="on" role="tab">Elenco</button>
+        <button data-view="gantt" role="tab">Gantt</button>
+      </div>
+      <button class="btn primary" id="btnSave" title="Scarica una copia di questo file con lo stato attuale incorporato">Salva file aggiornato<span class="dot"></span></button>
+      <button class="btn" id="btnCopy" title="Copia un riepilogo testuale negli appunti">Copia riepilogo</button>
+      <button class="btn ghost" id="btnReset" title="Riporta stati, caselle e note ai valori incorporati nel file">Azzera modifiche</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="summary">
+    <div class="phases" id="phaseCards"></div>
+    <div class="overall">
+      <div>
+        <div class="lbl">Avanzamento complessivo · <span id="ovPct">0%</span> delle sottotask</div>
+        <div class="bar"><i id="ovBar" style="width:0%"></i></div>
+      </div>
+      <div class="counts" id="counts"></div>
+    </div>
+    <div class="twoweeks">
+      <div class="lbl">Prossime due settimane</div>
+      <ul id="twoweeks"></ul>
+    </div>
+    <details class="premesse">
+      <summary>Premesse e come usare questo file</summary>
+      <div class="body">
+        <div>
+          <h3>Premesse</h3>
+          <ol id="premesse"></ol>
+        </div>
+        <div>
+          <h3>Come si usa</h3>
+          <ol>
+            <li>Ogni task principale si apre con un clic: dentro ci sono le sottotask da spuntare, la prova di fatto, le dipendenze e uno spazio per le note.</li>
+            <li>Lo stato di un task si cambia dall'etichetta colorata (da fare → in corso → fatta → bloccata) o dal menu nel dettaglio.</li>
+            <li>Le modifiche restano nel browser di questo computer. Per portarle con te o passarle al nuovo account Claude usa <b>Salva file aggiornato</b>: scarica una copia di questo stesso file con lo stato dentro, da sostituire nella cartella Website Ariadne.</li>
+            <li>Il Gantt è a settimane: le barre piene sono task in corso, quelle vuote sono da fare, le barre a righe sono bloccate, i rombi sono le milestone. Passando sopra una barra si evidenziano le task da cui dipende.</li>
+            <li>Claude può aggiornare direttamente questo file nel repository: i dati stanno in un unico blocco JSON in fondo alla pagina.</li>
+          </ol>
+          <h3>Legenda fasi e responsabili</h3>
+          <div class="legend" id="legend"></div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="filters">
+    <select id="fOwner"><option value="">Tutti i responsabili</option></select>
+    <select id="fStato">
+      <option value="">Tutti gli stati</option>
+      <option>da fare</option><option>in corso</option><option>fatta</option><option>bloccata</option>
+    </select>
+    <input id="fText" type="search" placeholder="Cerca nel titolo, nelle sottotask, nelle note…">
+    <span class="sp"></span>
+    <button class="lnk" id="expAll">Espandi tutto</button>
+    <button class="lnk" id="colAll">Comprimi tutto</button>
+  </section>
+
+  <main id="viewElenco"></main>
+
+  <main id="viewGantt" hidden>
+    <div class="gwrap">
+      <div class="gscroll" id="gscroll">
+        <div class="gtable" id="gtable"></div>
+      </div>
+      <div class="mslist" id="mslist"></div>
+    </div>
+  </main>
+
+  <footer>
+    <span id="footFonte"></span>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="dhead"><span class="id" id="dId"></span><h3 id="dTitle"></h3><button class="x" id="dClose" aria-label="Chiudi">×</button></div>
+  <div class="dbody" id="dBody"></div>
+</aside>
+<div class="gtip" id="gtip"></div>
+<div class="toast" id="toast"></div>
+
+<script id="pm-data" type="application/json">
+{
+  "meta": {
+    "titolo": "Sito e community Ariadne · piano di lavoro",
+    "versione": "1.1",
+    "creato": "2026-11-06",
+    "aggiornato": "2026-11-06T18:10:00",
+    "fonte": "Documento «Nuovo sito e community Ariadne — punto della situazione e specifiche» del 5 novembre 2026, revisione dell'esperto inclusa",
+    "inizio": "2026-11-02",
+    "fine": "2027-09-19",
+    "premesse": [
+      "Il lavoro di progettazione passa all'account Claude intestato ad Ariadne: si trasferiscono solo file e accessi (repository GitHub, Notion, cartella Website Ariadne). Artefatti, documenti Claude, memoria e chat di questo account restano qui: per questo la fase 0 prepara un pacchetto di passaggio fatto di file.",
+      "Base44 serve solo per l'area riservata e parte con il piano Builder (40 $ al mese annuale) dalla fase 3; il sito pubblico resta HTML nel repository GitHub, pubblicato da Cloudflare Pages a costo zero.",
+      "Notion «Gestione scuola» è la fonte di verità, ma l'area dedicata al sito (contenuti, eventi, persone, testimonianze, richieste) va creata da zero in relazione ai database già esistenti (Percorsi, Edizioni, Corsisti).",
+      "Le bozze di oggi riportano edizioni 2026: il calendario da pubblicare è quello 2027 e va letto da Notion, mai digitato nelle pagine.",
+      "Ogni task ha una «prova di fatto»: il task si chiude quando la prova è vera, non quando il lavoro sembra finito."
+    ]
+  },
+  "fasi": [
+    {
+      "id": "F0",
+      "nome": "Fondamenta e allineamento",
+      "colore": "#655a9c",
+      "testo": "#ffffff",
+      "inizio": "2026-11-09",
+      "fine": "2026-11-29",
+      "descr": "Account, accessi, Notion, fotografia dello stato attuale e decisioni di impianto. Senza questa fase il progetto parte scollegato dalla realtà."
+    },
+    {
+      "id": "F1",
+      "nome": "Contenuti e dati",
+      "colore": "#df7a4a",
+      "testo": "#1F1813",
+      "inizio": "2026-11-16",
+      "fine": "2027-01-10",
+      "descr": "Testi, dati di corsi ed eventi in Notion, archivio immagini, font, questioni esterne (commercialista, informative)."
+    },
+    {
+      "id": "F2",
+      "nome": "Sito pubblico",
+      "colore": "#9ec165",
+      "testo": "#1F1813",
+      "inizio": "2026-11-30",
+      "fine": "2027-02-14",
+      "descr": "Prototipo Notion → sito, pagine, moduli Tally, SEO e redirect, collaudo, passaggio DNS e spegnimento di Wix."
+    },
+    {
+      "id": "F3",
+      "nome": "Area riservata",
+      "colore": "#568dc1",
+      "testo": "#ffffff",
+      "inizio": "2027-02-01",
+      "fine": "2027-04-11",
+      "descr": "Specifiche, Base44 Builder, accessi e ruoli, sincronizzazione con Notion, pagamenti con fattura, iscrizione con contratto, messa online su community.ariadne.training."
+    },
+    {
+      "id": "F4",
+      "nome": "Community e consolidamento",
+      "colore": "#d33935",
+      "testo": "#ffffff",
+      "inizio": "2027-04-12",
+      "fine": "2027-09-19",
+      "descr": "Bacheca e canali, rate online, runbook e continuità, check mattutino, verifica costi, Instagram."
+    }
+  ],
+  "owners": {
+    "EC": {
+      "nome": "Emanuele",
+      "colore": "#655a9c"
+    },
+    "TT": {
+      "nome": "Teresa / segreteria",
+      "colore": "#d95d84"
+    },
+    "CL": {
+      "nome": "Claude (account Ariadne)",
+      "colore": "#568dc1"
+    },
+    "AP": {
+      "nome": "Arianna e trainer",
+      "colore": "#9ec165"
+    },
+    "EX": {
+      "nome": "Esterni",
+      "colore": "#9C8B7B"
+    }
+  },
+  "milestones": [
+    {
+      "id": "M0",
+      "fase": "F0",
+      "nome": "Pacchetto di passaggio pronto e account Ariadne attivo",
+      "data": "2026-11-15"
+    },
+    {
+      "id": "M1",
+      "fase": "F0",
+      "nome": "Fondamenta chiuse: Notion pronto, decisioni prese",
+      "data": "2026-11-29"
+    },
+    {
+      "id": "M2",
+      "fase": "F2",
+      "nome": "Sito online su ariadne.training, Wix spento",
+      "data": "2027-02-12"
+    },
+    {
+      "id": "M3",
+      "fase": "F3",
+      "nome": "Area riservata online su community.ariadne.training",
+      "data": "2027-04-09"
+    },
+    {
+      "id": "M4",
+      "fase": "F4",
+      "nome": "Community attiva: bacheca, promo, canali",
+      "data": "2027-05-09"
+    },
+    {
+      "id": "M5",
+      "fase": "F4",
+      "nome": "Instagram tra i canali collegati",
+      "data": "2027-09-06"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "0.1",
+      "fase": "F0",
+      "titolo": "Account Claude intestato ad Ariadne e Project «Sito e community»",
+      "owner": [
+        "EC"
+      ],
+      "inizio": "2026-11-09",
+      "fine": "2026-11-15",
+      "stato": "da fare",
+      "dip": [],
+      "prova": "Nel nuovo account esiste il Project con il pacchetto di passaggio caricato; GitHub e Notion sono collegati e Claude apre il repository del sito.",
+      "sotto": [
+        {
+          "t": "Scegliere il piano: deve includere Claude Code e i connettori (verificare sulla pagina dei piani; Pro per partire, superiore se l'uso quotidiano lo richiede)",
+          "done": false
+        },
+        {
+          "t": "Creare l'account con un indirizzo Ariadne (segreteria@ o info@), 2FA, credenziali nel password manager della SRL",
+          "done": false
+        },
+        {
+          "t": "Creare il Project «Sito e community Ariadne» e caricare il pacchetto di passaggio (questo file, specifiche, revisione, CONTEXT.md, bozze HTML, briefing Emergent, prompt Notion)",
+          "done": false
+        },
+        {
+          "t": "Collegare i connettori: GitHub (con l'app GitHub di Claude installata sull'organizzazione), Notion (workspace Gestione scuola), Tally, Brevo",
+          "done": false
+        },
+        {
+          "t": "Da qui in poi progettazione e Design si fanno nel nuovo account; questo account resta solo come archivio",
+          "done": false
+        }
+      ],
+      "note": "Non si trasferiscono: artefatti (canvas Design, documento Claude), memoria, chat. Il canvas Design può essere condiviso in sola lettura con il nuovo account, ma le pagine utili sono già nel repository e nelle bozze.",
+      "rif": "Richiesta del 6 novembre"
+    },
+    {
+      "id": "0.2",
+      "fase": "F0",
+      "titolo": "Pacchetto di passaggio nel repository",
+      "owner": [
+        "CL"
+      ],
+      "inizio": "2026-11-09",
+      "fine": "2026-11-13",
+      "stato": "in corso",
+      "dip": [],
+      "prova": "Nel repository Ariadne-frontend-website esiste la cartella docs/ con tutti i file e un README che spiega da dove ripartire; tag git handoff-2026-11.",
+      "sotto": [
+        {
+          "t": "Creare docs/ con: README di ripartenza, specifiche (md), revisione dell'esperto, questo piano, contesto e prompt per Design, briefing Emergent, guida Notion, messaggi freelance",
+          "done": true
+        },
+        {
+          "t": "Aggiornare CONTEXT.md con le decisioni del 5 novembre: menu, font Afterglow + Montserrat + Open Sans, contrasto dei colori, il filo, quattro percorsi, prezzi da Notion",
+          "done": true
+        },
+        {
+          "t": "Bozze scuola v4, Core Quadrant v2 e Il filo v1 in drafts/2026-11 (pagine autonome: l'integrazione con header e footer comuni è nella task 2.2)",
+          "done": true
+        },
+        {
+          "t": "README del repository: struttura reale, regole in breve, pubblicazione",
+          "done": true
+        },
+        {
+          "t": "Push del ramo docs/handoff-2026-11 e unione in main: bloccato finché l'app GitHub di Claude non è installata sull'account che possiede il repository",
+          "done": false
+        },
+        {
+          "t": "Copia della cartella Website Ariadne allineata (stessi file di docs/ e drafts/)",
+          "done": false
+        }
+      ],
+      "note": "6 novembre: pacchetto preparato e committato in locale sul ramo docs/handoff-2026-11. Il push da Claude è rifiutato finché l'app GitHub di Claude non è installata sull'account GitHub proprietario (github.com/apps/claude) o GitHub non è ricollegato dalle impostazioni di claude.ai. In alternativa lo zip Ariadne_pacchetto_passaggio_2026-11-06.zip si carica a mano.",
+      "rif": "Sezione 1, tabella dei componenti"
+    },
+    {
+      "id": "0.3",
+      "fase": "F0",
+      "titolo": "GitHub intestato ad Ariadne",
+      "owner": [
+        "EC"
+      ],
+      "inizio": "2026-11-12",
+      "fine": "2026-11-19",
+      "stato": "da fare",
+      "dip": [
+        "0.1"
+      ],
+      "prova": "I due repository stanno in un'organizzazione GitHub di Ariadne (o l'account Ariadne ne è proprietario) e il nuovo account Claude li apre in scrittura.",
+      "sotto": [
+        {
+          "t": "Creare l'organizzazione GitHub (es. ariadne-training) con l'email della SRL",
+          "done": false
+        },
+        {
+          "t": "Trasferire Ariadne-frontend-website e Ariadne (Emergent) nell'organizzazione: GitHub mantiene storico e redirect",
+          "done": false
+        },
+        {
+          "t": "Archiviare il repository Emergent in sola lettura: resta mappa delle funzioni, non si mantiene",
+          "done": false
+        },
+        {
+          "t": "Installare l'app GitHub di Claude sull'organizzazione Ariadne (senza, Claude legge il repository ma non può pubblicare modifiche)",
+          "done": false
+        },
+        {
+          "t": "Dare accesso al nuovo account Claude e verificare un commit di prova",
+          "done": false
+        }
+      ],
+      "note": "Oggi i repository sono sull'account personale Kase81ema.",
+      "rif": "Sezione 7, chi opera"
+    },
+    {
+      "id": "0.4",
+      "fase": "F0",
+      "titolo": "Area Notion «Sito e community» creata da zero",
+      "owner": [
+        "EC",
+        "CL"
+      ],
+      "inizio": "2026-11-16",
+      "fine": "2026-11-29",
+      "stato": "da fare",
+      "dip": [
+        "0.1"
+      ],
+      "prova": "Una scheda corso e un evento si ricostruiscono per intero leggendo solo i record di Notion.",
+      "sotto": [
+        {
+          "t": "Creare il teamspace (o pagina radice) «Sito e community» in Gestione scuola, con integrazione Notion dedicata che vede solo quest'area più Percorsi, Edizioni e Corsisti",
+          "done": false
+        },
+        {
+          "t": "Database Contenuti sito: pagina, sezione, testo approvato, stato, ultima revisione",
+          "done": false
+        },
+        {
+          "t": "Database Eventi: tipo (8 tipi), data e ora, sede o link, prezzo, posti, pubblico, modulo Tally, «Pubblica sul sito»",
+          "done": false
+        },
+        {
+          "t": "Database Persone pubbliche: nome, ruolo, bio breve, foto (URL archivio), percorsi tenuti",
+          "done": false
+        },
+        {
+          "t": "Database Testimonianze: testo, persona, consenso, link video",
+          "done": false
+        },
+        {
+          "t": "Database Richieste: destinazione dei moduli Tally, relazione a Corsisti gestita dalla segreteria",
+          "done": false
+        },
+        {
+          "t": "Campi su Percorsi: prezzo, early bird, prerequisiti, ore, livello ICF, «Pubblica sul sito», slug della pagina",
+          "done": false
+        },
+        {
+          "t": "Campi su Edizioni: posti, stato iscrizioni (aperte, ultimi posti, chiuse), link Tally, «Pubblica sul sito»",
+          "done": false
+        },
+        {
+          "t": "Campo su Corsisti: ruolo community (ospite, coach di altra scuola, iscritto, alumnus) e accesso area riservata",
+          "done": false
+        },
+        {
+          "t": "Spostare i testi revisionati di homepage e Il filo da pagine libere a record di Contenuti",
+          "done": false
+        }
+      ],
+      "note": "Relazioni ai database esistenti (Percorsi 9b551b2b, Edizioni 996ea2c5, Corsisti 5f70433b): nessun dato duplicato. Il «Prezzo edizione» attuale non è affidabile: o si corregge o si sostituisce con le rate imponibili.",
+      "rif": "Sezione 4"
+    },
+    {
+      "id": "0.5",
+      "fase": "F0",
+      "titolo": "Fotografia dello stato attuale",
+      "owner": [
+        "EC",
+        "CL"
+      ],
+      "inizio": "2026-11-09",
+      "fine": "2026-11-22",
+      "stato": "da fare",
+      "dip": [],
+      "prova": "Esistono la tabella delle URL del sito Wix, l'inventario DNS completo, l'elenco di moduli e liste attive e il calendario edizioni 2027.",
+      "sotto": [
+        {
+          "t": "Crawl del sito Wix (tutte le URL) ed export da Search Console: pagine e query che posizionano",
+          "done": false
+        },
+        {
+          "t": "Inventario dei record DNS su Wix: A, CNAME, MX, SPF, DKIM, DMARC, record di verifica",
+          "done": false
+        },
+        {
+          "t": "Scadenze Wix: piano del sito e rinnovo dominio (il piano sito non si rinnova; il dominio sì)",
+          "done": false
+        },
+        {
+          "t": "Moduli JotForm e Tally attivi e dove scrivono; liste Brevo e mittenti autenticati",
+          "done": false
+        },
+        {
+          "t": "Calendario reale delle edizioni 2027 (Core, Advanced, Team, Core Quadrant®) e degli eventi del primo semestre",
+          "done": false
+        },
+        {
+          "t": "Stato dell'area Emergent: è online? ha utenti reali? cosa va comunicato a chi la usa",
+          "done": false
+        }
+      ],
+      "note": "È il passo che lega il piano alla realtà: tutto ciò che viene dopo si misura su questi dati.",
+      "rif": "Revisione, cosa manca; sezione 1"
+    },
+    {
+      "id": "0.6",
+      "fase": "F0",
+      "titolo": "Account e strumenti intestati alla SRL",
+      "owner": [
+        "EC"
+      ],
+      "inizio": "2026-11-16",
+      "fine": "2026-11-29",
+      "stato": "da fare",
+      "dip": [
+        "0.5"
+      ],
+      "prova": "Ogni account è intestato a un indirizzo Ariadne, con 2FA e credenziali nel password manager; esiste il registro di chi è amministratore di cosa.",
+      "sotto": [
+        {
+          "t": "Cloudflare: account, zona ariadne.training pronta (non ancora attiva), Pages, R2",
+          "done": false
+        },
+        {
+          "t": "Stripe: account della SRL con dati societari e IBAN; la verifica dell'identità richiede giorni, meglio partire subito",
+          "done": false
+        },
+        {
+          "t": "Tally: verificare che il piano in uso includa integrazione Notion e webhook",
+          "done": false
+        },
+        {
+          "t": "Brevo: autenticazione del dominio (SPF, DKIM) prima del cambio DNS",
+          "done": false
+        },
+        {
+          "t": "Base44: account con email Ariadne sul piano gratuito fino alla fase 3",
+          "done": false
+        },
+        {
+          "t": "Registro accessi: chi è admin di Cloudflare, Stripe, Notion, GitHub, Base44, Brevo, Tally",
+          "done": false
+        }
+      ],
+      "note": "",
+      "rif": "Revisione, punto 12 e cosa manca"
+    },
+    {
+      "id": "0.7",
+      "fase": "F0",
+      "titolo": "Decisioni di impianto",
+      "owner": [
+        "EC",
+        "AP"
+      ],
+      "inizio": "2026-11-16",
+      "fine": "2026-11-29",
+      "stato": "da fare",
+      "dip": [
+        "0.5"
+      ],
+      "prova": "Tutte le caselle della sezione 9 del documento sono chiuse per iscritto.",
+      "sotto": [
+        {
+          "t": "Generatore del sito: Astro (consigliato: legge Notion al build) oppure HTML statico con file JSON",
+          "done": false
+        },
+        {
+          "t": "Menu: cinque voci (Scuola ▾ · Core Quadrant® · Formazione esperienziale · Community ▾ · Aziende) come propone il revisore, oppure le sette della bozza",
+          "done": false
+        },
+        {
+          "t": "Regola delle CTA per fascia: fino a 150 € «Paga e partecipa»; moduli e Core Quadrant® «Iscriviti»; programmi «Prenota il colloquio»",
+          "done": false
+        },
+        {
+          "t": "Freelance frontend: oggi opzionale, perché Claude costruisce il sito; decidere se tenerlo come riserva",
+          "done": false
+        },
+        {
+          "t": "Software di fatturazione con API: Sibill (verificare l'API) o Fatture in Cloud (API documentata)",
+          "done": false
+        },
+        {
+          "t": "Analytics senza cookie: Cloudflare Web Analytics o Plausible; nessun pixel in fase 1",
+          "done": false
+        },
+        {
+          "t": "Font dei titoli: licenza web di Afterglow oppure Playfair Display definitivo",
+          "done": false
+        },
+        {
+          "t": "Prezzi reali di Team Coaching Program autonomo e dei moduli singoli (quelli nelle bozze sono segnaposto)",
+          "done": false
+        },
+        {
+          "t": "Chi approva gli utenti della community (Teresa) e con quale tempo massimo (2 giorni lavorativi)",
+          "done": false
+        }
+      ],
+      "note": "Le prime tre decisioni condizionano la fase 2; le altre possono chiudersi entro metà dicembre.",
+      "rif": "Sezione 9; revisione punti 2, 3"
+    },
+    {
+      "id": "1.1",
+      "fase": "F1",
+      "titolo": "Testi delle pagine allineati a Notion",
+      "owner": [
+        "CL",
+        "AP"
+      ],
+      "inizio": "2026-11-23",
+      "fine": "2026-12-20",
+      "stato": "da fare",
+      "dip": [
+        "0.4"
+      ],
+      "prova": "Nessun testo segnaposto in nessuna pagina; ogni blocco ha il suo record in Contenuti con stato «approvato».",
+      "sotto": [
+        {
+          "t": "Homepage e Il filo di Ariadne dai testi revisionati",
+          "done": false
+        },
+        {
+          "t": "Schede Core Coaching, Advanced Coaching, Team Coaching dai programmi dettagliati (moduli online e slide già nel Project)",
+          "done": false
+        },
+        {
+          "t": "Core Quadrant®: testi integrali già in bozza v2, con edizioni 2027",
+          "done": false
+        },
+        {
+          "t": "Scuola di coaching: hub, quattro programmi, configuratore e FAQ allineati a menu e CTA decisi",
+          "done": false
+        },
+        {
+          "t": "Training, LSP, Kaospilot, Workshop, Coaching Atelier, Laboratori, Webinar rivisti sui formati attuali (Book Club, Convivio, Mentoring di gruppo)",
+          "done": false
+        },
+        {
+          "t": "Aziende dalla brochure 2026; Contatti; testi legali dalla task 1.5",
+          "done": false
+        },
+        {
+          "t": "Revisione di voce e terminologia sul corpus dei post approvati",
+          "done": false
+        }
+      ],
+      "note": "Arianna valida i testi dei programmi che eroga.",
+      "rif": "Sezione 3; passo 3"
+    },
+    {
+      "id": "1.2",
+      "fase": "F1",
+      "titolo": "Dati di corsi, edizioni ed eventi in Notion",
+      "owner": [
+        "TT"
+      ],
+      "inizio": "2026-11-30",
+      "fine": "2026-12-20",
+      "stato": "da fare",
+      "dip": [
+        "0.4",
+        "0.7"
+      ],
+      "prova": "Calendario 2027 completo in Notion con «Pubblica sul sito» impostato; prezzi e prerequisiti presenti su ogni percorso.",
+      "sotto": [
+        {
+          "t": "Percorsi: prezzo, early bird, prerequisiti, ore, livello ICF, slug",
+          "done": false
+        },
+        {
+          "t": "Edizioni 2027: date, sede, posti, stato iscrizioni",
+          "done": false
+        },
+        {
+          "t": "Eventi del primo semestre 2027: Apericoaching, Laboratori, webinar, Open Day",
+          "done": false
+        },
+        {
+          "t": "Persone pubbliche: i trainer con bio, foto e percorsi",
+          "done": false
+        },
+        {
+          "t": "Testimonianze reali con consenso, comprese le video interviste",
+          "done": false
+        }
+      ],
+      "note": "",
+      "rif": "Sezione 4; passo 2"
+    },
+    {
+      "id": "1.3",
+      "fase": "F1",
+      "titolo": "Archivio immagini e video",
+      "owner": [
+        "EC",
+        "CL"
+      ],
+      "inizio": "2026-11-30",
+      "fine": "2027-01-10",
+      "stato": "da fare",
+      "dip": [
+        "0.6"
+      ],
+      "prova": "Ogni immagine del sito punta a un URL permanente su media.ariadne.training; nessuna foto stock.",
+      "sotto": [
+        {
+          "t": "Selezione delle foto reali dalla cartella «Materiale foto video website Ariadne» (Core Quadrant, aule, Open Day)",
+          "done": false
+        },
+        {
+          "t": "Bucket Cloudflare R2 con dominio media.ariadne.training",
+          "done": false
+        },
+        {
+          "t": "Conversione AVIF/WebP con fallback JPEG, tre larghezze, lato lungo ≤ 1.600 px, nomi immutabili",
+          "done": false
+        },
+        {
+          "t": "Video di Ofman e van Doorn e video interviste su YouTube (nocookie, non in elenco) o Vimeo",
+          "done": false
+        },
+        {
+          "t": "Loghi ICF Level 1 e 2, CCE, CQI e partner in vettoriale",
+          "done": false
+        }
+      ],
+      "note": "Gli URL dei file Notion scadono dopo un'ora: l'archivio deve stare fuori da Notion e da Base44.",
+      "rif": "Passo 4; revisione punto 8"
+    },
+    {
+      "id": "1.4",
+      "fase": "F1",
+      "titolo": "Font e sistema grafico definitivo",
+      "owner": [
+        "EC",
+        "CL"
+      ],
+      "inizio": "2026-11-23",
+      "fine": "2026-12-13",
+      "stato": "da fare",
+      "dip": [
+        "0.7"
+      ],
+      "prova": "Titoli renderizzati con il font scelto e licenza in regola; tutto il testo supera il contrasto WCAG AA.",
+      "sotto": [
+        {
+          "t": "Licenza Web Font di Afterglow (verificare quale Afterglow) oppure Playfair Display definitivo",
+          "done": false
+        },
+        {
+          "t": "File woff2 self-hosted, font-display swap, fallback con size-adjust",
+          "done": false
+        },
+        {
+          "t": "Montserrat e Open Sans self-hosted",
+          "done": false
+        },
+        {
+          "t": "Varianti scure di arancio, verde e azzurro per il testo su bianco (gli originali restano per sfondi e blocchi)",
+          "done": false
+        },
+        {
+          "t": "Aggiornare ariadne.css e CONTEXT.md",
+          "done": false
+        }
+      ],
+      "note": "",
+      "rif": "Passo 5; revisione punto 10"
+    },
+    {
+      "id": "1.5",
+      "fase": "F1",
+      "titolo": "Questioni esterne: commercialista, informative, condizioni",
+      "owner": [
+        "EC",
+        "EX"
+      ],
+      "inizio": "2026-11-16",
+      "fine": "2026-12-20",
+      "stato": "da fare",
+      "dip": [],
+      "prova": "Risposte scritte della commercialista; informative, cookie policy (se serve), condizioni di vendita e regole della community pronte per la pubblicazione.",
+      "sotto": [
+        {
+          "t": "Commercialista: corrispettivi o fattura immediata, Apericoaching pagato online, IVA per chi paga dall'estero, software con API già in uso",
+          "done": false
+        },
+        {
+          "t": "Informativa privacy del sito e informativa dell'area riservata (responsabili: Tally UE, Notion USA con DPF, Brevo UE, Base44 da chiedere)",
+          "done": false
+        },
+        {
+          "t": "Cookie policy solo se restano cookie: l'obiettivo in fase 1 è nessun banner",
+          "done": false
+        },
+        {
+          "t": "Condizioni di vendita online con recesso di 14 giorni; regole della community",
+          "done": false
+        },
+        {
+          "t": "Liberatoria immagini (una per persona, già definita) richiamata nei moduli degli eventi",
+          "done": false
+        }
+      ],
+      "note": "Questa task blocca i pagamenti (3.4): va aperta subito.",
+      "rif": "Sezione 6; revisione punti 5, 11"
+    },
+    {
+      "id": "2.1",
+      "fase": "F2",
+      "titolo": "Prototipo Notion → sito",
+      "owner": [
+        "CL"
+      ],
+      "inizio": "2026-11-30",
+      "fine": "2026-12-13",
+      "stato": "da fare",
+      "dip": [
+        "0.4",
+        "0.7"
+      ],
+      "prova": "Calendario e una scheda corso generati dai record Notion, pubblicati su Cloudflare Pages con rebuild schedulato funzionante.",
+      "sotto": [
+        {
+          "t": "Progetto Astro nel repository (o generatore JSON) che legge Eventi, Edizioni e Percorsi via API al build",
+          "done": false
+        },
+        {
+          "t": "Una pagina per evento con schema.org/Event e un file eventi.json",
+          "done": false
+        },
+        {
+          "t": "GitHub Action quotidiana + Deploy Hook di Cloudflare Pages; lo stesso hook dietro «Aggiorna ora»",
+          "done": false
+        },
+        {
+          "t": "Fallback all'ultimo JSON committato se l'API Notion non risponde",
+          "done": false
+        },
+        {
+          "t": "Posti disponibili calcolati (posti meno iscrizioni confermate), mai digitati",
+          "done": false
+        }
+      ],
+      "note": "Dimostra la catena Notion → sito prima di scrivere una riga per Base44.",
+      "rif": "Revisione punto 4 e prossime due settimane"
+    },
+    {
+      "id": "2.2",
+      "fase": "F2",
+      "titolo": "Costruzione delle pagine",
+      "owner": [
+        "CL"
+      ],
+      "inizio": "2026-12-07",
+      "fine": "2027-01-24",
+      "stato": "da fare",
+      "dip": [
+        "2.1",
+        "1.1",
+        "1.3",
+        "1.4"
+      ],
+      "prova": "Diciassette pagine senza segnaposto, corrette su telefono e desktop, ogni pagina raggiungibile in due tocchi.",
+      "sotto": [
+        {
+          "t": "Componenti comuni: header con menu e sottomenu ad accordion su mobile, footer viola, CTA unica, blocco «Prossima edizione» identico",
+          "done": false
+        },
+        {
+          "t": "Homepage, Il filo di Ariadne, Scuola di coaching con configuratore",
+          "done": false
+        },
+        {
+          "t": "Core Coaching, Advanced Coaching, Team Coaching, Core Quadrant®",
+          "done": false
+        },
+        {
+          "t": "Training, LSP, Kaospilot, Workshop, Calendario",
+          "done": false
+        },
+        {
+          "t": "Coaching Atelier, Laboratori, Webinar, Aziende",
+          "done": false
+        },
+        {
+          "t": "Contatti, Privacy, Termini, pagina 404",
+          "done": false
+        },
+        {
+          "t": "Collegamenti incrociati modulo ↔ programma ↔ evento ↔ trainer",
+          "done": false
+        },
+        {
+          "t": "Filo SVG e animazioni con prefers-reduced-motion; carosello strumenti → griglia su mobile",
+          "done": false
+        }
+      ],
+      "note": "Le bozze scuola v4, Core Quadrant v2 e Il filo v1 sono la base; i dati vengono da Notion tramite il prototipo.",
+      "rif": "Sezione 3; passo 6"
+    },
+    {
+      "id": "2.3",
+      "fase": "F2",
+      "titolo": "Moduli Tally e flussi dei dati",
+      "owner": [
+        "TT",
+        "CL"
+      ],
+      "inizio": "2027-01-11",
+      "fine": "2027-01-24",
+      "stato": "da fare",
+      "dip": [
+        "0.4",
+        "1.5"
+      ],
+      "prova": "Una risposta di test per ciascun modulo compare in Notion (Richieste); l'iscrizione newsletter arriva in Brevo con doppio opt-in.",
+      "sotto": [
+        {
+          "t": "Cinque moduli: colloquio, pre-iscrizione, prenotazione Apericoaching e Laboratori, newsletter, organizzazioni",
+          "done": false
+        },
+        {
+          "t": "Due consensi separati e non preselezionati: privacy obbligatoria, newsletter facoltativa; consenso immagini solo negli eventi",
+          "done": false
+        },
+        {
+          "t": "Integrazione Tally → Notion sul database Richieste",
+          "done": false
+        },
+        {
+          "t": "Newsletter con form Brevo (doppio opt-in incluso) o webhook: Tally non ha Brevo tra le integrazioni native",
+          "done": false
+        },
+        {
+          "t": "Email di conferma automatica e mittente autenticato",
+          "done": false
+        },
+        {
+          "t": "Sostituzione di tutti i link JotForm nelle pagine",
+          "done": false
+        }
+      ],
+      "note": "",
+      "rif": "Sezione 4; passo 7; revisione punto 5"
+    },
+    {
+      "id": "2.4",
+      "fase": "F2",
+      "titolo": "SEO, redirect e accessibilità",
+      "owner": [
+        "CL"
+      ],
+      "inizio": "2027-01-18",
+      "fine": "2027-02-07",
+      "stato": "da fare",
+      "dip": [
+        "2.2",
+        "0.5"
+      ],
+      "prova": "Mappa 301 completa applicata; Lighthouse mobile ≥ 90 su cinque pagine chiave; Search Console verificata via DNS.",
+      "sotto": [
+        {
+          "t": "Mappa URL vecchie → nuove (Core Quadrant® con lo stesso slug o 301), file _redirects su Pages, 404 personalizzata",
+          "done": false
+        },
+        {
+          "t": "Title, description, canonical, sitemap, robots; dati strutturati Organization, Course, Event",
+          "done": false
+        },
+        {
+          "t": "Immagini lazy con width e height; contrasto AA; focus visibile; navigazione da tastiera",
+          "done": false
+        },
+        {
+          "t": "Search Console verificata via DNS prima del cambio; analytics senza cookie installata",
+          "done": false
+        }
+      ],
+      "note": "Attendersi 2–6 settimane di oscillazione del posizionamento dopo il passaggio.",
+      "rif": "Revisione punti 9, 10, 11"
+    },
+    {
+      "id": "2.5",
+      "fase": "F2",
+      "titolo": "Staging e collaudo del sito",
+      "owner": [
+        "TT",
+        "EC",
+        "AP"
+      ],
+      "inizio": "2027-02-01",
+      "fine": "2027-02-07",
+      "stato": "da fare",
+      "dip": [
+        "2.2",
+        "2.3",
+        "2.4"
+      ],
+      "prova": "Checklist firmata per ogni pagina su telefono; ogni modulo testato; approvazione scritta di Emanuele e Arianna.",
+      "sotto": [
+        {
+          "t": "Anteprima protetta su Cloudflare Pages per Arianna, Teresa e i trainer",
+          "done": false
+        },
+        {
+          "t": "Checklist per pagina: testi, link, immagini, moduli, mobile",
+          "done": false
+        },
+        {
+          "t": "Invio di prova di ogni modulo e verifica in Notion e Brevo",
+          "done": false
+        },
+        {
+          "t": "Correzioni e approvazione finale",
+          "done": false
+        }
+      ],
+      "note": "",
+      "rif": "Revisione, cosa manca"
+    },
+    {
+      "id": "2.6",
+      "fase": "F2",
+      "titolo": "Passaggio DNS e messa online",
+      "owner": [
+        "EC",
+        "CL"
+      ],
+      "inizio": "2027-02-08",
+      "fine": "2027-02-14",
+      "stato": "da fare",
+      "dip": [
+        "2.5",
+        "0.6"
+      ],
+      "prova": "ariadne.training serve il nuovo sito; la posta di segreteria@ funziona in entrata e uscita; il piano sito Wix è disdetto, il dominio resta.",
+      "sotto": [
+        {
+          "t": "TTL abbassati una settimana prima",
+          "done": false
+        },
+        {
+          "t": "Record MX, SPF, DKIM, DMARC e di verifica ricopiati su Cloudflare",
+          "done": false
+        },
+        {
+          "t": "Cambio nameserver (circa 3 ore di propagazione) e verifica della posta",
+          "done": false
+        },
+        {
+          "t": "Search Console: nuova proprietà e sitemap; monitoraggio 301 e 404 per sei settimane",
+          "done": false
+        },
+        {
+          "t": "Disdetta del piano sito Wix, dominio mantenuto; comunicazione del nuovo sito in newsletter",
+          "done": false
+        }
+      ],
+      "note": "Milestone M2: sito online il 12 febbraio 2027.",
+      "rif": "Sezione 7, dominio"
+    },
+    {
+      "id": "3.1",
+      "fase": "F3",
+      "titolo": "Specifiche per Base44 (passo 10)",
+      "owner": [
+        "CL",
+        "EC"
+      ],
+      "inizio": "2027-02-01",
+      "fine": "2027-02-14",
+      "stato": "da fare",
+      "dip": [
+        "0.4",
+        "1.5",
+        "0.7"
+      ],
+      "prova": "Il documento basta a Base44 senza domande: tabelle, mappatura campo per campo con Notion, flussi, interfacce fisse, prompt per area.",
+      "sotto": [
+        {
+          "t": "Tabelle: profili, ruoli, edizioni, eventi, iscrizioni, pagamenti; mappatura campo per campo con Notion",
+          "done": false
+        },
+        {
+          "t": "Flussi: registrazione, approvazione, iscrizione con contratto reale (19 articoli, recesso 14 giorni), pagamento, sincronizzazione",
+          "done": false
+        },
+        {
+          "t": "Interfacce fisse per iscritto: schema Notion, URL dell'archivio media, webhook Stripe",
+          "done": false
+        },
+        {
+          "t": "Prompt separati per area (dati, interfaccia, integrazioni, pagamenti) con i vincoli di design",
+          "done": false
+        },
+        {
+          "t": "Mappa delle funzioni Emergent da riprendere e di quelle da lasciare",
+          "done": false
+        }
+      ],
+      "note": "Con le interfacce fisse l'area riservata può un giorno passare altrove senza toccare sito e Notion.",
+      "rif": "Passo 10; sezione 5; revisione sezione 5"
+    },
+    {
+      "id": "3.2",
+      "fase": "F3",
+      "titolo": "Base44 Builder, app base, accessi e ruoli",
+      "owner": [
+        "CL",
+        "EC"
+      ],
+      "inizio": "2027-02-15",
+      "fine": "2027-03-07",
+      "stato": "da fare",
+      "dip": [
+        "3.1"
+      ],
+      "prova": "Registrazione libera con verifica email e Turnstile; approvazione in Base44 con effetto immediato che scrive il ruolo in Notion.",
+      "sotto": [
+        {
+          "t": "Attivare il piano Builder (annuale, 40 $ al mese) con l'account Ariadne",
+          "done": false
+        },
+        {
+          "t": "App con il design system: bianco, cubi, palette, font, card 16 px, bottoni 6 px",
+          "done": false
+        },
+        {
+          "t": "Login, verifica email, Cloudflare Turnstile, regole accettate al primo accesso",
+          "done": false
+        },
+        {
+          "t": "Ruoli: ospite registrato, coach di altra scuola, iscritto, alumnus, trainer e segreteria",
+          "done": false
+        },
+        {
+          "t": "Pannello di approvazione per Teresa con SLA di due giorni lavorativi",
+          "done": false
+        },
+        {
+          "t": "Profilo: consenso alla visibilità, link LinkedIn, dati fiscali per la fattura, cancellazione self-service",
+          "done": false
+        }
+      ],
+      "note": "Da qui il Builder resta attivo: le funzioni backend non funzionano sui piani inferiori.",
+      "rif": "Sezione 5; sezione 7, costo reale; revisione punto 6"
+    },
+    {
+      "id": "3.3",
+      "fase": "F3",
+      "titolo": "Sincronizzazione Notion ↔ Base44",
+      "owner": [
+        "CL"
+      ],
+      "inizio": "2027-03-01",
+      "fine": "2027-03-14",
+      "stato": "da fare",
+      "dip": [
+        "3.2"
+      ],
+      "prova": "Percorsi, Edizioni, Eventi e Persone con «Pubblica sul sito» compaiono in Base44 entro 24 ore e subito con «Aggiorna ora»; iscrizioni e pagamenti conclusi tornano in Notion.",
+      "sotto": [
+        {
+          "t": "Connettore Notion con ruolo di servizio e funzione schedulata quotidiana",
+          "done": false
+        },
+        {
+          "t": "Copia dei soli record pubblicati; posti riletti al momento del pagamento",
+          "done": false
+        },
+        {
+          "t": "Scrittura inversa: iscrizioni, pagamenti conclusi, ruolo approvato",
+          "done": false
+        },
+        {
+          "t": "Log degli errori visibile nel pannello admin",
+          "done": false
+        }
+      ],
+      "note": "Sync ogni due giorni è troppo lenta per i posti: quotidiana più rilettura al pagamento.",
+      "rif": "Sezione 7; revisione punto 4"
+    },
+    {
+      "id": "3.4",
+      "fase": "F3",
+      "titolo": "Pagamenti online e fattura automatica",
+      "owner": [
+        "CL",
+        "EC"
+      ],
+      "inizio": "2027-03-08",
+      "fine": "2027-03-28",
+      "stato": "da fare",
+      "dip": [
+        "3.2",
+        "1.5",
+        "0.6"
+      ],
+      "prova": "Pagamento di test da 1 €: iscrizione confermata, fattura emessa o in coda «da emettere», riga in Notion Pagamenti, ricevuta via email.",
+      "sotto": [
+        {
+          "t": "Stripe Checkout: carte, Apple Pay, Google Pay, PayPal come metodo; Satispay se senza canone",
+          "done": false
+        },
+        {
+          "t": "Webhook idempotente; la conferma non dipende dalla fattura",
+          "done": false
+        },
+        {
+          "t": "Codice fiscale o partita IVA validati prima del pagamento; IVA con Stripe Tax o regole della commercialista",
+          "done": false
+        },
+        {
+          "t": "API di fatturazione (Sibill o Fatture in Cloud) con coda, riprova e stato visibile in admin",
+          "done": false
+        },
+        {
+          "t": "Email di ricevuta e registrazione in Notion Pagamenti",
+          "done": false
+        }
+      ],
+      "note": "Bloccata finché la commercialista non risponde (task 1.5).",
+      "rif": "Sezione 6; revisione punto 7"
+    },
+    {
+      "id": "3.5",
+      "fase": "F3",
+      "titolo": "Iscrizione con contratto, materiali, eventi",
+      "owner": [
+        "CL",
+        "TT"
+      ],
+      "inizio": "2027-03-15",
+      "fine": "2027-04-04",
+      "stato": "da fare",
+      "dip": [
+        "3.3",
+        "3.4"
+      ],
+      "prova": "Un'iscrizione completa a un'edizione con contratto accettato e una prenotazione Apericoaching pagata, entrambe visibili in Notion.",
+      "sotto": [
+        {
+          "t": "Wizard di iscrizione con il contratto reale e prefill dal profilo",
+          "done": false
+        },
+        {
+          "t": "Il mio percorso: ore di pratica e mentoring verso ACC, PCC, ACTC",
+          "done": false
+        },
+        {
+          "t": "Materiali per coorte, solo per iscritti e alumni",
+          "done": false
+        },
+        {
+          "t": "Eventi con iscrizione e pagamento in un passo",
+          "done": false
+        },
+        {
+          "t": "Home con widget «prossimo passo» in base allo stato",
+          "done": false
+        }
+      ],
+      "note": "",
+      "rif": "Sezione 5, tabella funzioni"
+    },
+    {
+      "id": "3.6",
+      "fase": "F3",
+      "titolo": "Dominio, legale e collaudo dell'area riservata",
+      "owner": [
+        "EC",
+        "TT"
+      ],
+      "inizio": "2027-03-22",
+      "fine": "2027-04-11",
+      "stato": "da fare",
+      "dip": [
+        "3.5"
+      ],
+      "prova": "community.ariadne.training attivo; informativa, DPA e regole pubblicate; test con cinque utenti reali superati; primi inviti spediti.",
+      "sotto": [
+        {
+          "t": "community.ariadne.training su Base44 (CNAME su Cloudflare)",
+          "done": false
+        },
+        {
+          "t": "DPA di Base44 e regione di hosting; informativa dell'area riservata e regole della community pubblicate",
+          "done": false
+        },
+        {
+          "t": "Chiavi Stripe da test a live",
+          "done": false
+        },
+        {
+          "t": "Test con cinque utenti reali: trainer, segreteria, un alumnus, un corsista, un partecipante Apericoaching",
+          "done": false
+        },
+        {
+          "t": "Inviti ai corsisti attuali e ai partecipanti degli Apericoaching; chiusura dell'area Emergent se ancora attiva",
+          "done": false
+        }
+      ],
+      "note": "Milestone M3: area riservata online il 9 aprile 2027.",
+      "rif": "Sezione 5; sezione 9"
+    },
+    {
+      "id": "4.1",
+      "fase": "F4",
+      "titolo": "Bacheca, promo e canali",
+      "owner": [
+        "TT"
+      ],
+      "inizio": "2027-04-12",
+      "fine": "2027-05-09",
+      "stato": "da fare",
+      "dip": [
+        "3.6"
+      ],
+      "prova": "Bacheca attiva con pubblicazione moderata, prima promo dedicata inviata, canali LinkedIn e WhatsApp collegati, piano editoriale scritto.",
+      "sotto": [
+        {
+          "t": "Feed con post, immagini, commenti; pulsante «Segnala»; moderazione",
+          "done": false
+        },
+        {
+          "t": "Pagina dei valori e promo dedicate ad alumni e iscritti",
+          "done": false
+        },
+        {
+          "t": "Collegamenti ai canali LinkedIn e WhatsApp",
+          "done": false
+        },
+        {
+          "t": "Piano editoriale minimo: chi pubblica cosa e ogni quanto",
+          "done": false
+        }
+      ],
+      "note": "Milestone M4: community attiva il 9 maggio 2027.",
+      "rif": "Sezione 5"
+    },
+    {
+      "id": "4.2",
+      "fase": "F4",
+      "titolo": "Rate online e percorso ICF",
+      "owner": [
+        "CL"
+      ],
+      "inizio": "2027-05-10",
+      "fine": "2027-05-30",
+      "stato": "da fare",
+      "dip": [
+        "3.4"
+      ],
+      "prova": "Una rata pagata con carta aggiorna Notion Pagamenti; il promemoria di scadenza parte da solo.",
+      "sotto": [
+        {
+          "t": "Rate dei programmi con carta o bonifico, registrate in Notion",
+          "done": false
+        },
+        {
+          "t": "Promemoria delle scadenze",
+          "done": false
+        },
+        {
+          "t": "Percorso ICF con ore di pratica e mentoring aggiornabili dall'iscritto",
+          "done": false
+        }
+      ],
+      "note": "",
+      "rif": "Sezione 5"
+    },
+    {
+      "id": "4.3",
+      "fase": "F4",
+      "titolo": "Manutenzione, runbook e continuità",
+      "owner": [
+        "CL",
+        "EC"
+      ],
+      "inizio": "2027-04-26",
+      "fine": "2027-05-23",
+      "stato": "da fare",
+      "dip": [
+        "2.6",
+        "3.6"
+      ],
+      "prova": "Esiste RUNBOOK.md con le dieci operazioni ricorrenti; la segreteria cambia un prezzo da sola; i backup sono verificati.",
+      "sotto": [
+        {
+          "t": "RUNBOOK.md: pubblicare una modifica, aggiungere un evento, cambiare un prezzo, gestire un 404, ripristinare una versione",
+          "done": false
+        },
+        {
+          "t": "CMS git-based (Decap o Pages CMS) per i contenuti del sito che Notion non copre",
+          "done": false
+        },
+        {
+          "t": "Backup ed export: Notion, Base44 tramite GitHub sync, Stripe",
+          "done": false
+        },
+        {
+          "t": "Monitoraggio di uptime e dei webhook falliti con avviso via email",
+          "done": false
+        },
+        {
+          "t": "Criteri di «fatto» e chi approva le modifiche, scritti nel README",
+          "done": false
+        }
+      ],
+      "note": "Risponde alla domanda: cosa succede se Claude o l'abbonamento non ci sono.",
+      "rif": "Revisione punto 12"
+    },
+    {
+      "id": "4.4",
+      "fase": "F4",
+      "titolo": "Check mattutino e sistema di comunicazione",
+      "owner": [
+        "CL"
+      ],
+      "inizio": "2027-04-26",
+      "fine": "2027-05-16",
+      "stato": "da fare",
+      "dip": [
+        "2.1",
+        "3.3"
+      ],
+      "prova": "Ogni mattina, se Notion e sito divergono, compare un task «aggiorna il sito» in Notion con la differenza precisa.",
+      "sotto": [
+        {
+          "t": "Attività schedulata nell'account Claude di Ariadne",
+          "done": false
+        },
+        {
+          "t": "Confronto tra eventi.json pubblicato e i record Notion",
+          "done": false
+        },
+        {
+          "t": "Apertura del task in Notion e, se serve, commit di aggiornamento",
+          "done": false
+        },
+        {
+          "t": "Collegamento con la newsletter Brevo sulla base dei post approvati",
+          "done": false
+        }
+      ],
+      "note": "È il pezzo previsto dall'architettura del sistema di comunicazione del 4 novembre.",
+      "rif": "Architettura del 4 novembre; sezione 7"
+    },
+    {
+      "id": "4.5",
+      "fase": "F4",
+      "titolo": "Verifica del piano Base44 e dei costi reali",
+      "owner": [
+        "EC"
+      ],
+      "inizio": "2027-05-10",
+      "fine": "2027-05-16",
+      "stato": "da fare",
+      "dip": [
+        "3.6"
+      ],
+      "prova": "Decisione scritta su Builder o Pro, con i crediti di integrazione consumati nel primo mese e il costo mensile totale dell'impianto.",
+      "sotto": [
+        {
+          "t": "Consumo dei crediti di integrazione del primo mese",
+          "done": false
+        },
+        {
+          "t": "Costo mensile reale: Base44, Cloudflare, Stripe, software di fatturazione, font, Claude",
+          "done": false
+        },
+        {
+          "t": "Eventuale cambio di piano",
+          "done": false
+        }
+      ],
+      "note": "",
+      "rif": "Sezione 7, costo reale; revisione sezione 5"
+    },
+    {
+      "id": "4.6",
+      "fase": "F4",
+      "titolo": "Instagram tra i canali collegati",
+      "owner": [
+        "TT"
+      ],
+      "inizio": "2027-08-30",
+      "fine": "2027-09-19",
+      "stato": "da fare",
+      "dip": [
+        "4.1"
+      ],
+      "prova": "Profilo Instagram Ariadne attivo e collegato dall'area riservata e dal sito.",
+      "sotto": [
+        {
+          "t": "Apertura del profilo e linee editoriali",
+          "done": false
+        },
+        {
+          "t": "Collegamento dal sito e dall'area riservata",
+          "done": false
+        }
+      ],
+      "note": "Decisione del 5 novembre: settembre 2027.",
+      "rif": "Sezione 9"
+    }
+  ]
+}
+</script>
+<script>
+(function(){
+  // Snapshot of this file before any rendering: used by "Salva file aggiornato".
+  const ORIGINAL_HTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const DATA = JSON.parse(document.getElementById('pm-data').textContent);
+  const KEY = 'ariadne-pm-sito-community-v1';
+  const STATI = ['da fare','in corso','fatta','bloccata'];
+  const CLS = {'da fare':'todo','in corso':'run','fatta':'done','bloccata':'blk'};
+  const $ = (s,el)=> (el||document).querySelector(s);
+  const $$ = (s,el)=> Array.from((el||document).querySelectorAll(s));
+  const byId = {}; DATA.tasks.forEach(t=>byId[t.id]=t);
+  const faseById = {}; DATA.fasi.forEach(f=>faseById[f.id]=f);
+  const DAY = 86400000;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const pd = s => { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
+  const iso = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const MESI = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  const MESI_L = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+  const fmt = (s,withYear) => { const d=pd(s); return d.getDate()+' '+MESI[d.getMonth()]+(withYear?' '+d.getFullYear():''); };
+  const fmtRange = t => { const a=pd(t.inizio), b=pd(t.fine); const sameY=a.getFullYear()===b.getFullYear(); return fmt(t.inizio, !sameY)+' → '+fmt(t.fine,true); };
+  const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  /* ---------- state: embedded data + localStorage, newest wins ---------- */
+  let unsaved = false;
+  function snapshot(){ const s={updatedAt:DATA.meta.aggiornato,tasks:{}}; DATA.tasks.forEach(t=>s.tasks[t.id]={stato:t.stato,sotto:t.sotto.map(x=>!!x.done),note:t.note||''}); return s; }
+  function applyState(s){ DATA.tasks.forEach(t=>{ const x=s.tasks&&s.tasks[t.id]; if(!x) return; if(STATI.includes(x.stato)) t.stato=x.stato; if(Array.isArray(x.sotto)) t.sotto.forEach((st,i)=>{ if(typeof x.sotto[i]==='boolean') st.done=x.sotto[i]; }); if(typeof x.note==='string') t.note=x.note; }); }
+  function loadState(){
+    let local=null; try{ local=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){ local=null; }
+    if(local && local.updatedAt && local.updatedAt > DATA.meta.aggiornato){ applyState(local); unsaved=true; }
+    else { try{ localStorage.setItem(KEY, JSON.stringify(snapshot())); }catch(e){} }
+  }
+  function stamp(){ let now=new Date().toISOString().slice(0,19); if(now<=DATA.meta.aggiornato){ const d=new Date(DATA.meta.aggiornato+'Z'); d.setSeconds(d.getSeconds()+1); now=d.toISOString().slice(0,19); } return now; }
+  function persist(){
+    const s=snapshot(); s.updatedAt=stamp();
+    try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){}
+    unsaved=true; $('#btnSave').classList.add('unsaved');
+  }
+  function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),2600); }
+
+  /* ---------- derived ---------- */
+  const pct = t => t.sotto.length ? Math.round(100*t.sotto.filter(x=>x.done).length/t.sotto.length) : (t.stato==='fatta'?100:0);
+  const effPct = t => t.stato==='fatta' ? 100 : pct(t);
+  const ownersOf = t => t.owner.map(o=>DATA.owners[o]).filter(Boolean);
+  const ownerShort = t => t.owner.map(o=>(DATA.owners[o]||{nome:o}).nome.split(' ')[0]).join(', ');
+  function matchesFilter(t){
+    const o=$('#fOwner').value, s=$('#fStato').value, q=$('#fText').value.trim().toLowerCase();
+    if(o && !t.owner.includes(o)) return false;
+    if(s && t.stato!==s) return false;
+    if(q){ const hay=(t.id+' '+t.titolo+' '+t.sotto.map(x=>x.t).join(' ')+' '+(t.note||'')+' '+t.prova).toLowerCase(); if(!hay.includes(q)) return false; }
+    return true;
+  }
+
+  /* ---------- summary ---------- */
+  function renderSummary(){
+    const cards=$('#phaseCards'); cards.innerHTML='';
+    DATA.fasi.forEach(f=>{
+      const ts=DATA.tasks.filter(t=>t.fase===f.id);
+      const done=ts.filter(t=>t.stato==='fatta').length;
+      const sub=ts.reduce((a,t)=>a+t.sotto.length,0), subd=ts.reduce((a,t)=>a+t.sotto.filter(x=>x.done).length,0);
+      const p= sub? Math.round(100*subd/sub):0;
+      const el=document.createElement('div'); el.className='pcard'; el.style.setProperty('--c',f.colore);
+      el.innerHTML=`<div class="k">Fase ${f.id.slice(1)}</div><div class="n">${esc(f.nome)}</div><div class="d">${fmt(f.inizio,false)} → ${fmt(f.fine,true)}</div><div class="bar"><i style="width:${p}%"></i></div><div class="m"><span>${done}/${ts.length} task</span><span>${p}%</span></div>`;
+      el.addEventListener('click',()=>{ showView('elenco'); const h=document.getElementById('fase-'+f.id); if(h) h.scrollIntoView({behavior:'smooth',block:'start'}); });
+      cards.appendChild(el);
+    });
+    const all=DATA.tasks, sub=all.reduce((a,t)=>a+t.sotto.length,0), subd=all.reduce((a,t)=>a+t.sotto.filter(x=>x.done).length,0);
+    const p=sub?Math.round(100*subd/sub):0; $('#ovPct').textContent=p+'%'; $('#ovBar').style.width=p+'%';
+    const c={}; STATI.forEach(s=>c[s]=all.filter(t=>t.stato===s).length);
+    $('#counts').innerHTML=STATI.map(s=>`<button class="pill btnlike ${CLS[s]}" data-s="${s}">${c[s]} ${s}</button>`).join('');
+    $$('#counts .pill').forEach(b=>b.addEventListener('click',()=>{ const sel=$('#fStato'); sel.value = sel.value===b.dataset.s ? '' : b.dataset.s; applyFilters(); }));
+    // next two weeks
+    const lim=new Date(today.getTime()+14*DAY);
+    const soon=all.filter(t=>t.stato!=='fatta' && pd(t.inizio)<=lim).sort((a,b)=>pd(a.inizio)-pd(b.inizio));
+    const ul=$('#twoweeks'); ul.innerHTML='';
+    if(!soon.length) ul.innerHTML='<li>Nulla in scadenza nelle prossime due settimane.</li>';
+    soon.forEach(t=>{
+      const f=faseById[t.fase]; const late=pd(t.fine)<today;
+      const li=document.createElement('li'); li.style.setProperty('--c',f.colore);
+      li.innerHTML=`<span class="id">${t.id}</span><div class="tx"><div>${esc(t.titolo)}</div><small class="when ${late?'late':''}">${late?'in ritardo · ':''}${fmtRange(t)} · ${esc(ownerShort(t))}</small></div>`;
+      li.addEventListener('click',()=>openDrawer(t.id)); ul.appendChild(li);
+    });
+  }
+
+  /* ---------- list view ---------- */
+  function statusPill(t){ return `<button class="pill btnlike status ${CLS[t.stato]}" data-act="cycle" title="Clic per cambiare stato">${t.stato}</button>`; }
+  function detailHTML(t){
+    const f=faseById[t.fase];
+    const deps=t.dip.length? t.dip.map(d=>{ const x=byId[d]; const col={'da fare':'#D9D0C0','in corso':'#568dc1','fatta':'#5fa15a','bloccata':'#d33935'}[x.stato]; return `<span class="dep" data-go="${d}" title="${esc(x.stato)}"><i style="background:${col}"></i>${d} · ${esc(x.titolo)}</span>`; }).join('') : '<span style="font-size:12.5px;color:var(--ink3)">Nessuna: può partire subito.</span>';
+    const dependents=DATA.tasks.filter(x=>x.dip.includes(t.id));
+    return `
+      <div class="dtop">
+        <label class="dlbl" style="margin:0">Stato</label>
+        <select data-act="stato">${STATI.map(s=>`<option ${s===t.stato?'selected':''}>${s}</option>`).join('')}</select>
+        <span class="pill todo" style="background:var(--crema)">${fmtRange(t)}</span>
+        ${ownersOf(t).map(o=>`<span class="ow" style="--oc:${o.colore}"><i></i>${esc(o.nome)}</span>`).join('')}
+      </div>
+      <div class="dgrid">
+        <div>
+          <p class="dlbl">Sottotask · ${t.sotto.filter(x=>x.done).length}/${t.sotto.length}</p>
+          <ul class="sub">${t.sotto.map((s,i)=>`<li class="${s.done?'ok':''}"><input type="checkbox" data-act="sub" data-i="${i}" ${s.done?'checked':''} id="cb-${t.id}-${i}"><span><label for="cb-${t.id}-${i}">${esc(s.t)}</label></span></li>`).join('')}</ul>
+        </div>
+        <div>
+          <p class="dlbl">Prova di fatto</p>
+          <div class="prova">${esc(t.prova)}</div>
+          <p class="dlbl" style="margin-top:14px">Dipende da</p>
+          <div class="deps">${deps}</div>
+          ${dependents.length?`<p class="dlbl">Sblocca</p><div class="deps">${dependents.map(x=>`<span class="dep" data-go="${x.id}"><i style="background:${faseById[x.fase].colore}"></i>${x.id} · ${esc(x.titolo)}</span>`).join('')}</div>`:''}
+          <p class="dlbl">Note</p>
+          <textarea class="note" data-act="note" placeholder="Decisioni, link, chi ha fatto cosa…">${esc(t.note||'')}</textarea>
+          <div class="rif">Riferimento nel documento: ${esc(t.rif||'—')}</div>
+        </div>
+      </div>`;
+  }
+  function renderList(){
+    const main=$('#viewElenco'); main.innerHTML='';
+    DATA.fasi.forEach(f=>{
+      const ts=DATA.tasks.filter(t=>t.fase===f.id);
+      const sec=document.createElement('section'); sec.className='phase'; sec.id='fase-'+f.id; sec.style.setProperty('--c',f.colore); sec.style.setProperty('--ct',f.testo);
+      sec.innerHTML=`<div class="phead"><div class="num">${f.id.slice(1)}</div><div><h2>${esc(f.nome)}</h2><div class="meta">${fmt(f.inizio,false)} → ${fmt(f.fine,true)} · ${ts.length} task</div><div class="descr">${esc(f.descr)}</div></div><div class="right" data-cnt="${f.id}"></div></div>`;
+      ts.forEach(t=>{
+        const el=document.createElement('article'); el.className='task'+(t.stato==='fatta'?' done':''); el.dataset.id=t.id; el.style.setProperty('--c',f.colore);
+        el.innerHTML=`<div class="trow">
+            <span class="id">${t.id}</span>
+            <div class="title">${esc(t.titolo)}<div class="bar"><i style="width:${effPct(t)}%"></i></div></div>
+            <div class="owners">${ownersOf(t).map(o=>`<span class="ow" style="--oc:${o.colore}"><i></i>${esc(o.nome.split(' ')[0])}</span>`).join('')}</div>
+            <div class="dates">${fmt(t.inizio,false)} → ${fmt(t.fine,false)}<small>${t.dip.length?'dopo '+t.dip.join(', '):'può partire subito'}</small></div>
+            ${statusPill(t)}
+            <span class="chev"></span>
+          </div>
+          <div class="detail">${detailHTML(t)}</div>`;
+        sec.appendChild(el);
+      });
+      main.appendChild(sec);
+    });
+    applyFilters();
+  }
+  function refreshTask(id){
+    const t=byId[id];
+    $$(`.task[data-id="${id}"]`).forEach(el=>{
+      el.classList.toggle('done',t.stato==='fatta');
+      $('.status',el).outerHTML=statusPill(t);
+      $('.title .bar i',el).style.width=effPct(t)+'%';
+      const open=el.classList.contains('open');
+      $('.detail',el).innerHTML=detailHTML(t);
+      if(!open) el.classList.remove('open');
+    });
+    if(drawerId===id){ $('#dBody').innerHTML=detailHTML(t); }
+    renderSummary(); renderGanttBars(); applyFilters();
+  }
+
+  /* ---------- actions (delegated) ---------- */
+  function cycle(t){ t.stato=STATI[(STATI.indexOf(t.stato)+1)%STATI.length]; if(t.stato==='fatta') t.sotto.forEach(s=>s.done=true); }
+  document.addEventListener('click',e=>{
+    const act=e.target.closest('[data-act]'); const row=e.target.closest('.trow'); const go=e.target.closest('[data-go]');
+    if(go){ e.stopPropagation(); openDrawer(go.dataset.go); return; }
+    if(act){
+      const host=act.closest('.task')||act.closest('.drawer'); const id=host.classList.contains('drawer')?drawerId:host.dataset.id; const t=byId[id];
+      if(act.dataset.act==='cycle'){ e.stopPropagation(); cycle(t); persist(); refreshTask(id); return; }
+      if(act.dataset.act==='sub'){ t.sotto[+act.dataset.i].done=act.checked; if(t.sotto.every(s=>s.done)&&t.stato!=='fatta'){ t.stato='fatta'; } else if(t.stato==='fatta'&&!t.sotto.every(s=>s.done)){ t.stato='in corso'; } else if(t.stato==='da fare'&&act.checked){ t.stato='in corso'; } persist(); refreshTask(id); return; }
+      return;
+    }
+    if(row){ row.parentElement.classList.toggle('open'); }
+  });
+  document.addEventListener('change',e=>{
+    const act=e.target.closest('[data-act]'); if(!act) return;
+    const host=act.closest('.task')||act.closest('.drawer'); const id=host.classList.contains('drawer')?drawerId:host.dataset.id; const t=byId[id];
+    if(act.dataset.act==='stato'){ t.stato=act.value; if(t.stato==='fatta') t.sotto.forEach(s=>s.done=true); persist(); refreshTask(id); }
+    if(act.dataset.act==='note'){ t.note=act.value; persist(); renderSummary(); }
+  });
+  document.addEventListener('input',e=>{ const act=e.target.closest('[data-act="note"]'); if(act){ const host=act.closest('.task')||act.closest('.drawer'); const id=host.classList.contains('drawer')?drawerId:host.dataset.id; byId[id].note=act.value; } });
+
+  /* ---------- filters ---------- */
+  function applyFilters(){
+    DATA.fasi.forEach(f=>{ let vis=0; DATA.tasks.filter(t=>t.fase===f.id).forEach(t=>{ const ok=matchesFilter(t); $$(`.task[data-id="${t.id}"], .grow[data-id="${t.id}"]`).forEach(el=>el.classList.toggle('hidden',!ok)); if(ok) vis++; }); const c=$(`[data-cnt="${f.id}"]`); if(c) c.textContent=vis+' visibili'; });
+  }
+  ['fOwner','fStato','fText'].forEach(id=>$('#'+id).addEventListener('input',applyFilters));
+  $('#expAll').addEventListener('click',()=>$$('.task').forEach(t=>t.classList.add('open')));
+  $('#colAll').addEventListener('click',()=>$$('.task').forEach(t=>t.classList.remove('open')));
+
+  /* ---------- drawer ---------- */
+  let drawerId=null;
+  function openDrawer(id){ const t=byId[id]; if(!t) return; drawerId=id; const f=faseById[t.fase]; const d=$('#drawer'); d.style.setProperty('--c',f.colore); $('#dId').textContent=t.id; $('#dTitle').textContent=t.titolo; $('#dBody').innerHTML=detailHTML(t); d.classList.add('show'); $('#scrim').classList.add('show'); d.setAttribute('aria-hidden','false'); }
+  function closeDrawer(){ drawerId=null; $('#drawer').classList.remove('show'); $('#scrim').classList.remove('show'); $('#drawer').setAttribute('aria-hidden','true'); }
+  $('#dClose').addEventListener('click',closeDrawer); $('#scrim').addEventListener('click',closeDrawer);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+
+  /* ---------- gantt ---------- */
+  const G={start:pd(DATA.meta.inizio), end:pd(DATA.meta.fine), px:6};
+  const x = d => Math.round((d-G.start)/DAY*G.px);
+  const totalW = () => x(new Date(G.end.getTime()+DAY));
+  function renderGantt(){
+    const tb=$('#gtable'); tb.innerHTML='';
+    const lw = window.innerWidth<640 ? 170 : 290; tb.style.setProperty('--lw',lw+'px'); G.px = window.innerWidth<640 ? 4.6 : 6;
+    const left=document.createElement('div'); left.className='gleft'; const right=document.createElement('div'); right.className='gright'; right.style.width=totalW()+'px';
+    left.innerHTML='<div class="ghead">Fasi e task</div>';
+    // header months + weeks
+    const head=document.createElement('div'); head.className='ghead'; head.style.width=totalW()+'px';
+    let months='', weeks='';
+    let d=new Date(G.start);
+    const mStarts=[]; let cur=new Date(d.getFullYear(),d.getMonth(),1);
+    while(cur<=G.end){ const nxt=new Date(cur.getFullYear(),cur.getMonth()+1,1); const a=Math.max(x(cur),0), b=Math.min(x(nxt),totalW()); if(b>a){ mStarts.push(a); months+=`<div style="width:${b-a}px">${MESI_L[cur.getMonth()]} ${cur.getFullYear()}</div>`; } cur=nxt; }
+    let w=new Date(G.start); const wk=[];
+    while(w<=G.end){ const n=new Date(w.getTime()+7*DAY); const a=x(w), b=Math.min(x(n),totalW()); weeks+=`<div style="width:${b-a}px">${w.getDate()}</div>`; wk.push(a); w=n; }
+    head.innerHTML=`<div class="months">${months}</div><div class="weeks">${weeks}</div>`;
+    right.appendChild(head);
+    const lines=`<div class="gridlines">${wk.map(a=>`<i style="left:${a}px"></i>`).join('')}${mStarts.map(a=>`<i class="m" style="left:${a}px"></i>`).join('')}</div>`;
+    DATA.fasi.forEach(f=>{
+      const ts=DATA.tasks.filter(t=>t.fase===f.id);
+      const pl=document.createElement('div'); pl.className='grow ph'; pl.style.setProperty('--c',f.colore); pl.style.setProperty('--ct',f.testo); pl.innerHTML=`<span class="id">${f.id.slice(1)}</span><span class="t">${esc(f.nome)}</span>`; left.appendChild(pl);
+      const pr=document.createElement('div'); pr.className='grow ph'; pr.style.setProperty('--c',f.colore); pr.dataset.phase=f.id;
+      const s=Math.min(...ts.map(t=>pd(t.inizio))), e=Math.max(...ts.map(t=>pd(t.fine)));
+      pr.innerHTML=lines+`<div class="gphase" style="left:${x(new Date(s))}px;width:${x(new Date(e+DAY))-x(new Date(s))}px"></div>`+DATA.milestones.filter(m=>m.fase===f.id).map(m=>`<div class="gms" style="left:${x(pd(m.data))}px" data-ms="${m.id}"></div>`).join('');
+      right.appendChild(pr);
+      ts.forEach(t=>{
+        const l=document.createElement('div'); l.className='grow'; l.dataset.id=t.id; l.style.setProperty('--c',f.colore); l.innerHTML=`<span class="id">${t.id}</span><span class="t">${esc(t.titolo)}</span><span class="st ${CLS[t.stato]}"></span>`; l.addEventListener('click',()=>openDrawer(t.id)); left.appendChild(l);
+        const r=document.createElement('div'); r.className='grow'; r.dataset.id=t.id; r.style.setProperty('--c',f.colore); r.innerHTML=lines; r.addEventListener('click',()=>openDrawer(t.id)); right.appendChild(r);
+      });
+    });
+    const tl=document.createElement('div'); tl.className='today'; tl.style.left=x(today)+'px'; if(today>=G.start&&today<=G.end) right.appendChild(tl);
+    tb.appendChild(left); tb.appendChild(right);
+    renderGanttBars();
+    // milestones list
+    $('#mslist').innerHTML=DATA.milestones.map(m=>`<div style="--c:${faseById[m.fase].colore}"><span class="dia"></span><span>${esc(m.nome)}</span><span class="when">${fmt(m.data,true)}</span></div>`).join('');
+    // hover highlights + tooltip
+    const tip=$('#gtip');
+    right.addEventListener('mousemove',e=>{
+      const row=e.target.closest('.grow'); const ms=e.target.closest('.gms');
+      $$('.gbar.dephl,.gbar.hl').forEach(b=>b.classList.remove('dephl','hl'));
+      if(ms){ const m=DATA.milestones.find(z=>z.id===ms.dataset.ms); tip.innerHTML=`<b>${esc(m.nome)}</b><br>${fmt(m.data,true)}`; }
+      else if(row&&row.dataset.id){ const t=byId[row.dataset.id]; $(`.gbar[data-id="${t.id}"]`)?.classList.add('hl'); t.dip.forEach(d=>$(`.gbar[data-id="${d}"]`)?.classList.add('dephl')); tip.innerHTML=`<b>${t.id} · ${esc(t.titolo)}</b><br>${fmtRange(t)} · ${esc(ownerShort(t))}<br>${t.stato} · ${effPct(t)}% sottotask${t.dip.length?'<br>dipende da '+t.dip.join(', '):''}`; }
+      else { tip.classList.remove('show'); return; }
+      tip.classList.add('show'); const tw=tip.offsetWidth; let lx=e.clientX+14; if(lx+tw>window.innerWidth-10) lx=e.clientX-tw-14; tip.style.left=lx+'px'; tip.style.top=(e.clientY+14)+'px';
+    });
+    right.addEventListener('mouseleave',()=>{ tip.classList.remove('show'); $$('.gbar.dephl,.gbar.hl').forEach(b=>b.classList.remove('dephl','hl')); });
+    // scroll so that today is visible
+    const sc=$('#gscroll'); sc.scrollLeft=Math.max(0,x(today)-140);
+  }
+  function renderGanttBars(){
+    $$('.gright .grow[data-id]').forEach(r=>{
+      const t=byId[r.dataset.id]; $$('.gbar,.glbl',r).forEach(n=>n.remove());
+      const a=x(pd(t.inizio)), b=x(new Date(pd(t.fine).getTime()+DAY));
+      const bar=document.createElement('div'); bar.className='gbar '+CLS[t.stato]; bar.dataset.id=t.id; bar.style.left=a+'px'; bar.style.width=Math.max(b-a,6)+'px'; bar.innerHTML=`<div class="fill" style="width:${pct(t)}%"></div>`;
+      const lbl=document.createElement('div'); lbl.className='glbl '+CLS[t.stato]; lbl.style.left=b+'px'; lbl.textContent=(t.stato==='fatta'?'✓ ':'')+ownerShort(t)+(t.dip.length?' · dopo '+t.dip.join(', '):'');
+      r.appendChild(bar); r.appendChild(lbl);
+    });
+    $$('.gleft .grow[data-id]').forEach(l=>{ const t=byId[l.dataset.id]; const st=$('.st',l); st.className='st '+CLS[t.stato]; });
+  }
+
+  /* ---------- views ---------- */
+  function showView(v){ $$('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.view===v)); $('#viewElenco').hidden=v!=='elenco'; $('#viewGantt').hidden=v!=='gantt'; if(v==='gantt'){ if(!$('#gtable').children.length) renderGantt(); const top=$('.gwrap').getBoundingClientRect().top+window.scrollY-(window.innerWidth<=720?12:88); if(window.scrollY>top||window.scrollY<top-200) window.scrollTo({top:Math.max(0,top),behavior:'instant'}); } try{ localStorage.setItem(KEY+':view',v); }catch(e){} }
+  $$('.seg button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+  let rt; window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(()=>{ if(!$('#viewGantt').hidden){ $('#gtable').innerHTML=''; renderGantt(); } },200); });
+
+  /* ---------- save / copy / reset ---------- */
+  $('#btnSave').addEventListener('click',()=>{
+    const out=JSON.parse(JSON.stringify(DATA)); out.meta.aggiornato=stamp();
+    const json=JSON.stringify(out,null,2).replace(/</g,'\\u003c');
+    const html=ORIGINAL_HTML.replace(/(<script id="pm-data"[^>]*>)([\s\S]*?)(<\/script>)/, (m,a,b,c)=>a+'\n'+json+'\n'+c);
+    const blob=new Blob([html],{type:'text/html;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download='Piano_lavoro_sito_Ariadne_'+iso(new Date())+'.html'; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);
+    DATA.meta.aggiornato=out.meta.aggiornato; try{ localStorage.setItem(KEY, JSON.stringify(snapshot())); }catch(e){}
+    unsaved=false; $('#btnSave').classList.remove('unsaved'); $('#updated').textContent=fmt(iso(new Date()),true);
+    toast('File scaricato: sostituiscilo nella cartella Website Ariadne.');
+  });
+  $('#btnCopy').addEventListener('click',()=>{
+    let md=`# ${DATA.meta.titolo} · riepilogo ${fmt(iso(new Date()),true)}\n\n`;
+    DATA.fasi.forEach(f=>{ md+=`## Fase ${f.id.slice(1)} · ${f.nome}\n`; DATA.tasks.filter(t=>t.fase===f.id).forEach(t=>{ md+=`- ${t.id} ${t.titolo} — ${t.stato} (${effPct(t)}%) · ${fmtRange(t)} · ${ownerShort(t)}${t.note?` · nota: ${t.note.replace(/\s+/g,' ').trim()}`:''}\n`; }); md+='\n'; });
+    const lim=new Date(today.getTime()+14*DAY); const soon=DATA.tasks.filter(t=>t.stato!=='fatta'&&pd(t.inizio)<=lim).sort((a,b)=>pd(a.inizio)-pd(b.inizio));
+    md+=`## Prossime due settimane\n`+soon.map(t=>`- ${t.id} ${t.titolo} (${fmtRange(t)}, ${ownerShort(t)})`).join('\n')+'\n';
+    const done=()=>toast('Riepilogo copiato negli appunti.');
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(md).then(done,()=>fallback(md,done)); } else fallback(md,done);
+    function fallback(txt,cb){ const ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); cb(); }catch(e){ toast('Copia non riuscita: seleziona e copia a mano.'); } ta.remove(); }
+  });
+  let resetArmed=false;
+  $('#btnReset').addEventListener('click',e=>{
+    if(!resetArmed){ resetArmed=true; e.currentTarget.textContent='Confermi? Si perdono le modifiche non salvate'; e.currentTarget.style.color='var(--rosso)'; setTimeout(()=>{ resetArmed=false; $('#btnReset').textContent='Azzera modifiche'; $('#btnReset').style.color=''; },4000); return; }
+    try{ localStorage.removeItem(KEY); }catch(err){} location.reload();
+  });
+
+  /* ---------- init ---------- */
+  loadState();
+  $('#title').textContent=DATA.meta.titolo.split(' · ')[0];
+  $('#updated').textContent=fmt(DATA.meta.aggiornato.slice(0,10),true)+' · v'+DATA.meta.versione;
+  if(unsaved) $('#btnSave').classList.add('unsaved');
+  $('#footFonte').textContent='Fonte: '+DATA.meta.fonte+'. File creato il '+fmt(DATA.meta.creato,true)+'.';
+  $('#premesse').innerHTML=DATA.meta.premesse.map(p=>`<li>${esc(p)}</li>`).join('');
+  const own=$('#fOwner'); Object.entries(DATA.owners).forEach(([k,o])=>{ const op=document.createElement('option'); op.value=k; op.textContent=o.nome; own.appendChild(op); });
+  $('#legend').innerHTML=DATA.fasi.map(f=>`<span><span class="sw" style="background:${f.colore}"></span>Fase ${f.id.slice(1)} · ${esc(f.nome)}</span>`).join('')+Object.values(DATA.owners).map(o=>`<span class="ow" style="--oc:${o.colore}"><i></i>${esc(o.nome)}</span>`).join('');
+  renderSummary(); renderList();
+  let v='elenco'; try{ v=localStorage.getItem(KEY+':view')||'elenco'; }catch(e){} showView(v);
+})();
+</script>
+</body>
+</html>

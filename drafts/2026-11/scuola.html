@@ -1,0 +1,706 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Scuola di coaching — Ariadne</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FDFBF7;--bg-soft:#F5EFE3;--bg-deep:#1F1813;
+  --ink:#1F1813;--ink-soft:#5A4A3D;--ink-mute:#9C8B7B;
+  --p1:#df7a4a;--p2:#d33935;--p3:#9ec165;--p4:#7a9c50;
+  --viola:#655a9c;--azzurro:#67b2e2;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ═══ HEADER ═══ */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;backdrop-filter:blur(12px);background:rgba(253,251,247,.85);border-bottom:1px solid rgba(31,24,19,.06)}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:-.5px}
+.nav{display:flex;gap:32px;font-size:14px}
+.nav a{position:relative;transition:color .3s}
+.nav a:hover{color:var(--p1)}
+.nav a.active{color:var(--p1)}
+.nav-cta{padding:10px 20px;background:var(--ink);color:var(--bg)!important;border-radius:100px;font-size:13px;font-weight:500}
+
+/* ═══ HERO ═══ */
+.hero{padding:200px 48px 140px;text-align:center;position:relative}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(48px,8vw,120px);line-height:.95;letter-spacing:-3px;margin-bottom:32px;max-width:1200px;margin-left:auto;margin-right:auto}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--p1)}
+.hero .lede{font-family:var(--serif);font-weight:300;font-size:clamp(18px,2vw,24px);line-height:1.55;color:var(--ink-soft);max-width:720px;margin:0 auto 40px;font-style:italic}
+.hero .scroll-hint{font-family:var(--sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-mute);margin-top:80px;display:inline-flex;flex-direction:column;align-items:center;gap:12px}
+.hero .scroll-hint::after{content:"";width:1px;height:48px;background:var(--ink-mute);animation:scrollLine 2s ease-in-out infinite}
+@keyframes scrollLine{0%,100%{height:48px;opacity:1}50%{height:64px;opacity:.4}}
+
+/* ═══ MASK REVEAL TEXT ═══ */
+.reveal-mask{display:inline-block;overflow:hidden;vertical-align:bottom}
+.reveal-mask>span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.reveal-mask.in>span{transform:translateY(0)}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.in{opacity:1;transform:translateY(0)}
+
+/* ═══ COMMUNITY (Blocco 2) ═══ */
+.community{padding:140px 48px;background:var(--bg)}
+.community-inner{max-width:1300px;margin:0 auto}
+.section-eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:24px;font-weight:500}
+.community h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5vw,72px);line-height:1.05;letter-spacing:-2px;margin-bottom:32px;max-width:900px}
+.community h2 em{font-style:italic;font-weight:400;color:var(--p1)}
+.community .intro-p{font-family:var(--serif);font-weight:300;font-size:21px;line-height:1.55;color:var(--ink-soft);max-width:680px;margin-bottom:80px;font-style:italic}
+/* Community: cubotti eleganti */
+.comm-list{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.comm-item{padding:36px 28px;border-radius:14px;color:#fff;position:relative;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.comm-item:hover{transform:translateY(-6px);box-shadow:0 20px 40px -12px rgba(0,0,0,.18)}
+.comm-item.c1{background:linear-gradient(155deg,#df7a4a 0%,#c46a3e 100%)}
+.comm-item.c2{background:linear-gradient(155deg,#d4d965 0%,#bfc54a 100%);color:#3d3a14}
+.comm-item.c3{background:linear-gradient(155deg,#9ec165 0%,#7a9c50 100%)}
+.comm-item.c4{background:linear-gradient(155deg,#d33935 0%,#a82c2a 100%)}
+.comm-item.c5{background:linear-gradient(155deg,#655a9c 0%,#4a3f7a 100%)}
+.comm-item .num{font-family:var(--serif);font-size:14px;font-style:italic;opacity:.7;margin-bottom:18px;display:block;font-weight:400}
+.comm-item h4{font-family:var(--serif);font-weight:500;font-size:22px;margin-bottom:14px;line-height:1.15;letter-spacing:-.3px}
+.comm-item p{font-size:13.5px;line-height:1.55;opacity:.92}
+.comm-foot{margin-top:48px;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink);max-width:580px}
+
+/* ═══ SELEZIONE OBIETTIVO (Blocco 3) ═══ */
+.selezione{padding:140px 48px;background:var(--bg-soft)}
+.sel-inner{max-width:1300px;margin:0 auto}
+.sel-head{margin-bottom:80px;max-width:900px}
+.sel-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5vw,72px);line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+.sel-head h2 em{font-style:italic;font-weight:400;color:var(--p1)}
+.sel-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(31,24,19,.12);border:1px solid rgba(31,24,19,.12)}
+.sel-card{background:var(--bg-soft);padding:48px 40px;cursor:pointer;transition:all .4s;display:block;position:relative;overflow:hidden}
+.sel-card::before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:currentColor;transform:scaleY(0);transform-origin:bottom;transition:transform .5s ease}
+.sel-card:hover::before{transform:scaleY(1)}
+.sel-card:hover{background:var(--bg)}
+.sel-card.s1{color:var(--p1)}
+.sel-card.s2{color:var(--p3)}
+.sel-card.s3{color:var(--viola)}
+.sel-card.s4{color:var(--p2)}
+.sel-card .sel-num{font-family:var(--serif);font-size:13px;font-style:italic;color:currentColor;margin-bottom:24px;display:block}
+.sel-card h3{font-family:var(--serif);font-weight:300;font-size:28px;line-height:1.2;color:var(--ink);margin-bottom:24px;letter-spacing:-.5px}
+.sel-card .arrow{font-family:var(--serif);font-size:22px;color:currentColor;transition:transform .4s}
+.sel-card:hover .arrow{transform:translateX(8px)}
+
+/* ═══ PERCORSI — IL CUORE DELLA PAGINA ═══ */
+.percorsi-intro{padding:140px 48px 80px;text-align:center}
+.percorsi-intro h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5vw,72px);line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+.percorsi-intro h2 em{font-style:italic;font-weight:400;color:var(--p1)}
+.percorsi-intro p{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink-soft);max-width:640px;margin:0 auto}
+
+/* PERCORSO — pannelli paralleli che scorrono insieme */
+.percorso{position:relative;border-top:1px solid rgba(31,24,19,.08);padding:120px 0}
+.percorso-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:1400px;margin:0 auto;align-items:stretch}
+.percorso-left,.percorso-right{display:flex;flex-direction:column;justify-content:flex-start}
+.percorso-left{padding:0 48px 0 80px;display:flex;flex-direction:column;position:relative}
+.icf-badge{position:absolute;top:120px;right:32px;width:96px;height:96px;z-index:2;opacity:.95}
+.icf-badge img{width:100%;height:100%;object-fit:contain}
+.percorso-num{font-family:var(--serif);font-weight:200;font-size:clamp(120px,18vw,240px);line-height:.85;letter-spacing:-8px;color:currentColor;opacity:.15;margin-bottom:-40px;font-style:italic}
+.percorso-eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:16px}
+.percorso-titolo{font-family:var(--serif);font-weight:300;font-size:clamp(36px,4.5vw,64px);line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px}
+.percorso-titolo em{font-style:italic;font-weight:400;color:currentColor}
+.percorso-cred{font-family:var(--serif);font-style:italic;font-size:22px;color:currentColor;margin-bottom:32px}
+
+/* Descrizione narrativa estesa */
+.percorso-descr{margin:32px 0;padding-top:32px;border-top:1px solid rgba(31,24,19,.12)}
+.percorso-descr p{font-family:var(--serif);font-weight:300;font-size:17px;line-height:1.65;color:var(--ink-soft);margin-bottom:16px}
+.percorso-descr p strong{color:var(--ink);font-weight:500;font-style:italic}
+
+.percorso-prerec{font-size:14px;line-height:1.6;color:var(--ink-soft);margin-top:32px;padding-top:32px;border-top:1px solid rgba(31,24,19,.12)}
+.percorso-prerec strong{display:block;font-family:var(--sans);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px;font-weight:500}
+
+/* Investimento ben visibile a sinistra */
+.percorso-invest{margin-top:48px;padding-top:32px;border-top:1px solid rgba(31,24,19,.12)}
+.percorso-invest .invest-label{font-family:var(--sans);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:12px;font-weight:500}
+.percorso-invest .invest-prezzo{font-family:var(--serif);font-weight:400;font-size:48px;color:var(--ink);letter-spacing:-1.5px;line-height:1}
+.percorso-invest .invest-eb{display:block;font-size:15px;color:var(--ink-mute);font-weight:300;margin-top:8px;font-style:italic}
+.percorso-invest .btn-link{margin-top:24px;display:inline-block}
+
+.percorso-right{padding:0 80px 0 48px;position:relative;flex:1}
+.percorso-flow{position:relative;padding-left:60px}
+
+/* LINEA SVG VERTICALE che si traccia (estesa a tutto il blocco) */
+.flow-line{position:absolute;left:24px;top:30px;bottom:30px;width:2px;background:rgba(31,24,19,.08);overflow:hidden}
+.flow-line::after{content:"";position:absolute;top:0;left:0;right:0;height:0;background:currentColor;transition:height 1.5s cubic-bezier(.4,0,.2,1)}
+.percorso.in-view .flow-line::after{height:100%}
+
+/* NODI MODULI */
+.flow-node{position:relative;margin-bottom:48px;opacity:0;transform:translateX(20px);transition:opacity .8s ease,transform .8s ease;transition-delay:0s}
+.percorso.in-view .flow-node:nth-child(1){opacity:1;transform:translateX(0);transition-delay:.1s}
+.percorso.in-view .flow-node:nth-child(2){opacity:1;transform:translateX(0);transition-delay:.4s}
+.percorso.in-view .flow-node:nth-child(3){opacity:1;transform:translateX(0);transition-delay:.7s}
+.percorso.in-view .flow-node:nth-child(4){opacity:1;transform:translateX(0);transition-delay:1s}
+.percorso.in-view .flow-node:nth-child(5){opacity:1;transform:translateX(0);transition-delay:1.3s}
+
+.flow-node::before{content:"";position:absolute;left:-46px;top:8px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px solid currentColor}
+.flow-node.diploma::before{background:currentColor}
+.flow-node h4{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.15;margin-bottom:6px;letter-spacing:-.5px}
+.flow-node h4 em{font-style:italic}
+.flow-node .label{font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:4px;font-weight:500}
+.flow-node .desc{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-top:8px;max-width:380px}
+
+/* DIPLOMA — diploma cartaceo con cornice tratteggiata */
+.diploma-card{margin:32px 0;padding:32px 32px;background:#FDFBF7;border:2px dashed currentColor;border-radius:6px;position:relative;color:currentColor}
+.diploma-coccarda{position:absolute;top:20px;right:20px;width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+.diploma-coccarda svg{width:100%;height:100%}
+.diploma-card .d-eyebrow{font-family:var(--sans);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:currentColor;font-weight:600;margin-bottom:10px}
+.diploma-card h4{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;color:var(--ink);margin-bottom:14px;letter-spacing:-.5px;padding-right:60px}
+.diploma-card h4 em{font-style:italic;font-weight:500;color:var(--ink)}
+.diploma-card .d-desc{font-family:var(--serif);font-weight:300;font-size:14px;line-height:1.55;color:var(--ink-soft)}
+.diploma-card .d-firma{font-family:var(--serif);font-style:italic;font-size:12px;color:var(--ink-mute);margin-top:14px;padding-top:14px;border-top:1px solid rgba(31,24,19,.1)}
+
+/* CREDENZIALI BOX — allineato col flusso, pallino come gli altri nodi */
+.cred-block{margin-top:32px;position:relative;padding-left:0}
+.cred-block::before{content:"";position:absolute;left:14px;top:8px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px solid currentColor}
+.cred-title{font-family:var(--serif);font-weight:300;font-size:22px;font-style:italic;color:var(--ink);margin-bottom:20px;padding-left:60px}
+.cred-title em{font-style:normal;color:currentColor;font-weight:400}
+.cred-cards{display:grid;gap:14px;padding-left:60px}
+.cred-cards.dual{grid-template-columns:1fr 1fr}
+.cred-card{padding:24px 28px;background:var(--bg);border:1px solid rgba(31,24,19,.12);border-radius:12px;position:relative;transition:transform .3s,border-color .3s}
+.cred-card:hover{border-color:currentColor;transform:translateY(-2px)}
+.cred-sigla{font-family:var(--serif);font-weight:400;font-size:36px;color:currentColor;line-height:1;margin-bottom:6px}
+.cred-nome{font-family:var(--sans);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px;font-weight:500}
+.cred-req{font-size:13px;line-height:1.55;color:var(--ink-soft);margin-bottom:8px}
+.cred-req strong{color:var(--ink);font-weight:600}
+.cred-opz{font-size:11px;color:var(--ink-mute);font-style:italic}
+
+/* INVESTIMENTO */
+.invest-block{padding-left:60px;margin-top:48px;padding-top:32px;border-top:1px solid rgba(31,24,19,.08);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
+.invest-prezzo{font-family:var(--serif);font-weight:400;font-size:36px;color:var(--ink);letter-spacing:-1px}
+.invest-prezzo .eb{display:block;font-size:13px;color:var(--ink-mute);font-weight:300;margin-top:4px;font-style:italic}
+.btn-link{font-family:var(--sans);font-size:14px;font-weight:500;color:currentColor;border-bottom:1px solid currentColor;padding-bottom:4px;transition:transform .3s}
+.btn-link:hover{transform:translateX(4px)}
+
+/* COLORI PERCORSO */
+.percorso.p1{color:var(--p1)}
+.percorso.p2{color:var(--p2)}
+.percorso.p3{color:var(--p3)}
+.percorso.p4{color:var(--p4)}
+
+/* ═══ AZIENDE ═══ */
+.aziende{padding:140px 48px;background:linear-gradient(135deg,#655a9c 0%,#4a3f7a 100%);color:#fff;position:relative;overflow:hidden}
+.aziende::before{content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(103,178,226,.25) 0%,transparent 70%);pointer-events:none}
+.az-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1.5fr;gap:80px;position:relative}
+.az-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+.az-head h2 em{font-style:italic;font-weight:400;color:#67b2e2}
+.az-head .section-eyebrow{color:rgba(255,255,255,.55)}
+.az-head p{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.55;color:rgba(255,255,255,.78)}
+.az-cards{display:grid;gap:24px}
+.az-card{padding:32px 32px;background:rgba(255,255,255,.06);border:1px solid rgba(103,178,226,.2);border-radius:14px;backdrop-filter:blur(8px);transition:all .35s ease}
+.az-card:hover{background:rgba(103,178,226,.1);border-color:rgba(103,178,226,.4);transform:translateY(-3px)}
+.az-card h3{font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:12px;color:#fff}
+.az-card p{font-size:14px;line-height:1.65;color:rgba(255,255,255,.78);margin-bottom:18px}
+.az-card a{font-family:var(--sans);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#67b2e2;font-weight:500;border-bottom:1px solid #67b2e2;padding-bottom:3px;transition:color .3s,border-color .3s}
+.az-card a:hover{color:#fff;border-color:#fff}
+
+/* ═══ MODULI ═══ */
+.moduli{padding:140px 48px;background:var(--bg)}
+.mod-inner{max-width:1300px;margin:0 auto}
+.mod-head{margin-bottom:64px;max-width:900px}
+.mod-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,4vw,56px);line-height:1.05;letter-spacing:-1.5px;margin-bottom:16px}
+.mod-head h2 em{font-style:italic;font-weight:400}
+.mod-head p{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-soft)}
+.mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.mod-card{padding:32px;border:1px solid rgba(31,24,19,.12);border-radius:16px;transition:all .4s;background:var(--bg);position:relative;overflow:hidden}
+.mod-card::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:currentColor}
+.mod-card.core{color:var(--p1)}
+.mod-card.advanced{color:var(--p2)}
+.mod-card.team{color:var(--p3)}
+.mod-card:hover{transform:translateY(-4px);border-color:currentColor}
+.mod-card .label{font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:12px;font-weight:500}
+.mod-card h4{font-family:var(--serif);font-weight:500;font-size:24px;color:var(--ink);margin-bottom:12px}
+.mod-card p{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:24px}
+.mod-card .prezzo{font-family:var(--serif);font-size:24px;color:var(--ink);margin-bottom:16px}
+.mod-card .mod-cta{font-family:var(--sans);font-size:13px;font-weight:500;color:currentColor;border-bottom:1px solid currentColor;padding-bottom:3px}
+
+/* ═══ CONFIGURATORE IMMERSIVO ═══ */
+.config{padding:0;background:var(--bg-soft);min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.config-inner{max-width:900px;margin:0 auto;padding:120px 48px;text-align:center;width:100%}
+.config-head{margin-bottom:80px}
+.config-head .eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:24px;font-weight:500}
+.config-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5vw,64px);line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.config-head h2 em{font-style:italic;font-weight:400;color:var(--p1)}
+.config-step{transition:opacity .6s ease,transform .6s ease;position:relative;padding:48px 0}
+.config-step.hidden{opacity:0;pointer-events:none;position:absolute;top:50%;left:0;right:0;transform:translateY(-50%)}
+.config-step .step-num{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--p1);margin-bottom:16px;letter-spacing:1px}
+.config-step h3{font-family:var(--serif);font-weight:300;font-size:clamp(28px,3.5vw,44px);line-height:1.2;letter-spacing:-1px;margin-bottom:48px;max-width:700px;margin-left:auto;margin-right:auto}
+.config-options{display:flex;flex-direction:column;gap:14px;max-width:600px;margin:0 auto}
+.config-options button{padding:22px 32px;background:var(--bg);border:none;border-radius:14px;font-family:var(--sans);font-size:15.5px;font-weight:500;color:var(--ink);cursor:pointer;transition:all .35s ease;text-align:left;box-shadow:0 1px 3px rgba(0,0,0,.04),0 0 0 1px rgba(31,24,19,.08) inset;position:relative;overflow:hidden}
+.config-options button:hover{transform:translateY(-3px);color:#fff;background:var(--p1);box-shadow:0 16px 32px -10px rgba(223,122,74,.4),0 0 0 1px var(--p1) inset}
+.config-result{display:none;animation:fadeUp .8s ease}
+.config-result.show{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.config-result .badge{display:inline-block;padding:8px 16px;background:var(--p1);color:var(--bg);font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;border-radius:100px;margin-bottom:24px}
+.config-result h3{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4vw,52px);line-height:1.15;letter-spacing:-1.5px;margin-bottom:24px}
+.config-result h3 em{font-style:italic;font-weight:400;color:var(--p1)}
+.config-result p{font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.55;color:var(--ink-soft);max-width:580px;margin:0 auto 32px}
+.config-result .closing{font-size:14px;color:var(--ink-mute);max-width:520px;margin:0 auto 40px;line-height:1.6}
+.config-result .btn-final{display:inline-block;padding:18px 40px;background:var(--ink);color:var(--bg);border-radius:100px;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.5px;transition:transform .3s}
+.config-result .btn-final:hover{transform:translateY(-2px)}
+
+/* ═══ FAQ ═══ */
+.faq{padding:140px 48px;background:var(--bg)}
+.faq-inner{max-width:900px;margin:0 auto}
+.faq-head{text-align:center;margin-bottom:80px}
+.faq-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,4vw,56px);line-height:1.05;letter-spacing:-1.5px}
+.faq-head h2 em{font-style:italic;font-weight:400}
+.faq-item{border-bottom:1px solid rgba(31,24,19,.12);transition:all .3s}
+.faq-q{padding:32px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);line-height:1.3;letter-spacing:-.3px}
+.faq-q::after{content:"";width:24px;height:24px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M5 12h14M12 5v14' stroke='%23df7a4a' stroke-width='1.5'/></svg>");background-size:contain;flex-shrink:0;margin-left:24px;transition:transform .4s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:all .5s cubic-bezier(.4,0,.2,1)}
+.faq-item.open .faq-a{max-height:400px;padding:0 0 32px}
+.faq-a p{font-size:16px;line-height:1.7;color:var(--ink-soft);font-family:var(--serif);font-weight:300}
+
+/* ═══ CTA FINALE ═══ */
+.final{padding:140px 48px;background:var(--bg-deep);color:var(--bg);text-align:center;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(223,122,74,.15),transparent 60%);pointer-events:none}
+.final-inner{max-width:900px;margin:0 auto;position:relative}
+.final h2{font-family:var(--serif);font-weight:300;font-size:clamp(48px,7vw,96px);line-height:1.05;letter-spacing:-3px;margin-bottom:32px}
+.final h2 em{font-style:italic;font-weight:400;color:var(--p1)}
+.final p{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.55;color:rgba(253,251,247,.75);max-width:580px;margin:0 auto 48px}
+.final-btn{display:inline-block;padding:20px 48px;background:var(--p1);color:var(--bg);border-radius:100px;font-family:var(--sans);font-size:15px;font-weight:500;letter-spacing:.5px;transition:transform .3s,background .3s}
+.final-btn:hover{transform:translateY(-2px);background:#c46a3e}
+
+/* ═══ FOOTER ═══ */
+footer{padding:80px 48px 48px;background:var(--bg);border-top:1px solid rgba(31,24,19,.08);font-size:13px;color:var(--ink-mute)}
+.footer-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px}
+.footer-brand p{font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.55;margin-top:16px;color:var(--ink-soft);max-width:280px}
+footer h5{font-family:var(--sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink);font-weight:600;margin-bottom:16px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:8px}
+footer ul a{transition:color .3s}
+footer ul a:hover{color:var(--p1)}
+.footer-bottom{max-width:1400px;margin:64px auto 0;padding-top:32px;border-top:1px solid rgba(31,24,19,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:12px}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .header{padding:16px 24px}
+  .nav{display:none}
+  .hero{padding:140px 24px 80px}
+  .community,.selezione,.aziende,.moduli,.faq,.final{padding:80px 24px}
+  .comm-list{grid-template-columns:1fr 1fr}
+  .sel-grid{grid-template-columns:1fr}
+  .percorso-grid{grid-template-columns:1fr}
+  .percorso{padding:64px 0}
+  .percorso-left{padding:0 24px 32px}
+  .percorso-right{padding:32px 24px 0}
+  .az-inner{grid-template-columns:1fr;gap:48px}
+  .mod-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+  .cred-cards.dual{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .comm-list{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr}
+  .invest-block{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head><body>
+
+<header class="header"><div class="header-inner">
+<a href="homepage.html" class="logo">Ariadne</a>
+<nav class="nav">
+<a href="approccio.html">L'approccio</a>
+<a href="scuola.html" class="active">Scuola</a>
+<a href="core-quadrant.html">Core Quadrant®</a>
+<a href="training.html">Training</a>
+<a href="workshop.html">Workshop</a>
+<a href="calendario.html">Calendario</a>
+<a href="#" class="nav-cta">Aziende →</a>
+</nav>
+</div></header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+<h1><span class="reveal-mask"><span>La scuola di</span></span><br><span class="reveal-mask"><span>coaching</span></span> <span class="reveal-mask"><span><em>creativo</em></span></span></h1>
+<p class="lede fade-in">Quattro percorsi verso le credenziali ICF (ACC, PCC, ACTC). Ognuno porta al Diploma Professional Coach Ariadne, da cui puoi applicare per la credenziale che corrisponde ai tuoi obiettivi.</p>
+<span class="scroll-hint fade-in">Scorri per esplorare</span>
+</section>
+
+<!-- ═══ COMMUNITY ═══ -->
+<section class="community">
+<div class="community-inner">
+<div class="section-eyebrow fade-in">Quello che è incluso</div>
+<h2 class="fade-in">Non vendiamo solo<br>ore di <em>formazione</em></h2>
+<p class="intro-p fade-in">Per tutta la durata del tuo percorso fai parte della community attiva di Ariadne. Cinque servizi inclusi che fanno parte di ogni programma — non un extra, ma il modo in cui lavoriamo.</p>
+<div class="comm-list">
+<div class="comm-item fade-in"><span class="num">i.</span><h4>Coaching Atelier</h4><p>La community di coach, trainer, manager. Apericoaching mensili, networking, eventi aperti.</p></div>
+<div class="comm-item fade-in"><span class="num">ii.</span><h4>Laboratori Ariadne</h4><p>Approfondimenti pratici online e in presenza, inclusi nell'annualità.</p></div>
+<div class="comm-item fade-in"><span class="num">iii.</span><h4>Peer to Peer</h4><p>Esperienze di pratica con i colleghi del corso e con coach di altre scuole.</p></div>
+<div class="comm-item fade-in"><span class="num">iv.</span><h4>Pratica supervisionata</h4><p>Ore di coaching pratico con supervisione, fondamentali per le ore richieste da ICF.</p></div>
+<div class="comm-item fade-in"><span class="num">v.</span><h4>Accompagnamento all'esame</h4><p>Sessioni dedicate alla preparazione, mentoring e simulazioni.</p></div>
+</div>
+</div>
+</section>
+
+<!-- ═══ SELEZIONE ═══ -->
+<section class="selezione">
+<div class="sel-inner">
+<div class="sel-head">
+<div class="section-eyebrow fade-in">Trova il tuo punto di partenza</div>
+<h2 class="fade-in">Cosa vuoi <em>diventare?</em></h2>
+</div>
+<div class="sel-grid">
+<a href="#programma-1" class="sel-card s1"><span class="sel-num">i. coach professionista</span><h3>Voglio diventare coach professionista certificato ICF</h3><span class="arrow">→</span></a>
+<a href="#programma-3" class="sel-card s2"><span class="sel-num">ii. team coach</span><h3>Voglio specializzarmi nel team coaching</h3><span class="arrow">→</span></a>
+<a href="#aziende" class="sel-card s3"><span class="sel-num">iii. manager / leader</span><h3>Sono manager, HR o leader e voglio competenze di coaching</h3><span class="arrow">→</span></a>
+<a href="#moduli" class="sel-card s4"><span class="sel-num">iv. modulo singolo</span><h3>Voglio approfondire un singolo strumento o modulo</h3><span class="arrow">→</span></a>
+</div>
+</div>
+</section>
+
+<!-- ═══ PERCORSI INTRO ═══ -->
+<section class="percorsi-intro">
+<div class="section-eyebrow fade-in">I quattro percorsi</div>
+<h2 class="fade-in">Ogni percorso è una <em>storia</em></h2>
+<p class="fade-in">Quattro modi diversi di arrivare alla stessa cosa: la tua trasformazione come coach.</p>
+</section>
+
+<!-- ═══ PERCORSO 1: CORE COACHING PROGRAM ═══ -->
+<section class="percorso p1" id="programma-1">
+<div class="percorso-grid">
+<div class="percorso-left">
+<div class="icf-badge"><img src="assets/icf-education-provider-level1.png" alt="ICF Accredited Coaching Education Level 1"></div>
+<div class="percorso-num">01</div>
+<div class="percorso-eyebrow">Programma · ICF Level 1</div>
+<h2 class="percorso-titolo">Core Coaching <em>Program</em></h2>
+<p class="percorso-cred">→ Verso la credenziale ACC</p>
+<div class="percorso-descr">
+<p>Il Core Coaching Program è il programma di <strong>primo livello accreditato ICF Level 1</strong>: <strong>60 ore di formazione</strong> in aula su quattro weekend, più <strong>10 ore di mentor coaching individuale</strong>.</p>
+<p>Copre integralmente le ICF Core Competencies e ti porta dalle basi del coaching professionale fino all'esame finale, con il nostro approccio creativo-esperienziale come filo conduttore. Edizioni in autunno e primavera, sedi Milano e Cascina Ovi a Segrate.</p>
+</div>
+<div class="percorso-prerec"><strong>Prerequisiti</strong>Nessun prerequisito di formazione coaching pregressa. Colloquio individuale di accesso. Motivazione e disponibilità a mettersi in gioco.</div>
+<div class="percorso-invest">
+<div class="invest-label">Investimento</div>
+<div class="invest-prezzo">€3.200<span class="invest-eb">€2.900 early bird · + IVA</span></div>
+<a href="core-coaching.html" class="btn-link">Approfondisci il programma →</a>
+</div>
+</div>
+<div class="percorso-right">
+<div class="percorso-flow">
+<div class="flow-line"></div>
+<div class="flow-node"><div class="label">Anno 1 · 4 weekend · 60 ore</div><h4>Core <em>Coaching</em></h4><p class="desc">Le fondamenta del coaching creativo-esperienziale e ICF Core Competencies.</p></div>
+<div class="flow-node"><div class="label">Accompagnamento · 10 ore</div><h4>Mentoring + <em>Esame</em></h4><p class="desc">Mentor coaching individuale, simulazioni d'esame e prova finale ICF Level 1.</p></div>
+<div class="diploma-card">
+<div class="diploma-coccarda"><svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="26" r="18" fill="currentColor" opacity="0.12"/><circle cx="32" cy="26" r="18" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="32" cy="26" r="11" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M32 17 L34 22 L39 22 L35 25 L37 30 L32 27 L27 30 L29 25 L25 22 L30 22 Z" fill="currentColor"/><path d="M22 40 L28 60 L32 54 L36 60 L42 40 Z" fill="currentColor" opacity="0.85"/></svg></div>
+<div class="d-eyebrow">Riconoscimento Ariadne</div>
+<h4>Diploma <em>Professional Coach</em></h4>
+<p class="d-desc">Diploma cartaceo che attesta la frequentazione del percorso e le capacità acquisite secondo l'approccio creativo-esperienziale Ariadne.</p>
+<div class="d-firma">Firmato dai partner Ariadne · Edizione 2026</div>
+</div>
+<div class="cred-block">
+<h3 class="cred-title">E poi puoi applicare per <em>la credenziale ICF</em></h3>
+<div class="cred-cards">
+<div class="cred-card"><div class="cred-sigla">ACC</div><div class="cred-nome">Associate Certified Coach</div><p class="cred-req"><strong>100 ore</strong> di pratica coaching documentate (50 nelle 18 mesi prima dell'application).</p><p class="cred-opz">Non obbligatorio. La credenziale è una scelta tua.</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ PERCORSO 2 ═══ -->
+<section class="percorso p2" id="programma-2">
+<div class="percorso-grid">
+<div class="percorso-left">
+<div class="icf-badge"><img src="assets/icf-education-provider-level2.webp" alt="ICF Accredited Coaching Education Level 2"></div>
+<div class="percorso-num">02</div>
+<div class="percorso-eyebrow">Programma · ICF Level 2</div>
+<h2 class="percorso-titolo">Professional Coaching <em>Program</em></h2>
+<p class="percorso-cred">→ Verso la credenziale PCC</p>
+<div class="percorso-descr">
+<p>Il Professional Coaching Program è il programma di <strong>secondo livello accreditato ICF Level 2</strong>. Combina due annualità progressive — Core Coaching e Advanced Coaching — per un totale di <strong>125 ore di formazione</strong> in aula e <strong>10 ore di mentor coaching</strong>, in linea con i requisiti formativi richiesti per la credenziale PCC.</p>
+<p>Il primo anno (Core Coaching) costruisce le competenze fondamentali. Il secondo anno (Advanced Coaching) approfondisce dimensioni più sofisticate del coaching: presenza sistemica, lavoro con i livelli di senso, uso del sé come strumento, complessità relazionale.</p>
+</div>
+<div class="percorso-prerec"><strong>Prerequisiti</strong>Nessun prerequisito di formazione coaching pregressa. Si parte dal Core Coaching e si prosegue con Advanced Coaching. Colloquio individuale di accesso.</div>
+<div class="percorso-invest">
+<div class="invest-label">Investimento</div>
+<div class="invest-prezzo">€5.500<span class="invest-eb">€4.950 early bird · + IVA</span></div>
+<a href="advanced-coaching.html" class="btn-link">Approfondisci il programma →</a>
+</div>
+</div>
+<div class="percorso-right">
+<div class="percorso-flow">
+<div class="flow-line"></div>
+<div class="flow-node"><div class="label">Anno 1 · 4 weekend · 60 ore</div><h4>Core <em>Coaching</em></h4><p class="desc">Le fondamenta del coaching creativo-esperienziale e ICF Core Competencies.</p></div>
+<div class="flow-node"><div class="label">Anno 2 · 4 weekend · 65 ore</div><h4>Advanced <em>Coaching</em></h4><p class="desc">Approfondimento sistemico, presenza, sentire profondo, uso del sé come strumento di coaching.</p></div>
+<div class="flow-node"><div class="label">Accompagnamento · 10 ore</div><h4>Mentoring + <em>Esame</em></h4><p class="desc">Mentor coaching individuale ed esame finale ICF Level 2.</p></div>
+<div class="diploma-card">
+<div class="diploma-coccarda"><svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="26" r="18" fill="currentColor" opacity="0.12"/><circle cx="32" cy="26" r="18" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="32" cy="26" r="11" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M32 17 L34 22 L39 22 L35 25 L37 30 L32 27 L27 30 L29 25 L25 22 L30 22 Z" fill="currentColor"/><path d="M22 40 L28 60 L32 54 L36 60 L42 40 Z" fill="currentColor" opacity="0.85"/></svg></div>
+<div class="d-eyebrow">Riconoscimento Ariadne</div>
+<h4>Diploma <em>Professional Coach</em></h4>
+<p class="d-desc">Diploma cartaceo che attesta la frequentazione del percorso e le capacità acquisite secondo l'approccio creativo-esperienziale Ariadne.</p>
+<div class="d-firma">Firmato dai partner Ariadne · Edizione 2026</div>
+</div>
+<div class="cred-block">
+<h3 class="cred-title">E poi puoi applicare per <em>la credenziale ICF</em></h3>
+<div class="cred-cards">
+<div class="cred-card"><div class="cred-sigla">PCC</div><div class="cred-nome">Professional Certified Coach</div><p class="cred-req"><strong>500 ore</strong> di pratica coaching documentate (50 nelle 18 mesi prima dell'application).</p><p class="cred-opz">Non obbligatorio. La credenziale è una scelta tua.</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ PERCORSO 3 ═══ -->
+<section class="percorso p3" id="programma-3">
+<div class="percorso-grid">
+<div class="percorso-left">
+<div class="icf-badge"><img src="assets/icf-education-provider-level2.webp" alt="ICF Accredited Coaching Education Level 2"></div>
+<div class="percorso-num">03</div>
+<div class="percorso-eyebrow">Programma · ICF Level 2</div>
+<h2 class="percorso-titolo">Professional Team Coaching <em>Program</em></h2>
+<p class="percorso-cred">→ Verso le credenziali PCC e ACTC</p>
+<div class="percorso-descr">
+<p>Il Professional Team Coaching Program è il programma di <strong>secondo livello accreditato ICF Level 2</strong> con specializzazione in team coaching. Combina Core Coaching (anno 1) e Team Coaching (anno 2) per <strong>125 ore di formazione</strong> e <strong>10 ore di mentor coaching</strong>.</p>
+<p>Il modulo Team Coaching del secondo anno copre le ICF Team Coaching Competencies: lavoro con sistemi e dinamiche di gruppo, contracting con team multipli, leadership coaching, coaching collettivo. Il programma è accreditato sia ICF Level 2 sia ACTC Education.</p>
+</div>
+<div class="percorso-prerec"><strong>Prerequisiti</strong>Nessun prerequisito di formazione coaching pregressa. Si parte dal Core e si specializza con Team Coaching. Colloquio individuale di accesso.</div>
+<div class="percorso-invest">
+<div class="invest-label">Investimento</div>
+<div class="invest-prezzo">€5.500<span class="invest-eb">€4.950 early bird · + IVA</span></div>
+<a href="team-coaching.html" class="btn-link">Approfondisci il programma →</a>
+</div>
+</div>
+<div class="percorso-right">
+<div class="percorso-flow">
+<div class="flow-line"></div>
+<div class="flow-node"><div class="label">Anno 1 · 4 weekend · 60 ore</div><h4>Core <em>Coaching</em></h4><p class="desc">Le fondamenta del coaching creativo-esperienziale.</p></div>
+<div class="flow-node"><div class="label">Anno 2 · Specializzazione · 65 ore</div><h4>Team <em>Coaching</em></h4><p class="desc">Lavoro con i team: dinamiche sistemiche, contracting collettivo, leadership coaching, ICF Team Coaching Competencies.</p></div>
+<div class="flow-node"><div class="label">Accompagnamento · 10 ore</div><h4>Mentoring + <em>Esame</em></h4><p class="desc">Mentor coaching individuale ed esame finale ICF Level 2.</p></div>
+<div class="diploma-card">
+<div class="diploma-coccarda"><svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="26" r="18" fill="currentColor" opacity="0.12"/><circle cx="32" cy="26" r="18" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="32" cy="26" r="11" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M32 17 L34 22 L39 22 L35 25 L37 30 L32 27 L27 30 L29 25 L25 22 L30 22 Z" fill="currentColor"/><path d="M22 40 L28 60 L32 54 L36 60 L42 40 Z" fill="currentColor" opacity="0.85"/></svg></div>
+<div class="d-eyebrow">Riconoscimento Ariadne</div>
+<h4>Diploma <em>Professional Coach</em></h4>
+<p class="d-desc">Diploma cartaceo che attesta la frequentazione del percorso e le capacità acquisite secondo l'approccio creativo-esperienziale Ariadne.</p>
+<div class="d-firma">Firmato dai partner Ariadne · Edizione 2026</div>
+</div>
+<div class="cred-block">
+<h3 class="cred-title">E poi puoi applicare per <em>le credenziali ICF</em></h3>
+<div class="cred-cards dual">
+<div class="cred-card"><div class="cred-sigla">PCC</div><div class="cred-nome">Professional Certified Coach</div><p class="cred-req"><strong>500 ore</strong> di pratica coaching documentate.</p><p class="cred-opz">Non obbligatorio.</p></div>
+<div class="cred-card"><div class="cred-sigla">ACTC</div><div class="cred-nome">Advanced Cert. Team Coaching</div><p class="cred-req">Credenziale ICF attiva (ACC/PCC/MCC) + <strong>5 team coaching engagements</strong> negli ultimi 5 anni.</p><p class="cred-opz">Non obbligatorio.</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ PERCORSO 4 ═══ -->
+<section class="percorso p4" id="programma-4">
+<div class="percorso-grid">
+<div class="percorso-left">
+<div class="percorso-num">04</div>
+<div class="percorso-eyebrow">Programma specialistico</div>
+<h2 class="percorso-titolo">Team Coaching <em>Program</em></h2>
+<p class="percorso-cred">→ Verso la credenziale ACTC</p>
+<div class="percorso-descr">
+<p>Il Team Coaching Program è un <strong>programma specialistico autonomo</strong>, dedicato a coach che hanno già completato un percorso equivalente al Core Coaching presso un'altra scuola riconosciuta e vogliono specializzarsi nel team coaching.</p>
+<p>Include <strong>65 ore di formazione</strong> sulle ICF Team Coaching Competencies più <strong>5 ore di Coaching Supervision</strong> (richieste specificamente da ICF per la credenziale ACTC, in sostituzione del Mentoring previsto per le credenziali individuali). Edizione pilota 2026 limitata a 12 partecipanti.</p>
+</div>
+<div class="percorso-prerec"><strong>Prerequisiti</strong>Percorso equivalente al Core Coaching già completato presso un'altra scuola riconosciuta. Colloquio individuale di valutazione.</div>
+<div class="percorso-invest">
+<div class="invest-label">Investimento</div>
+<div class="invest-prezzo">€3.500<span class="invest-eb">€3.150 early bird · + IVA<br><em style="opacity:.7;font-size:13px">prezzo provvisorio</em></span></div>
+<a href="team-coaching.html" class="btn-link">Approfondisci il programma →</a>
+</div>
+</div>
+<div class="percorso-right">
+<div class="percorso-flow">
+<div class="flow-line"></div>
+<div class="flow-node"><div class="label">Modulo specialistico · 65 ore</div><h4>Team <em>Coaching</em></h4><p class="desc">Lavoro con i team: dinamiche sistemiche, coaching collettivo, ICF Team Coaching Competencies.</p></div>
+<div class="flow-node"><div class="label">Specifico per ACTC · 5 ore</div><h4>Supervisione + <em>Esame</em></h4><p class="desc">Coaching Supervision (non Mentoring) come richiesto da ICF per la credenziale ACTC, più esame finale.</p></div>
+<div class="diploma-card">
+<div class="diploma-coccarda"><svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="26" r="18" fill="currentColor" opacity="0.12"/><circle cx="32" cy="26" r="18" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="32" cy="26" r="11" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M32 17 L34 22 L39 22 L35 25 L37 30 L32 27 L27 30 L29 25 L25 22 L30 22 Z" fill="currentColor"/><path d="M22 40 L28 60 L32 54 L36 60 L42 40 Z" fill="currentColor" opacity="0.85"/></svg></div>
+<div class="d-eyebrow">Riconoscimento Ariadne</div>
+<h4>Diploma <em>Professional Coach</em></h4>
+<p class="d-desc">Diploma cartaceo che attesta la frequentazione del percorso e le capacità acquisite secondo l'approccio creativo-esperienziale Ariadne.</p>
+<div class="d-firma">Firmato dai partner Ariadne · Edizione 2026</div>
+</div>
+<div class="cred-block">
+<h3 class="cred-title">E poi puoi applicare per <em>la credenziale ICF</em></h3>
+<div class="cred-cards">
+<div class="cred-card"><div class="cred-sigla">ACTC</div><div class="cred-nome">Advanced Certification Team Coaching</div><p class="cred-req">Credenziale ICF attiva (ACC/PCC/MCC) come prerequisito + <strong>5 team coaching engagements</strong> negli ultimi 5 anni.</p><p class="cred-opz">Non obbligatorio.</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ AZIENDE ═══ -->
+<section class="aziende" id="aziende">
+<div class="az-inner">
+<div class="az-head">
+<div class="section-eyebrow" style="color:rgba(253,251,247,.5)">Per le organizzazioni</div>
+<h2>Portiamo i percorsi nelle <em>aziende</em></h2>
+<p>In due modalità diverse, sempre con la stessa profondità formativa.</p>
+</div>
+<div class="az-cards">
+<div class="az-card"><h3>Per manager singoli</h3><p>Percorsi individuali su Core, Advanced o Team Coaching per manager che vogliono sviluppare competenze di coaching nella propria leadership e nel potenziale delle persone che guidano.</p><a href="#">Scopri di più →</a></div>
+<div class="az-card"><h3>Per gruppi di manager in azienda</h3><p>Percorsi da svolgere in azienda per gruppi di manager o coach interni, con progettazione customizzata sui bisogni dell'organizzazione e dei team coinvolti.</p><a href="#">Scopri di più →</a></div>
+</div>
+</div>
+</section>
+
+<!-- ═══ MODULI ═══ -->
+<section class="moduli" id="moduli">
+<div class="mod-inner">
+<div class="mod-head">
+<div class="section-eyebrow fade-in">Senza puntare al diploma</div>
+<h2 class="fade-in">Solo un <em>modulo per volta</em></h2>
+<p class="fade-in">Per chi vuole approfondire uno specifico aspetto, indipendentemente dai programmi che portano alla credenziale.</p>
+</div>
+<div class="mod-grid">
+<div class="mod-card core fade-in"><div class="label">— Modulo singolo</div><h4>Core Coaching</h4><p>Le fondamenta del coaching creativo-esperienziale. Per esplorare il metodo senza puntare al diploma.</p><div class="prezzo">€1.800 + IVA</div><a href="core-coaching.html" class="mod-cta">Iscriviti →</a></div>
+<div class="mod-card advanced fade-in"><div class="label">— Modulo singolo</div><h4>Advanced Coaching</h4><p>L'approfondimento sistemico per coach esperti. Richiede Core o equivalente.</p><div class="prezzo">€2.000 + IVA</div><a href="advanced-coaching.html" class="mod-cta">Iscriviti →</a></div>
+<div class="mod-card team fade-in"><div class="label">— Modulo singolo</div><h4>Team Coaching</h4><p>Specializzazione nel lavoro con i team. Richiede Core o equivalente.</p><div class="prezzo">€2.200 + IVA</div><a href="team-coaching.html" class="mod-cta">Iscriviti →</a></div>
+</div>
+</div>
+</section>
+
+<!-- ═══ CONFIGURATORE ═══ -->
+<section class="config">
+<div class="config-inner">
+<div class="config-head">
+<div class="eyebrow">Aiutami a scegliere</div>
+<h2>Non hai ancora <em>le idee chiare?</em></h2>
+</div>
+<div class="config-step" data-step="1">
+<div class="step-num">i. — primo passo</div>
+<h3>Hai già fatto un percorso di coaching?</h3>
+<div class="config-options">
+<button data-q="1" data-v="si">Sì, da una scuola riconosciuta</button>
+<button data-q="1" data-v="no">No, parto da zero</button>
+<button data-q="1" data-v="forse">Non so se conta</button>
+</div>
+</div>
+<div class="config-step hidden" data-step="2">
+<div class="step-num">ii. — secondo passo</div>
+<h3>Cosa è più importante per te?</h3>
+<div class="config-options">
+<button data-q="2" data-v="coach">Diventare coach professionista certificato ICF</button>
+<button data-q="2" data-v="manager">Acquisire competenze di coaching per il mio ruolo</button>
+<button data-q="2" data-v="team">Specializzarmi in team coaching</button>
+<button data-q="2" data-v="strumento">Approfondire uno strumento specifico</button>
+</div>
+</div>
+<div class="config-step hidden" data-step="3">
+<div class="step-num">iii. — ultimo passo</div>
+<h3>Quanto tempo puoi dedicarci?</h3>
+<div class="config-options">
+<button data-q="3" data-v="lungo">Un anno o più, sono pronto per un percorso lungo</button>
+<button data-q="3" data-v="breve">Vorrei iniziare con qualcosa di più contenuto</button>
+<button data-q="3" data-v="ndr">Non ho ancora un'idea chiara</button>
+</div>
+</div>
+<div class="config-result" id="risultato">
+<span class="badge">Suggerimento</span>
+<h3>Per te suggeriamo<br><em><span id="suggerito">il Programma 1: Core Coaching</span></em></h3>
+<p id="motivo">Sembra il punto di partenza giusto. Vai alla sezione del programma per scoprirne i dettagli.</p>
+<p class="closing">Quello che ti suggeriamo è solo un punto di partenza. Ogni persona ha la sua storia, il suo contesto, i suoi obiettivi. Il modo migliore per scegliere è una conversazione di 30 minuti con uno dei trainer.</p>
+<a href="#" class="btn-final">Richiedi un colloquio →</a>
+</div>
+</div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq">
+<div class="faq-inner">
+<div class="faq-head">
+<div class="section-eyebrow fade-in">Le domande che ci fanno spesso</div>
+<h2 class="fade-in">Domande <em>frequenti</em></h2>
+</div>
+<div class="faq-item"><div class="faq-q">Qual è la differenza tra il Diploma Ariadne e le credenziali ICF?</div><div class="faq-a"><p>Il Diploma Professional Coach Ariadne è il riconoscimento del percorso formativo svolto da noi. Le credenziali ICF (ACC, PCC, ACTC) sono certificazioni internazionali rilasciate dall'International Coaching Federation, che richiedono ore di pratica documentate dopo la formazione. Sono complementari, non sovrapposte.</p></div></div>
+<div class="faq-item"><div class="faq-q">Posso iscrivermi senza voler ottenere una credenziale ICF?</div><div class="faq-a"><p>Sì, assolutamente. Molti partecipanti scelgono i nostri percorsi per acquisire competenze di coaching da applicare nel proprio ruolo (manager, HR, leader, formatore) senza puntare alla credenziale ICF. Il Diploma Ariadne è un risultato a sé.</p></div></div>
+<div class="faq-item"><div class="faq-q">Quanto tempo serve per accumulare le ore di pratica richieste da ICF?</div><div class="faq-a"><p>Dipende dal tuo ritmo. La pratica supervisionata è già parte del percorso, e durante l'annualità inizi ad accumulare ore. Per la ACC (100 ore) tipicamente bastano 6-12 mesi dopo la fine del corso. Per la PCC (500 ore) servono mediamente 2-3 anni di pratica continuativa.</p></div></div>
+<div class="faq-item"><div class="faq-q">I percorsi sono riconosciuti internazionalmente?</div><div class="faq-a"><p>Sì. I nostri programmi sono accreditati ICF, che è la federazione internazionale di riferimento del coaching. Le credenziali ICF sono riconosciute in tutto il mondo.</p></div></div>
+<div class="faq-item"><div class="faq-q">Posso fare un solo modulo invece di tutto il programma?</div><div class="faq-a"><p>Sì, è possibile iscriversi al singolo modulo (Core, Advanced o Team) senza puntare al diploma o alla credenziale. È un'opzione utile per approfondire un aspetto specifico.</p></div></div>
+<div class="faq-item"><div class="faq-q">Sono previste agevolazioni o pagamenti rateizzati?</div><div class="faq-a"><p>Sì. Tutte le quote possono essere rateizzate. Inoltre offriamo una tariffa early bird per chi si iscrive in anticipo. Per situazioni particolari (alumni, iscrizioni multiple, percorsi aziendali) sono previste agevolazioni dedicate.</p></div></div>
+</div>
+</section>
+
+<!-- ═══ CTA FINALE ═══ -->
+<section class="final">
+<div class="final-inner">
+<h2><em>Inizia</em><br>da qui</h2>
+<p>Un colloquio gratuito di 30 minuti con uno dei trainer Ariadne. Per capire insieme da dove conviene iniziare.</p>
+<a href="#" class="final-btn">Richiedi un colloquio →</a>
+</div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer><div class="footer-inner">
+<div class="footer-brand"><span class="logo" style="font-size:20px">Ariadne</span><p>La scuola italiana di coaching professionale ICF dove l'approccio si impara sperimentando.</p></div>
+<div><h5>Scuola</h5><ul><li><a href="scuola.html">La proposta Ariadne</a></li><li><a href="core-coaching.html">Core Coaching</a></li><li><a href="advanced-coaching.html">Advanced Coaching</a></li><li><a href="team-coaching.html">Team Coaching</a></li><li><a href="core-quadrant.html">Core Quadrant®</a></li></ul></div>
+<div><h5>Community</h5><ul><li><a href="coaching-atelier.html">Coaching Atelier</a></li><li><a href="laboratori.html">Laboratori Ariadne</a></li><li><a href="webinar.html">Webinar</a></li><li><a href="workshop.html">Workshop</a></li><li><a href="calendario.html">Calendario</a></li></ul></div>
+<div><h5>Contatti</h5><ul><li><a href="approccio.html">L'approccio</a></li><li><a href="approccio.html#trainer">I trainer</a></li><li><a href="mailto:info@ariadne.training">Richiedi un colloquio</a></li></ul></div>
+</div>
+<div class="footer-bottom"><div>© 2026, Ariadne SRL · P.IVA 11640010960</div><div>Via Pietro Paleocapa, 7 · 20121 Milano</div></div>
+</footer>
+
+<script>
+// Mask reveal & fade-in observer
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') });
+}, {threshold:0.15, rootMargin:'-50px'});
+document.querySelectorAll('.reveal-mask, .fade-in').forEach(el => io.observe(el));
+
+// Percorso in-view (per attivare la linea + nodi)
+const percIo = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view') });
+}, {threshold:0.25});
+document.querySelectorAll('.percorso').forEach(el => percIo.observe(el));
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+
+// Configuratore
+const state = {1:null, 2:null, 3:null};
+document.querySelectorAll('.config-options button').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const q = this.dataset.q, v = this.dataset.v;
+    state[q] = v;
+    const currentStep = this.closest('.config-step');
+    const nextStep = document.querySelector(`.config-step[data-step="${parseInt(q)+1}"]`);
+    
+    if (nextStep) {
+      currentStep.classList.add('hidden');
+      setTimeout(() => nextStep.classList.remove('hidden'), 200);
+    } else {
+      currentStep.classList.add('hidden');
+      // Logica suggerimento
+      let sugg = 'il Programma 1: Core Coaching Program';
+      let mot = 'Sembra il punto di partenza giusto. Vai alla sezione del programma per scoprirne i dettagli.';
+      if (state[2] === 'team' && state[1] === 'si') {
+        sugg = 'il Programma 4: Team Coaching specialistico';
+        mot = 'Hai già un Core Coaching alle spalle e vuoi specializzarti nel team coaching. Il Programma 4 è pensato esattamente per te.';
+      } else if (state[2] === 'team') {
+        sugg = 'il Programma 3: Professional Team Coaching Program';
+        mot = 'Vuoi specializzarti nel team coaching e non hai ancora una base di coaching individuale. Il Programma 3 ti porta da zero alla credenziale ACTC.';
+      } else if (state[2] === 'manager') {
+        sugg = 'il Programma 1 oppure i Moduli individuali';
+        mot = 'Cerchi competenze di coaching per il tuo ruolo. Il Core Coaching è un buon inizio, ma anche i moduli individuali possono fare al caso tuo.';
+      } else if (state[2] === 'strumento') {
+        sugg = 'i Moduli individuali';
+        mot = 'Vuoi approfondire uno strumento specifico. Guarda i moduli singoli, sono pensati esattamente per questo.';
+      } else if (state[2] === 'coach' && state[3] === 'lungo') {
+        sugg = 'il Programma 2: Professional Coaching Program';
+        mot = 'Vuoi diventare coach professionista certificato e hai tempo per un percorso completo. Il Professional Coaching Program ti porta dalla base alla PCC.';
+      } else if (state[2] === 'coach') {
+        sugg = 'il Programma 1: Core Coaching Program';
+        mot = 'Vuoi diventare coach professionista. Il Core Coaching è il punto di partenza naturale.';
+      }
+      document.getElementById('suggerito').textContent = sugg;
+      document.getElementById('motivo').textContent = mot;
+      setTimeout(() => document.getElementById('risultato').classList.add('show'), 300);
+    }
+  });
+});
+</script>
+</body></html>

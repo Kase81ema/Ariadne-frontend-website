@@ -1,5 +1,7 @@
 # Ariadne Website — Contesto progettuale per Claude Design
 
+> **Aggiornamento del 6 novembre 2026.** Questo file resta la fonte delle regole di brand. Le decisioni più recenti (menu, font, costi, architettura con Notion come fonte di verità, area riservata in Base44, sito statico su Cloudflare Pages) stanno in `docs/Ariadne_Specifiche_Sito_Community_2026-11-05.md`; il piano di lavoro in `docs/Piano_lavoro_sito_Ariadne.html`; le tre pagine ridisegnate a novembre in `drafts/2026-11/`. Dove questo file e le specifiche divergono, valgono le specifiche. Le differenze principali sono segnate qui sotto con «Novembre 2026».
+
 ## Chi è Ariadne
 
 Ariadne SRL è una scuola italiana di coaching creativo-esperienziale con sede a Milano (Via Pietro Paleocapa, 7). Tre partner fondatori che sono anche i trainer principali:
@@ -28,6 +30,8 @@ Il sito è in fase di riposizionamento: da "scuola di coaching" a **ecosistema f
 
 ### Menù principale
 L'approccio · Scuola (con sotto-menù) · Core Quadrant® · Training · Workshop · Calendario · Aziende →
+
+**Novembre 2026.** La voce «L'approccio» è diventata **«Il filo di Ariadne»** (chi siamo e approccio insieme, pagina `il-filo-di-ariadne.html`; `approccio.html` non esiste più). Menu della bozza: Il filo di Ariadne · Scuola di coaching (con sotto-menù) · Core Quadrant® · Training · Workshop · Calendario · Aziende →, più l'accesso all'area riservata nell'intestazione. La revisione dell'esperto propone di ridurre il primo livello a cinque voci (Scuola di coaching ▾ · Core Quadrant® · Formazione esperienziale · Community ▾ · Aziende) con Calendario e accesso come link di servizio: decisione aperta nella task 0.7 del piano. Su mobile il sotto-menù Scuola è un accordion a tocco.
 
 ### Mappa pagine completa
 
@@ -85,6 +89,8 @@ L'approccio · Scuola (con sotto-menù) · Core Quadrant® · Training · Worksh
 - Ink morbido: `#5A4A3D`
 - Ink muto: `#9C8B7B`
 
+**Novembre 2026 — contrasto.** Arancio `#df7a4a`, verde `#9ec165` e azzurro `#67b2e2` usati come colore del testo su bianco restano sotto il contrasto WCAG AA (circa 3:1, 2:1 e 2,3:1). Per le parole chiave in bold colorato e per i link servono varianti più scure degli stessi colori (da definire nella task 1.4 del piano); i colori originali restano per sfondi, blocchi, bordi e nodi con testo scuro sopra.
+
 ### Tipografia
 
 **IMPORTANTE:** Il sito attuale ariadne.training usa questa gerarchia tipografica:
@@ -97,6 +103,8 @@ L'approccio · Scuola (con sotto-menù) · Core Quadrant® · Training · Worksh
 - NO punto finale nei titoli
 - Evidenziare parole chiave nei testi lunghi con bold colorato per facilitare la lettura veloce
 
+**Novembre 2026 — decisione sui font (5 novembre).** Afterglow per i titoli, Montserrat per navigazione ed etichette, Open Sans per il corpo del testo. Afterglow va acquistato con licenza web (il file desktop convertito in woff2 non è coperto dall'EULA) oppure sostituito in via definitiva da Playfair Display: decisione nella task 0.7, attuazione nella task 1.4. Tutti i font self-hosted, `font-display: swap`, fallback con `size-adjust`. Il corsivo va ridotto anche nel corpo del testo (citazioni comprese), come fatto nelle bozze di novembre.
+
 ### Elementi grafici
 
 - **Cubotti del logo** — sono l'elemento identitario principale. Usati come marcatori semantici, texture di sfondo (in outline), e come base per il diagramma dei percorsi
@@ -104,6 +112,7 @@ L'approccio · Scuola (con sotto-menù) · Core Quadrant® · Training · Worksh
 - **Border-radius bottoni:** 6px (squadrati con curva accennata, non pill)
 - **Foto trainer:** quadrate con angoli stondati 16px (NON tonde)
 - **NO forme decorative generiche** (cerchi, ovali) negli hero — usare solo elementi derivati dal cubotto (archi, outline)
+- **Novembre 2026 — il filo.** Nuovo elemento identitario accanto ai cubotti: una linea sottile SVG che si traccia allo scroll e collega le tappe di un percorso, nodi circolari al posto dei blocchi rigidi, il labirinto SVG nella pagina Il filo di Ariadne. I diagrammi dei percorsi nelle bozze di novembre usano il filo con i nodi, con il diploma cartaceo (coccarda) alla fine del flusso e la credenziale ICF come tappa con il suo nodo. Ogni animazione rispetta `prefers-reduced-motion`; i caroselli diventano griglie su mobile.
 
 ### Codifica colori per area
 
@@ -132,6 +141,7 @@ L'approccio · Scuola (con sotto-menù) · Core Quadrant® · Training · Worksh
 - **"Metodo"** sostituito con **"Approccio"** quando ci si riferisce alla modalità di erogazione (es. "l'approccio creativo-esperienziale"). "Metodo" resta valido quando si parla del metodo di Daniel Ofman (Core Quadrant)
 - **"Atelier"** da solo NON si usa — sempre **"Coaching Atelier"** per evitare equivoci
 - **"Laboratori Ariadne"** è il nome definitivo (non "Lab", non "Ariadne's Lab")
+- **Novembre 2026.** I quattro percorsi della pagina Scuola di coaching sono: 1 Core Coaching Program (Level 1 → ACC), 2 Professional Coaching Program (Level 2: Core + Advanced → PCC), 3 Professional Team Coaching Program (Level 2: Core + Team → PCC e ACTC), 4 Team Coaching Program autonomo (Team + supervisione → ACTC per chi ha già una credenziale ICF attiva). «Diploma Professional Coach Ariadne» è un nome provvisorio: va spiegato in breve, senza far pensare a un doppio esame. Vocaboli vietati nei testi: «mindset», «resilienza», «journey», urgenza e scarsità. Nei testi si evita la costruzione retorica «A, non B»: si dice direttamente che cosa una cosa è.
 
 ---
 
@@ -164,6 +174,8 @@ Per ogni annualità (Core Coaching, Advanced Coaching, Team Coaching), il partec
 ---
 
 ## Prezzi
+
+**Novembre 2026.** I prezzi non si scrivono più nelle pagine: si leggono da Notion · Percorsi (campi prezzo, early bird, prerequisiti). Quelli qui sotto e quelli nelle bozze di novembre sono di riferimento; i prezzi del Team Coaching Program autonomo e dei moduli singoli nelle bozze sono segnaposto (decisione 0.7 del piano). Core Quadrant® nella bozza v2: 1.895 € + IVA.
 
 - Core Coaching: €3.200 pieno / €2.900 early bird + IVA
 - Team Coaching: €3.200 pieno / €2.900 early bird + IVA
@@ -246,7 +258,11 @@ Web: ariadne.training
 
 ---
 
-## Stato attuale del file allegato (v10)
+## Stato al 6 novembre 2026
+
+Il repository contiene le pagine di giugno 2026 (con header e footer condivisi, `ariadne.css`, `ariadne.js`) e, in `drafts/2026-11/`, le tre pagine ridisegnate a novembre: Scuola di coaching v4, Core Quadrant® v2, Il filo di Ariadne v1. Il lavoro riprende dal piano in `docs/Piano_lavoro_sito_Ariadne.html`: prima le fondamenta (account intestati ad Ariadne, area Notion «Sito e community», fotografia dello stato attuale, decisioni), poi contenuti e dati in Notion, poi la costruzione del sito con i dati letti da Notion al build (prototipo Astro, task 2.1), pubblicazione su Cloudflare Pages e passaggio DNS (obiettivo 12 febbraio 2027), infine l'area riservata in Base44 (obiettivo 9 aprile 2027).
+
+## Stato del file allegato a giugno 2026 (v10) — storico
 
 Il file ZIP contiene 18 pagine HTML + CSS + JS + asset grafici. La struttura informativa è corretta e validata. **Il design grafico necessita di miglioramento significativo** — le pagine sono funzionali come template ma non sono ancora al livello di qualità visiva del sito attuale ariadne.training. In particolare:
 
