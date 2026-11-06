@@ -4,16 +4,18 @@ Questa cartella contiene tutto ciò che serve per riprendere il progetto del nuo
 
 ## Da dove ripartire, in ordine
 
-1. **`Piano_lavoro_sito_Ariadne.html`** — il piano di lavoro: 5 fasi, 30 task, sottotask, dipendenze, Gantt. Si apre nel browser; lo stato si salva nel browser e si incorpora nel file con «Salva file aggiornato». I dati stanno in un unico blocco JSON (`<script id="pm-data">`) in fondo al file: Claude può aggiornarli direttamente nel repository.
+1. **`Piano_lavoro_sito_Ariadne.html`** — il piano di lavoro: 5 fasi, 31 task, sottotask, dipendenze, Gantt. Si apre nel browser; lo stato si salva nel browser e si incorpora nel file con «Salva file aggiornato». I dati stanno in un unico blocco JSON (`<script id="pm-data">`) in fondo al file: Claude può aggiornarli direttamente nel repository.
 2. **`Ariadne_Specifiche_Sito_Community_2026-11-05.md`** — il documento di specifiche: punto della situazione, identità visiva e voce, pagine e origine dei contenuti, Notion come fonte di verità, area riservata, pagamenti, architettura tecnica e costi, lavoro da fare, decisioni, revisione dell'esperto (sezione 10).
 3. **`Revisione_esperto_sito_2026-11-05.md`** — la revisione indipendente del documento, da sola.
-4. **`../CONTEXT.md`** — regole di brand, palette, font, terminologia, tono di voce. Vale per ogni pagina e per l'area riservata.
-5. **`../drafts/2026-11/`** — le tre pagine ridisegnate a novembre 2026 (Scuola di coaching v4, Core Quadrant® v2, Il filo di Ariadne v1): sono il riferimento di stile e contenuto più recente, da integrare nel sito nella task 2.2 del piano. Le pagine omonime nella radice del repository sono la versione di giugno 2026, con header e footer condivisi.
+4. **`Direzione_grafica.md`** — la decisione del 6 novembre sulla grafica: il sito di giugno e le bozze valgono per struttura e contenuti, la veste va rinnovata verso una linea distintiva di Ariadne; elenco dei segni dell'estetica «generata» da eliminare e degli elementi distintivi da sviluppare. Vale per ogni pagina.
+5. **`../CONTEXT.md`** — regole di brand, palette, font, terminologia, tono di voce. Vale per ogni pagina e per l'area riservata.
+6. **`../drafts/2026-11/`** — le tre pagine ridisegnate a novembre 2026 (Scuola di coaching v4, Core Quadrant® v2, Il filo di Ariadne v1): sono il riferimento più recente per struttura e contenuti, da integrare nel sito nella task 2.2 del piano; anche la loro grafica segue la revisione di `Direzione_grafica.md`. Le pagine omonime nella radice del repository sono la versione di giugno 2026, con header e footer condivisi.
 
 ## Gli altri file
 
 | File | Cosa contiene | Quando serve |
 | --- | --- | --- |
+| `Prompt_avvio_Claude_Ariadne.md` | Istruzioni del Project e primo messaggio per l'account Claude di Ariadne | Task 0.1 |
 | `Contesto_Design_Scuola.md` | Struttura e regole della pagina Scuola di coaching per lavorarci in Claude Design | Task 2.2 |
 | `Prompt_Design_Pagina_Scuola.md` | Prompt pronto per Claude Design sulla pagina Scuola | Task 2.2 |
 | `Briefing_Area_Riservata_Emergent_2026-07.md` | Stato dell'area riservata costruita con Emergent (repository `Ariadne`), dati reali raccolti, decisioni architetturali | Task 3.1 |

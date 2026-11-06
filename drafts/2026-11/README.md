@@ -1,6 +1,6 @@
 # Bozze di novembre 2026
 
-Tre pagine ridisegnate il 5 novembre 2026 nello stile che il nuovo sito deve assumere: bianco puro predominante, blocchi di colore della palette, il filo (linea SVG che si traccia allo scroll), nodi circolari, testi brevi.
+Tre pagine ridisegnate il 5 novembre 2026: struttura, contenuti, il filo (linea SVG che si traccia allo scroll) e i nodi circolari sono il riferimento per il nuovo sito. La veste grafica non è definitiva: anche queste bozze usano sfondi panna ed etichette maiuscole sopra i titoli, e seguono la revisione descritta in `docs/Direzione_grafica.md`.
 
 | File | Versione | Cosa cambia rispetto alla pagina di giugno nella radice |
 | --- | --- | --- |

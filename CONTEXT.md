@@ -78,6 +78,8 @@ L'approccio · Scuola (con sotto-menù) · Core Quadrant® · Training · Worksh
 - Azzurro: `#568dc1` (riservato all'area Aziende)
 - Cyan: `#67b2e2` (riservato all'area Aziende)
 
+**Novembre 2026 — direzione grafica (decisione del 6 novembre).** Il beige come sfondo è uno dei tratti tipici dei siti generati con l'AI e va eliminato: sfondo di pagina bianco puro, ritmo dato da fotografia e piani di colore pieni; panna e crema restano solo per oggetti che rappresentano carta (diploma cartaceo). Le regole qui sotto su panna e crema e sull'alternanza degli sfondi sono superate: vale `docs/Direzione_grafica.md`, con l'elenco completo dei segni da eliminare e degli elementi distintivi di Ariadne.
+
 **Colori di sfondo:**
 - Bianco puro: `#FFFFFF` — usare come sfondo principale, alternato con panna per dare ritmo
 - Panna caldo: `#FBF8F2` — scalda il sito, NON eliminare ma usare meno che nelle versioni precedenti dove era troppo dominante
@@ -208,6 +210,8 @@ Questa citazione appare in homepage e nella pagina L'approccio. Non va mai modif
 ---
 
 ## Pattern di design validati (da mantenere e migliorare)
+
+**Novembre 2026.** Questo elenco è di giugno. Restano validi i blocchi colorati saturi, le foto grandi e centrali, la citazione Thurman, il parallax leggero. Sono superati l'alternanza di sfondi bianco/panna/crema e l'uso del fade-in su ogni elemento; lo sticky scroll asimmetrico va rivalutato (ha creato effetto «mal di mare» nella pagina Scuola). Riferimento: `docs/Direzione_grafica.md`.
 
 - **Blocchi colorati saturi** per i programmi — gradient del colore di area come sfondo hero. Sono identità di brand riconoscibili dalla brochure, non si toccano
 - **Sticky scroll asimmetrico** — testo a sinistra che scorre, foto a destra che resta sticky. Usato per "Come lavoriamo" in homepage e "Come si lavora" nelle pagine modulo

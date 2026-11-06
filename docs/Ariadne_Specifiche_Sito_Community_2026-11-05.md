@@ -35,6 +35,8 @@ Il nuovo sito è l'evoluzione stilistica di ariadne.training, con la bozza grafi
 | Voce | Relazionale, accanto al lettore, genuina e professionale; invita, non vende; vietati «mindset», «resilienza», «journey», urgenza e scarsità; terminologia ICF precisa (sessioni, cliente); il corpus dei post approvati in Notion è il registro di verità | voice-and-communication, corpus luglio 2026 |
 | Terminologia | «Program» solo per i percorsi completi; moduli = Core Coaching, Advanced Coaching, Team Coaching; sempre «Coaching Atelier» e «Laboratori Ariadne»; mai «tragitto»; «approccio» al posto di «metodo» salvo per Ofman | CONTEXT.md |
 
+Direzione grafica, decisione del 6 novembre: il sito di giugno e le bozze di novembre valgono per struttura e contenuti; la loro veste grafica va rinnovata in modo sostanziale, eliminando il beige come sfondo e i tratti tipici dei siti generati con l'AI, verso una linea distintiva che evolve ariadne.training. Elenco completo e regole in `docs/Direzione_grafica.md`; lavoro nella task 1.6 del piano.
+
 Font deciso il 5 novembre: Afterglow per i titoli, Montserrat per navigazione ed etichette, Open Sans per il corpo del testo. Resta da consegnare Afterglow in formato web (.woff2).
 
 ## Sito pubblico: menu, pagine e origine dei contenuti

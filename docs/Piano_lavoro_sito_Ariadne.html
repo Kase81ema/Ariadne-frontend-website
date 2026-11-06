@@ -331,15 +331,16 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
 {
   "meta": {
     "titolo": "Sito e community Ariadne · piano di lavoro",
-    "versione": "1.2",
+    "versione": "1.3",
     "creato": "2026-11-06",
-    "aggiornato": "2026-11-06T18:30:00",
+    "aggiornato": "2026-11-06T18:45:00",
     "fonte": "Documento «Nuovo sito e community Ariadne — punto della situazione e specifiche» del 5 novembre 2026, revisione dell'esperto inclusa",
     "inizio": "2026-11-02",
     "fine": "2027-09-19",
     "premesse": [
       "Il lavoro di progettazione passa all'account Claude intestato ad Ariadne: si trasferiscono solo file e accessi (repository GitHub, Notion, cartella Website Ariadne). Artefatti, documenti Claude, memoria e chat di questo account restano qui: per questo la fase 0 prepara un pacchetto di passaggio fatto di file.",
       "Base44 serve solo per l'area riservata e parte con il piano Builder (40 $ al mese annuale) dalla fase 3; il sito pubblico resta HTML nel repository GitHub, pubblicato da Cloudflare Pages a costo zero.",
+      "La grafica del sito di giugno e delle bozze di novembre è una base per struttura e contenuti; la veste va rinnovata in modo sostanziale verso una linea distintiva di Ariadne, evoluzione di ariadne.training: niente beige come sfondo, niente tratti tipici dei siti generati con l'AI (elenco in docs/Direzione_grafica.md). Decisione del 6 novembre, lavoro nella task 1.6.",
       "Notion «Gestione scuola» è la fonte di verità, ma l'area dedicata al sito (contenuti, eventi, persone, testimonianze, richieste) va creata da zero in relazione ai database già esistenti (Percorsi, Edizioni, Corsisti).",
       "Le bozze di oggi riportano edizioni 2026: il calendario da pubblicare è quello 2027 e va letto da Notion, mai digitato nelle pagine.",
       "Ogni task ha una «prova di fatto»: il task si chiude quando la prova è vera, non quando il lavoro sembra finito."
@@ -428,6 +429,12 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
       "data": "2026-11-29"
     },
     {
+      "id": "M1b",
+      "fase": "F1",
+      "nome": "Direzione grafica approvata sulle due pagine pilota",
+      "data": "2026-12-06"
+    },
+    {
       "id": "M2",
       "fase": "F2",
       "nome": "Sito online su ariadne.training, Wix spento",
@@ -475,7 +482,15 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
           "done": false
         },
         {
-          "t": "Creare il Project «Sito e community Ariadne» e caricare il pacchetto di passaggio (questo file, specifiche, revisione, CONTEXT.md, bozze HTML, briefing Emergent, prompt Notion)",
+          "t": "Creare il Project «Sito e community Ariadne», incollare le istruzioni del Project e inviare il primo messaggio da docs/Prompt_avvio_Claude_Ariadne.md",
+          "done": false
+        },
+        {
+          "t": "Caricare nel Project i PDF del Team Coaching Program (moduli online e slide), il contratto di iscrizione e la brochure aziende 2026",
+          "done": false
+        },
+        {
+          "t": "Collegare la cartella Website Ariadne del computer",
           "done": false
         },
         {
@@ -499,7 +514,7 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
       ],
       "inizio": "2026-11-09",
       "fine": "2026-11-13",
-      "stato": "in corso",
+      "stato": "fatta",
       "dip": [],
       "prova": "Nel repository Ariadne-frontend-website esiste la cartella docs/ con tutti i file e un README che spiega da dove ripartire; tag git handoff-2026-11.",
       "sotto": [
@@ -525,10 +540,14 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
         },
         {
           "t": "Copia della cartella Website Ariadne allineata (stessi file di docs/ e drafts/)",
-          "done": false
+          "done": true
+        },
+        {
+          "t": "Direzione grafica e prompt di avvio per l'account Ariadne aggiunti a docs/ (6 novembre)",
+          "done": true
         }
       ],
-      "note": "6 novembre: pacchetto pubblicato su main (commit 0ec2084) e sul ramo docs/handoff-2026-11. Il tag handoff-2026-11 esiste solo in locale: il proxy della sessione non lascia passare i tag; il commit di riferimento è 0ec2084. Resta la copia nella cartella Website Ariadne.",
+      "note": "Pubblicato su main il 6 novembre (commit 0ec2084 e seguenti). Copia della cartella docs/ e dello zip nella cartella Website Ariadne. Il tag handoff-2026-11 è solo locale: il riferimento è il commit 0ec2084.",
       "rif": "Sezione 1, tabella dei componenti"
     },
     {
@@ -902,18 +921,19 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
     {
       "id": "1.4",
       "fase": "F1",
-      "titolo": "Font e sistema grafico definitivo",
+      "titolo": "Font e design system definitivo",
       "owner": [
         "EC",
         "CL"
       ],
-      "inizio": "2026-11-23",
-      "fine": "2026-12-13",
+      "inizio": "2026-11-30",
+      "fine": "2026-12-20",
       "stato": "da fare",
       "dip": [
-        "0.7"
+        "0.7",
+        "1.6"
       ],
-      "prova": "Titoli renderizzati con il font scelto e licenza in regola; tutto il testo supera il contrasto WCAG AA.",
+      "prova": "Titoli renderizzati con il font scelto e licenza in regola; tutto il testo supera il contrasto WCAG AA; ariadne.css applica la direzione grafica approvata nella task 1.6.",
       "sotto": [
         {
           "t": "Licenza Web Font di Afterglow (verificare quale Afterglow) oppure Playfair Display definitivo",
@@ -929,6 +949,10 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
         },
         {
           "t": "Varianti scure di arancio, verde e azzurro per il testo su bianco (gli originali restano per sfondi e blocchi)",
+          "done": false
+        },
+        {
+          "t": "Tradurre la direzione grafica in ariadne.css: sfondo bianco, piani di colore, griglia del cubo, regole per etichette, corsivo, card e animazioni",
           "done": false
         },
         {
@@ -976,6 +1000,51 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
       ],
       "note": "Questa task blocca i pagamenti (3.4): va aperta subito.",
       "rif": "Sezione 6; revisione punti 5, 11"
+    },
+    {
+      "id": "1.6",
+      "fase": "F1",
+      "titolo": "Direzione grafica distintiva di Ariadne",
+      "owner": [
+        "EC",
+        "CL",
+        "EX"
+      ],
+      "inizio": "2026-11-16",
+      "fine": "2026-12-06",
+      "stato": "da fare",
+      "dip": [
+        "0.2"
+      ],
+      "prova": "Le due pagine pilota (homepage e una scheda corso) non contengono nessuno dei tredici segni dell'estetica «generata» elencati in docs/Direzione_grafica.md, sono riconoscibili come Ariadne anche senza logo e sono approvate da Emanuele, Arianna e Silvia.",
+      "sotto": [
+        {
+          "t": "Analisi visiva del sito attuale ariadne.training, pagina per pagina, e della brochure 2026: che cosa è DNA da portare avanti",
+          "done": false
+        },
+        {
+          "t": "Censimento dei segni da eliminare nel sito di giugno e nelle bozze di novembre (beige come sfondo, etichette maiuscole, card in griglia, pill, ombre, fade-in ovunque…)",
+          "done": false
+        },
+        {
+          "t": "Raccolta delle foto reali e dei materiali esperienziali (dadi, carte, mappe, disegno onirico) da trasformare in segni grafici",
+          "done": false
+        },
+        {
+          "t": "Due direzioni grafiche a confronto su homepage e una scheda corso, con foto reali, bianco puro, piani di colore pieni, griglia del cubo e il filo",
+          "done": false
+        },
+        {
+          "t": "Revisione con Silvia (grafica del brand), Arianna ed Emanuele; scelta della direzione",
+          "done": false
+        },
+        {
+          "t": "Aggiornare docs/Direzione_grafica.md con le regole definitive e passare la direzione alla task 1.4 (design system)",
+          "done": false
+        }
+      ],
+      "note": "Decisione di Emanuele del 6 novembre: il sito attuale nel repository è una base, ma la grafica deve essere rinnovata in modo sostanziale e allineata agli elementi distintivi delle specifiche (sezione 2). Il lavoro è soddisfacente quando valorizza una linea grafica più moderna e propria di Ariadne.",
+      "rif": "docs/Direzione_grafica.md; specifiche sezione 2"
     },
     {
       "id": "2.1",
@@ -1031,9 +1100,10 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
         "2.1",
         "1.1",
         "1.3",
-        "1.4"
+        "1.4",
+        "1.6"
       ],
-      "prova": "Diciassette pagine senza segnaposto, corrette su telefono e desktop, ogni pagina raggiungibile in due tocchi.",
+      "prova": "Diciassette pagine senza segnaposto, nella nuova linea grafica, corrette su telefono e desktop, ogni pagina raggiungibile in due tocchi.",
       "sotto": [
         {
           "t": "Componenti comuni: header con menu e sottomenu ad accordion su mobile, footer viola, CTA unica, blocco «Prossima edizione» identico",
@@ -1066,9 +1136,13 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
         {
           "t": "Filo SVG e animazioni con prefers-reduced-motion; carosello strumenti → griglia su mobile",
           "done": false
+        },
+        {
+          "t": "Controllo su ogni pagina: nessuno dei segni elencati in docs/Direzione_grafica.md",
+          "done": false
         }
       ],
-      "note": "Le bozze scuola v4, Core Quadrant v2 e Il filo v1 sono la base; i dati vengono da Notion tramite il prototipo.",
+      "note": "Le bozze scuola v4, Core Quadrant v2 e Il filo v1 sono la base per struttura e contenuti; la veste grafica segue la direzione approvata nella task 1.6. I dati vengono da Notion tramite il prototipo.",
       "rif": "Sezione 3; passo 6"
     },
     {
@@ -1177,6 +1251,10 @@ footer{padding:26px 0 40px;color:var(--ink3);font-size:12px;border-top:1px solid
         },
         {
           "t": "Checklist per pagina: testi, link, immagini, moduli, mobile",
+          "done": false
+        },
+        {
+          "t": "Verifica della linea grafica con Silvia: nessun segno dell'estetica «generata», coerenza con le pagine pilota",
           "done": false
         },
         {
